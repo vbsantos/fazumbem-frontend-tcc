@@ -1,15 +1,20 @@
+import { Button } from "@chakra-ui/button";
+import { Flex, VStack } from "@chakra-ui/layout";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Home() {
   return (
-    <ul>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/register">Cadastro</Link>
-      </li>
-    </ul>
+    <Flex justify="center" align="center" minH="100vh" direction="column">
+      <VStack spacing={6}>
+        <Button colorScheme="brand" as={RouterLink} to="/login">
+          Login
+        </Button>
+
+        <Button colorScheme="brand" as={RouterLink} to="/register">
+          Cadastro
+        </Button>
+      </VStack>
+    </Flex>
   );
 }
