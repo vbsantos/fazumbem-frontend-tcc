@@ -4,7 +4,7 @@ import Home from "../views/Public/Home";
 import Login from "../views/Public/Login";
 import Register from "../views/Public/Register";
 
-export default function Routes() {
+export default function PublicRoutes() {
   return (
     <Router>
       <Switch>
