@@ -1,20 +1,32 @@
 import { EmailIcon } from "@chakra-ui/icons";
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputProps,
-} from "@chakra-ui/input";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
 import React from "react";
+import { InputFieldProps } from "../../InputRegister";
+import InputError from "../InputError";
 
-export default function InputEmail(props: InputProps) {
+export default function InputEmail({
+  register,
+  error,
+  ...props
+}: InputFieldProps) {
   return (
-    <InputGroup>
-      <InputLeftElement
-        pointerEvents="none"
-        children={<EmailIcon color="gray.300" />}
-      />
-      <Input placeholder="Email" type="email" autoComplete="email" {...props} />
-    </InputGroup>
+    <>
+      <InputGroup>
+        <InputLeftElement
+          pointerEvents="none"
+          children={<EmailIcon color="gray.300" />}
+        />
+        <Input
+          placeholder="Email"
+          type="email"
+          autoComplete="email"
+          isInvalid={!!error}
+          {...register}
+          {...props}
+        />
+      </InputGroup>
+
+      <InputError error={error} />
+    </>
   );
 }

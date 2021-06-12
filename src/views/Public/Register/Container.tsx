@@ -12,7 +12,7 @@ export default function Container({ children }: Props): ReactElement {
   return (
     <Flex justify="center" align="center" minH="100vh">
       <VStack
-        spacing={6}
+        spacing={4}
         justifyContent="center"
         maxW="400px"
         w="400px"

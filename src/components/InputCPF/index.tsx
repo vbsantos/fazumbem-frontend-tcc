@@ -1,12 +1,12 @@
-import { AtSignIcon } from "@chakra-ui/icons";
+import { InfoIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
 import React from "react";
 import { InputFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
 
-export default function InputOrganizationTitle({
-  register,
+export default function InputAddress({
   error,
+  register,
   ...props
 }: InputFieldProps) {
   return (
@@ -14,16 +14,9 @@ export default function InputOrganizationTitle({
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
-          children={<AtSignIcon color="gray.300" />}
+          children={<InfoIcon color="gray.300" />}
         />
-        <Input
-          placeholder="Nome da organização"
-          width="full"
-          autoComplete="organization-title"
-          isInvalid={!!error}
-          {...register}
-          {...props}
-        />
+        <Input placeholder="CPF" isInvalid={!!error} {...register} {...props} />
       </InputGroup>
 
       <InputError error={error} />
