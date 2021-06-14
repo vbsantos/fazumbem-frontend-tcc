@@ -122,10 +122,9 @@ export default function Home() {
             <VStack
               spacing={2}
               align="center"
-              justify="center"
               borderColor="gray.500"
               borderWidth="3px"
-              paddingX={6}
+              paddingX={2}
               paddingY={3}
               borderRadius={30}
               backgroundColor="gray.100"
@@ -133,7 +132,6 @@ export default function Home() {
                 borderColor: "brand.500",
               }}
               cursor="pointer"
-              position="relative"
               boxShadow="xl"
             >
               <Text
@@ -150,19 +148,14 @@ export default function Home() {
                 fallbackSrc={logoSrc}
                 alt="logo"
                 height="300px"
+                width="250px"
                 objectFit="fill"
-                borderRadius={30}
+                borderRadius={20}
                 filter="grayscale(20%)"
+                mb={2}
                 _hover={{
                   filter: "none",
                 }}
-              />
-
-              <Logo
-                height="4rem"
-                position="absolute"
-                bottom={4}
-                src={logoSrc}
               />
             </VStack>
           )
