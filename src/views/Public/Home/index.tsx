@@ -114,49 +114,59 @@ export default function Home() {
         spacing={10}
         paddingX={{ base: 4, md: 6, lg: 10 }}
         paddingY={4}
+        maxW="1600px"
+        margin="0 auto"
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((value) => (
-          <VStack
-            spacing={2}
-            align="center"
-            justify="center"
-            borderColor="gray.500"
-            borderWidth="3px"
-            paddingX={6}
-            paddingY={3}
-            borderRadius={30}
-            backgroundColor="gray.100"
-            _hover={{
-              borderColor: "brand.500",
-            }}
-            cursor="pointer"
-            position="relative"
-          >
-            <Text
-              fontSize="2xl"
-              color={titleColor}
-              fontWeight="bold"
-              textAlign="center"
-            >
-              Nome da Campanha {value}
-            </Text>
-
-            <Image
-              src={`https://fazumbem.inf.ufsm.br/images/entidades/${value}.png`}
-              fallbackSrc={logoSrc}
-              alt="logo"
-              height="300px"
-              objectFit="fill"
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
+          (value) => (
+            <VStack
+              spacing={2}
+              align="center"
+              justify="center"
+              borderColor="gray.500"
+              borderWidth="3px"
+              paddingX={6}
+              paddingY={3}
               borderRadius={30}
-              filter="grayscale(20%)"
+              backgroundColor="gray.100"
               _hover={{
-                filter: "none",
+                borderColor: "brand.500",
               }}
-            />
+              cursor="pointer"
+              position="relative"
+              boxShadow="xl"
+            >
+              <Text
+                fontSize="2xl"
+                color={titleColor}
+                fontWeight="bold"
+                textAlign="center"
+              >
+                Nome da Campanha {value}
+              </Text>
 
-            <Logo height="4rem" position="absolute" bottom={4} src={logoSrc} />
-          </VStack>
-        ))}
+              <Image
+                src={`https://fazumbem.inf.ufsm.br/images/entidades/${value}.png`}
+                fallbackSrc={logoSrc}
+                alt="logo"
+                height="300px"
+                objectFit="fill"
+                borderRadius={30}
+                filter="grayscale(20%)"
+                _hover={{
+                  filter: "none",
+                }}
+              />
+
+              <Logo
+                height="4rem"
+                position="absolute"
+                bottom={4}
+                src={logoSrc}
+              />
+            </VStack>
+          )
+        )}
       </SimpleGrid>
 
       <Box
@@ -176,6 +186,8 @@ export default function Home() {
         spacing={10}
         paddingX={{ base: 4, md: 6, lg: 10 }}
         paddingY={4}
+        maxW="1600px"
+        margin="0 auto"
       >
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((value) => (
           <VStack
@@ -191,6 +203,7 @@ export default function Home() {
             _hover={{
               borderColor: "brand.500",
             }}
+            boxShadow="xl"
           >
             <Text
               fontSize="1xl"
