@@ -117,15 +117,20 @@ export default function Home() {
       >
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((value) => (
           <VStack
-            spacing={4}
+            spacing={2}
             align="center"
             justify="center"
-            borderColor="brand.500"
-            borderWidth="2px"
+            borderColor="gray.500"
+            borderWidth="3px"
             paddingX={6}
             paddingY={3}
             borderRadius={30}
             backgroundColor="gray.100"
+            _hover={{
+              borderColor: "brand.500",
+            }}
+            cursor="pointer"
+            position="relative"
           >
             <Text
               fontSize="2xl"
@@ -143,11 +148,13 @@ export default function Home() {
               height="300px"
               objectFit="fill"
               borderRadius={30}
+              filter="grayscale(20%)"
+              _hover={{
+                filter: "none",
+              }}
             />
 
-            <Button variant="solid" colorScheme="brand">
-              Acessar
-            </Button>
+            <Logo height="4rem" position="absolute" bottom={4} src={logoSrc} />
           </VStack>
         ))}
       </SimpleGrid>
