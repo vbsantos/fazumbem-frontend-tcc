@@ -13,37 +13,44 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import logoSrc from "../../../assets/images/grayLogo.svg";
 import Logo from "../../../components/Logo";
+import ImgLogo from "../../../components/Home/Logo";
+import WhiteTopLeaf from "../../../assets/images/whiteTopLeaf.svg";
+import WhiteBottomLeaf from "../../../assets/images/whiteBottomLeaf.svg";
+import BlueLeaf from "../../../assets/images/blueLeaf.svg";
+
+function showCampaignDetails(){
+  console.log("show details");
+}
 
 export default function Home() {
-  const titleColor = useColorModeValue("brand.600", "brand.100");
-  const headingColor = useColorModeValue("brand.400", "brand.200");
-
+  const titleColor = useColorModeValue("#034074", "brand.100");
+  const headingColor = useColorModeValue("#034074", "brand.200");
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
   return (
-    <Box backgroundColor="gray.300">
+    <Box backgroundColor="gray.200">
       <Box
         as="header"
-        borderBottomColor="brand.500"
-        borderBottomWidth="5px"
-        backgroundColor="gray.100"
+        boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
+        backgroundColor={headingColor}
       >
         <Flex
           maxW="1400px"
-          paddingX={{ base: "35px", sm: "60px" }}
-          paddingY={2}
+          paddingX={{ base: "35px", sm: "2px" }}
           justify="space-between"
           align="center"
           wrap="wrap"
           margin="0 auto"
         >
-          <Logo height="7rem" width="100px" />
-
+          <Logo height="10rem" width="12rem" />
+          
+          <div />
           <Stack
             spacing={{ base: 2, sm: 10 }}
             direction={{ base: "column", sm: "row" }}
-            marginRight={{ base: 3, sm: "none" }}
+            marginRight={{ base: 10, sm: "none" }}
           >
             <Heading
-              color={headingColor}
+              color="white"
               size="lg"
               cursor="pointer"
               href="#campanhas"
@@ -53,7 +60,7 @@ export default function Home() {
             </Heading>
 
             <Heading
-              color={headingColor}
+              color="white"
               size="lg"
               cursor="pointer"
               href="#instituicoes"
@@ -63,7 +70,7 @@ export default function Home() {
             </Heading>
 
             <Heading
-              color={headingColor}
+              color="white"
               size="lg"
               cursor="pointer"
               href="#sobre"
@@ -75,105 +82,214 @@ export default function Home() {
 
           <HStack spacing={5} margin={{ base: "15px auto", lg: "initial" }}>
             <Button
-              colorScheme="brand"
+              bgColor="white"
+              color={headingColor}
+              borderRadius={50}
+              p={3}
+              pl={6}
+              pr={6}
               as={RouterLink}
               to="/login"
-              size="sm"
-              variant="outline"
+              size="1xl"        
+              boxShadow="0px 6px 20px rgba(0, 0, 0, 0.3)"
             >
               Entrar
             </Button>
-
             <Button
-              colorScheme="brand"
+              bgColor="white"
+              color={headingColor}
+              borderRadius={50}
+              p={3}
               as={RouterLink}
-              to="/register"
-              size="sm"
-              variant="outline"
+              to="/login"
+              size="1xl"        
+              boxShadow="0px 6px 20px rgba(0, 0, 0, 0.3)"
             >
-              Cadastro
+              Cadastrar
             </Button>
           </HStack>
         </Flex>
-      </Box>
-
-      <Box
-        backgroundColor="brand.500"
-        width="max-content"
-        padding={2}
-        margin="16px auto"
-        borderRadius={6}
-      >
-        <Heading color={"white"} textAlign="center" id="campanhas">
-          Campanhas
-        </Heading>
-      </Box>
-
-      <SimpleGrid
-        minChildWidth={{ base: "100%", md: "40%", lg: "300px" }}
-        spacing={10}
-        paddingX={{ base: 4, md: 6, lg: 10 }}
-        paddingY={4}
-        maxW="1600px"
+      </Box> 
+      <Flex
+        maxW="1400px"
+        paddingX={{ base: "35px", sm: "2px" }}
+        paddingY={2}
+        justify="space-between"
+        align="center"
+        wrap="wrap"
         margin="0 auto"
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
-          (value) => (
-            <VStack
-              spacing={2}
-              align="center"
-              borderColor="gray.500"
-              borderWidth="3px"
-              paddingX={2}
-              paddingY={3}
-              borderRadius={30}
-              backgroundColor="gray.100"
-              _hover={{
-                borderColor: "brand.500",
-              }}
-              cursor="pointer"
-              boxShadow="xl"
+        <ImgLogo type='blue' />
+        <Heading color={titleColor} size="2xl" textAlign="center">
+          BEM-VINDO AO FAZ UM <br /> BEM!
+          <br />
+          <Box 
+            as="button" 
+            borderRadius={50} 
+            bg={headingColor} 
+            color="white"
+            mt={10}
+            p={4}
+            pl={10}
+            pr={10}
+            width="max-content"
+            boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+          >
+            <Text
+              fontSize="2xl"
+              color="white"
+              fontWeight="medium"
+              textAlign="center"
             >
-              <Text
-                fontSize="2xl"
-                color={titleColor}
-                fontWeight="bold"
-                textAlign="center"
-              >
-                Nome da Campanha {value}
-              </Text>
-
-              <Image
-                src={`https://fazumbem.inf.ufsm.br/images/entidades/${value}.png`}
-                fallbackSrc={logoSrc}
-                alt="logo"
-                height="300px"
-                width="250px"
-                objectFit="fill"
-                borderRadius={20}
-                filter="grayscale(20%)"
-                mb={2}
-                _hover={{
-                  filter: "none",
-                }}
-              />
-            </VStack>
-          )
-        )}
-      </SimpleGrid>
-
+              Saiba mais
+            </Text>
+          </Box>
+        </Heading>
+      </Flex>
       <Box
         backgroundColor="brand.500"
+        width="100%"
+        p={2}
+        pt={20}
+        pb={20}
+        textAlign="center"
+      >
+        <SimpleGrid
+          minChildWidth={{ base: "100%", md: "40%", lg: "300px" }}
+          spacing={10}
+          paddingX={{ base: 4, md: 6, lg: 10 }}
+          paddingY={4}
+          maxW="1600px"
+          margin="0 auto"
+        >
+          <VStack
+            paddingY={3}
+          >
+            <Image
+              height="100px"
+              objectFit="contain"
+              src={WhiteTopLeaf}
+              alt="white icon top"
+            />
+            <Heading color="white" size="lg" textAlign="center">
+              CAMPANHAS EM ANDAMENTO
+            </Heading>
+            <Image
+              height="100px"
+              objectFit="contain"
+              src={WhiteBottomLeaf}
+              alt="white icon bottom"
+            />
+          </VStack>
+          {items.map(
+            (value) => (
+              <VStack
+                spacing={2}
+                align="center"
+                paddingX={1}
+                paddingY={1}
+                borderRadius={15}
+                pb={8}
+                backgroundColor="gray.100"
+                cursor="pointer"
+                title="Clique para ver mais infomações sobre a campanha"
+                boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
+                onMouseEnter={showCampaignDetails}
+                _hover={{
+                  marginTop: "-15px",
+                  marginBottom: "15px"
+                }}
+              >
+                <Image
+                  src={`https://fazumbem.inf.ufsm.br/images/entidades/${value}.png`}
+                  fallbackSrc={logoSrc}
+                  alt="logo"
+                  height="260px"
+                  width="280px"
+                  objectFit="fill"
+                  borderRadius={15}
+                  filter="none"
+                  mb={2}
+                  mt={4}
+                  _hover={{
+                    filter: "brightness(30%)",
+                    color: "white"
+                  }}
+                />
+                <Text
+                  fontSize="lg"
+                  color={titleColor}
+                  fontWeight="bold"
+                  textAlign="left"
+                >
+                  Nome da Campanha {value} 
+                </Text>
+              </VStack>
+            )
+          )}
+        </SimpleGrid>
+        <Button
+          bgColor="white"
+          color={headingColor}
+          borderRadius={50}
+          p={4}
+          pl={10}
+          pr={10}
+          mt={10}
+          as={RouterLink}
+          to="/login"
+          size="3xl"        
+          boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
+          >
+          <Text
+            fontSize="2xl"
+            color={headingColor}
+            fontWeight="medium"
+          >
+            Ver todas
+          </Text>
+        </Button>
+      </Box>
+      <Box
         width="max-content"
         padding={2}
-        margin="16px auto"
+        m="40px auto"
+        mt={20}
+        mb={20}
         borderRadius={6}
       >
-        <Heading color="white" textAlign="center" id="instituicoes">
-          Instituições
-        </Heading>
+        <Flex
+          maxW="1400px"
+          paddingX={{ base: "35px", sm: "2px" }}
+          justify="space-between"
+          align="center"
+          wrap="wrap"
+          margin="0 auto"
+        >
+          <Stack
+            spacing={{ base: 2, sm: 10 }}
+            direction={{ base: "column", sm: "row" }}
+            marginRight={{ base: 3, sm: "none" }}
+          >
+            <Image
+              height="100px"
+              objectFit="contain"
+              src={BlueLeaf}
+              alt="blue icon start"
+              transform="rotateY(180deg)"
+            />
+            <Heading color="brand.500" size="2xl" textAlign="center">
+              INSTITUIÇÕES <br />PARTICIPANTES
+            </Heading>
+            <Image
+              height="100px"
+              objectFit="contain"
+              src={BlueLeaf}
+              alt="blue icon end"
+            />
+          </Stack>
+        </Flex>
       </Box>
-
       <SimpleGrid
         minChildWidth={{ base: "40%", sm: "20%", lg: "150px" }}
         spacing={10}
@@ -186,27 +302,17 @@ export default function Home() {
           <VStack
             spacing={1}
             align="center"
-            justify="center"
-            borderColor="gray.500"
-            borderWidth="3px"
+            justify="center"  
             padding={3}
-            borderRadius={30}
-            backgroundColor="gray.200"
+            borderRadius={15}
+            backgroundColor="brand.500"
             cursor="pointer"
+            boxShadow="5px 10px 10px rgba(0, 0, 0, 0.3)"
             _hover={{
-              borderColor: "brand.500",
+              marginTop: "-15px",
+              marginBottom: "15px"
             }}
-            boxShadow="xl"
           >
-            <Text
-              fontSize="1xl"
-              color={titleColor}
-              fontWeight="bold"
-              textAlign="center"
-            >
-              Instituição Nome {value}
-            </Text>
-
             <Image
               src={`https://fazumbem.inf.ufsm.br/images/logos/${value}.png`}
               fallbackSrc={logoSrc}
@@ -215,9 +321,67 @@ export default function Home() {
               objectFit="fill"
               borderRadius={10}
             />
+            <Text
+              fontSize="1xl"
+              color="white"
+              fontWeight="bold"
+              textAlign="center"
+            >
+              Instituição Nome {value}
+            </Text>
           </VStack>
         ))}
       </SimpleGrid>
+      <Box
+        backgroundColor="brand.500"
+        width="100%"
+        mt={20}
+        p={2}
+      >
+        <Flex
+          maxW="1400px"
+          paddingX={{ base: "35px", sm: "2px" }}
+          paddingY={2}
+          justify="space-between"
+          align="center"
+          wrap="wrap"
+          margin="0 auto"
+        >
+          <ImgLogo type='white' />
+
+          <Heading color="white" size="2xl" textAlign="center">
+            Atalhos
+            <Text
+              fontSize="2xl"
+              color="white"
+              fontWeight="medium"
+              textAlign="left"
+              mt={15}
+              pt={10}
+            >
+              Campanhas
+            </Text>
+            <Text
+              fontSize="2xl"
+              color="white"
+              fontWeight="medium"
+              textAlign="left"
+              mt={8}
+            >
+              Instituições
+            </Text>
+            <Text
+              fontSize="2xl"
+              color="white"
+              fontWeight="medium"
+              textAlign="left"
+              mt={8}
+            >
+              Sobre
+            </Text>
+          </Heading>
+        </Flex>
+      </Box>
     </Box>
   );
 }

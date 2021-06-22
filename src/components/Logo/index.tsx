@@ -1,7 +1,7 @@
 import { Image, ImageProps } from "@chakra-ui/image";
 import React, { ReactElement } from "react";
 import { useHistory } from "react-router";
-import logo from "../../assets/images/logo.svg";
+import logo from "../../assets/images/whiteLogo.svg";
 
 export default function Logo(props: ImageProps): ReactElement {
   const history = useHistory();
