@@ -12,7 +12,7 @@ import { Image, Link, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import logoSrc from "../../../assets/images/grayLogo.svg";
-import Logo from "../../../components/Logo";
+import HeadLogo from "../../../components/Home/HeadLogo";
 import ImgLogo from "../../../components/Home/Logo";
 import WhiteTopLeaf from "../../../assets/images/whiteTopLeaf.svg";
 import WhiteBottomLeaf from "../../../assets/images/whiteBottomLeaf.svg";
@@ -41,8 +41,7 @@ export default function Home() {
           wrap="wrap"
           margin="0 auto"
         >
-          <Logo height="10rem" width="12rem" />
-          
+          <HeadLogo height="10rem" width="12rem"/>
           <div />
           <Stack
             spacing={{ base: 2, sm: 10 }}
