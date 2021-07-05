@@ -12,9 +12,9 @@ export default function Logo(logoType: LogoProps): ReactElement {
   return (
     <Image
       boxSize="450px"
-      height="25rem"
+      height={logoType.type === 'white' ? "15rem" : "25rem"}
       objectFit="contain"
-      mt={20}
+      mt={logoType.type === 'white' ? -10 : 20}
       mb={20}
       src={logoType.type === 'white' ? logo : blueLogo}
       alt="brand logo"

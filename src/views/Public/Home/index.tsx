@@ -7,10 +7,9 @@ import {
   Flex,
   Heading,
   HStack,
-  SimpleGrid,
-  Stack,
+  Stack
 } from "@chakra-ui/layout";
-import { Image, Link, Text } from "@chakra-ui/react";
+import { Image, Link, Text, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import HeadLogo from "../../../components/Home/HeadLogo";
@@ -18,7 +17,13 @@ import ImgLogo from "../../../components/Home/Logo";
 import BlueLeaf from "../../../assets/images/blueLeaf.svg";
 import { IconButton } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
-
+import { 
+  FaFacebook, 
+  FaInstagram, 
+  FaRegEnvelope, 
+  FaYoutube, 
+  FaMapMarkerAlt 
+} from "react-icons/fa";
 import Carousel from "../../../components/Home/Carousel";
 
 /*function showCampaignDetails(){
@@ -317,10 +322,8 @@ export default function Home() {
         pb={20}
         textAlign="center"
       >
-        <div>
-          <h1 className="slider_title">CAMPANHAS EM ANDAMENTO</h1>
-          <Carousel campanhas={campanhas}/>
-        </div>
+        <h1 className="slider_title">CAMPANHAS EM ANDAMENTO</h1>
+        <Carousel campanhas={campanhas}/>
       </Box>
       <Box
         width="max-content"
@@ -328,7 +331,7 @@ export default function Home() {
         m="40px auto"
         mt={20}
         mb={20}
-        borderRadius={6}
+        borderRadius={6} 
       >
         <Flex
           maxW="1400px"
@@ -383,11 +386,15 @@ export default function Home() {
                   <a href="/">
                     <i>
                       <IconButton 
-                        aria-label="info" 
+                        aria-label="info"
+                        borderRadius="10px"
+                        transform="translateY(-3px)"
+                        bgColor="white"
                         icon={<InfoIcon />}  
                         _hover={{ 
                           bgColor: "bluish.400", 
-                          transition: "0.2s"
+                          borderRadius: "10px",
+                          transform: "translateY(-3px)"
                         }} 
                       />
                     </i>
@@ -395,7 +402,7 @@ export default function Home() {
                 </li>
               </ul>
               <div className="institute-details">
-                <h2>{ institute.name }</h2>
+                <h5>{ institute.name }</h5>
               </div>
             </div>
           </div>
@@ -404,53 +411,56 @@ export default function Home() {
       <Box
         backgroundColor="brand.500"
         width="100%"
+        color="gray.300"
         mt={20}
         p={2}
       >
-        <Flex
-          maxW="1400px"
-          paddingX={{ base: "35px", sm: "55px" }}
-          paddingY={2}
-          justify="space-between"
-          align="center"
-          wrap="wrap"
-          margin="0 auto"
-        >
-          <ImgLogo type='white' />
-          <Heading color="white" size="2xl" mr={10} textAlign="center">
-            Atalhos
-            <Text
-              fontSize="2xl"
-              color="white"
-              fontWeight="medium"
-              textAlign="left"
-              mt={15}
-              pt={10}
-            >
-              Campanhas
-            </Text>
-            <Text
-              fontSize="2xl"
-              color="white"
-              fontWeight="medium"
-              textAlign="left"
-              mt={8}
-            >
-              Instituições
-            </Text>
-            <Text
-              fontSize="2xl"
-              color="white"
-              fontWeight="medium"
-              textAlign="left"
-              mt={8}
-            >
-              Sobre
-            </Text>
-          </Heading>
-        </Flex>
+        <SimpleGrid minChildWidth="120px" spacing={12} mt={20} ml={20} mr={20}>
+            <Box>
+              <Heading size="1xl" mb={4} color="white">Mapa do site</Heading>
+              <ul style={{
+                listStyleType: "none"
+              }}>
+                <li><Text as={Link} href="/">Início</Text></li>
+                <li><Text as={Link} href="/">Login/Cadastro</Text></li>
+                <li><Text as={Link} href="/">Campanhas</Text></li>
+                <li><Text as={Link} href="/">Instituições</Text></li>
+                <li><Text as={Link} href="/">Sobre</Text></li>
+              </ul>
+            </Box>
+            <Box>
+              <Heading size="1xl" mb={4} color="white">Contato</Heading>
+              <Box as={Link} hreaf="/">
+                <div style={{ marginBottom: "-28px" }}><FaRegEnvelope /></div>
+                <Text ml={6}>e_mail@mail.com</Text>
+              </Box>
+              <Box mt={2} textAlign="justify">
+                <div style={{ marginBottom: "-28px" }}><FaMapMarkerAlt /></div>
+                <Text ml={6}>
+                  Av. Roraima nº 1000 Cidade Universitária Bairro - Camobi, Santa Maria - RS, 97105-900
+                </Text>
+              </Box>
+            </Box>
+            <Box>
+              <Heading size="1xl" mb={2} color="white">Siga-nos</Heading>
+              <Flex flax-direction="row">
+                <Box m={2} as={Link} href="/"><FaFacebook size={35} /></Box>
+                <Box m={2} as={Link} href="/"><FaInstagram size={35} /></Box>
+                <Box m={2} as={Link} href="/"><FaYoutube size={35} /></Box>
+              </Flex>
+            </Box>
+            <Box><ImgLogo type='white' /></Box>
+        </SimpleGrid>
+        <Box backgroundColor="rgba(255,255,255, 0.1)">
+          <Text fontSize="sm" textAlign="center">desenvolvido por {" "}
+            <Text as={Link} href="" fontWeight={500}>Rafael de Lima</Text>, {" "}
+            <Text as={Link} href="" fontWeight={500}>Raíssa Arantes</Text>, {" "}
+            <Text as={Link} href="" fontWeight={500}>Vitória Pizzuti</Text>, {" "}
+            <Text as={Link} href="" fontWeight={500}>Yuri Becker</Text> e {" "}
+            <Text as={Link} href="" fontWeight={500}>Tayna ??</Text>.
+          </Text>
+        </Box>
       </Box>
-
     </Box>
   );
 }
