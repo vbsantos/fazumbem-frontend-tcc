@@ -499,62 +499,39 @@ export default function Home() {
                 Maria - RS, 97105-900
               </Text>
             </Box>
-            <li>
-              <Text as={Link} href="/">
-                Login/Cadastro
-              </Text>
-            </li>
-            <li>
-              <Text as={Link} href="/">
-                Campanhas
-              </Text>
-            </li>
-            <li>
-              <Text as={Link} href="/">
-                Instituições
-              </Text>
-            </li>
-            <li>
-              <Text as={Link} href="/">
-                Sobre
-              </Text>
-            </li>
-          </Box>
-          <Heading size="1xl" mb={4} color="white">
-            Contato
-          </Heading>
-          <Box as={Link} hreaf="/">
-            <div style={{ marginBottom: "-28px" }}>
-              <FaRegEnvelope />
-            </div>
-            <Text ml={6}>e_mail@mail.com</Text>
-          </Box>
-          <Box>
-            <Heading size="1xl" mb={2} color="brand.300">
-              Siga-nos
-            </Heading>
-            <Flex flax-direction="row">
-              <Box m={2} as={Link} href="/">
-                <FaFacebook size={35} />
-              </Box>
-              <Box m={2} as={Link} href="/">
-                <FaInstagram size={35} />
-              </Box>
-              <Box m={2} as={Link} href="/">
-                <FaYoutube size={35} />
-              </Box>
-            </Flex>
-          </Box>
-          <Box>
-            <Image
-              boxSize="450px"
-              height="15rem"
-              objectFit="contain"
-              mb={20}
-              mt={-10}
-              src={blueLogo}
-              alt="brand logo"
-            />
+            <Box as={Link} hreaf="/">
+              <div style={{ marginBottom: "-28px" }}>
+                <FaRegEnvelope />
+              </div>
+              <Text ml={6}>e_mail@mail.com</Text>
+            </Box>
+            <Box>
+              <Heading size="1xl" mb={2} color="brand.300">
+                Siga-nos
+              </Heading>
+              <Flex flax-direction="row">
+                <Box m={2} as={Link} href="/">
+                  <FaFacebook size={35} />
+                </Box>
+                <Box m={2} as={Link} href="/">
+                  <FaInstagram size={35} />
+                </Box>
+                <Box m={2} as={Link} href="/">
+                  <FaYoutube size={35} />
+                </Box>
+              </Flex>
+            </Box>
+            <Box>
+              <Image
+                boxSize="450px"
+                height="15rem"
+                objectFit="contain"
+                mb={20}
+                mt={-10}
+                src={blueLogo}
+                alt="brand logo"
+              />
+            </Box>
           </Box>
         </SimpleGrid>
         <Box backgroundColor="rgba(255,255,255, 0.3)">
