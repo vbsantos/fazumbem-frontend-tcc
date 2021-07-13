@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { HamburgerIcon, InfoIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, HStack } from "@chakra-ui/layout";
-import { IconButton, Image, Link, SimpleGrid, Text } from "@chakra-ui/react";
+import { IconButton, Image, Link, SimpleGrid, Text, Tooltip } from "@chakra-ui/react";
 import React, { useState } from "react";
 import {
   FaFacebook,
@@ -107,83 +107,6 @@ export default function Home() {
       picture_url: 15,
     },
   ];
-  // const institutes = [
-  //   {
-  //     id: 0,
-  //     name: "Instituição 1",
-  //     picture_url: 1,
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Instituição 2",
-  //     picture_url: 2,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Instituição 3",
-  //     picture_url: 3,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Instituição 4",
-  //     picture_url: 4,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Instituição 5",
-  //     picture_url: 5,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Instituição 6",
-  //     picture_url: 6,
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Instituição 7",
-  //     picture_url: 7,
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Instituição 8",
-  //     picture_url: 8,
-  //   },
-  //   {
-  //     id: 8,
-  //     name: "Instituição 9",
-  //     picture_url: 9,
-  //   },
-  //   {
-  //     id: 9,
-  //     name: "Instituição 10",
-  //     picture_url: 10,
-  //   },
-  //   {
-  //     id: 10,
-  //     name: "Instituição 11",
-  //     picture_url: 11,
-  //   },
-  //   {
-  //     id: 11,
-  //     name: "Instituição 12",
-  //     picture_url: 12,
-  //   },
-  //   {
-  //     id: 12,
-  //     name: "Instituição 13",
-  //     picture_url: 13,
-  //   },
-  //   {
-  //     id: 13,
-  //     name: "Instituição 14",
-  //     picture_url: 14,
-  //   },
-  //   {
-  //     id: 14,
-  //     name: "Instituição 15",
-  //     picture_url: 15,
-  //   },
-  // ];
   return (
     <Box backgroundColor="gray.200">
       <Box
@@ -200,17 +123,24 @@ export default function Home() {
             wrap="wrap"
             margin="0 auto"
           >
-            <Heading
-              color="white"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              onClick={(event) => setShowMenu(!showMenu)}
-              title={!showMenu ? "Exibir menu" : "Ocultar menu"}
+            <Tooltip 
+              hasArrow label={!showMenu ? "Exibir menu" : "Ocultar menu"} 
+              bg="brownish.200" 
+              color="bluish.100"
+              placement="right"
+              ml={2}
             >
-              <HamburgerIcon marginRight={3} marginBottom={1} />
-              Menu
-            </Heading>
+              <Heading
+                color="white"
+                fontWeight="none"
+                size="md"
+                cursor="pointer"
+                onClick={(event) => setShowMenu(!showMenu)}
+              >
+                  <HamburgerIcon marginRight={3} marginBottom={1} />
+                  Menu
+              </Heading>
+            </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
             <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
               <Heading
@@ -312,6 +242,7 @@ export default function Home() {
         spacing={10}
         paddingX={{ base: 4, md: 6, lg: 10 }}
         paddingY={4}
+        pb="5rem"
         maxW="1600px"
         margin="0 auto"
       >

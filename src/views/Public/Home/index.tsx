@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import "../../../css/instituicoes.css";
-import { Box, Flex, Heading, HStack, Grid } from "@chakra-ui/layout";
-import { Image, Link, Text, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack } from "@chakra-ui/layout";
+import { Image, Link, Text, SimpleGrid, Tooltip } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import HeadLogo from "../../../components/Home/HeadLogo";
@@ -27,6 +27,10 @@ function truncateName(name: String) {
   if (name.length > 12) {
     return name.substr(0, 12);
   }
+}
+
+function scrollToElement(element: string) {
+  (document.getElementById(element) as HTMLInputElement).scrollIntoView();
 }
 
 export default function Home() {
@@ -201,17 +205,27 @@ export default function Home() {
             wrap="wrap"
             margin="0 auto"
           >
-            <Heading
-              color="white"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              onClick={(event) => setShowMenu(!showMenu)}
-              title={!showMenu ? "Exibir menu" : "Ocultar menu"}
+            <Tooltip 
+              hasArrow 
+              label={!showMenu ? "Exibir menu" : "Ocultar menu"} 
+              bg="brownish.200" 
+              color="bluish.100"
+              placement="right"
+              borderRadius="8px"
+              transition="0.4s"
+              ml={2}
             >
-              <HamburgerIcon marginRight={3} marginBottom={1} />
-              Menu
-            </Heading>
+              <Heading
+                color="white"
+                fontWeight="none"
+                size="md"
+                cursor="pointer"
+                onClick={(event) => setShowMenu(!showMenu)}
+              >
+                <HamburgerIcon marginRight={3} marginBottom={1} />
+                  Menu
+              </Heading>
+            </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
             <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
               <Heading
@@ -271,6 +285,7 @@ export default function Home() {
               cursor="pointer"
               href="#instituicoes"
               as={Link}
+              onClick={() => scrollToElement('institutes')}
             >
               Instituições
             </Heading>
@@ -281,6 +296,7 @@ export default function Home() {
               cursor="pointer"
               href="#sobre"
               as={Link}
+              onClick={() => scrollToElement('about')}
             >
               Sobre
             </Heading>
@@ -289,8 +305,9 @@ export default function Home() {
               fontWeight="none"
               size="md"
               cursor="pointer"
-              href="#sobre"
+              href="#contacts"
               as={Link}
+              onClick={() => scrollToElement('footer')}
             >
               Contatos
             </Heading>
@@ -339,7 +356,7 @@ export default function Home() {
             </Text>
           </Box>
         </Heading>
-      </Flex>
+      </Flex>       
       <Box
         backgroundColor="bluish.100"
         width="100%"
@@ -351,16 +368,24 @@ export default function Home() {
         <h1 className="slider_title">CAMPANHAS EM ANDAMENTO</h1>
         <Carousel campanhas={campanhas} />
       </Box>
-      <Box width="100%" p={2} pt={20} pb={20}>
-        <Grid
-          templateColumns="repeat(2, 1fr)"
-          gap={6}
-          margin={10}
-          padding={10}
-          fontSize={45}
+      <Box 
+        width="100%" 
+        color="brand.300" 
+        p={1} 
+        pb={20} 
+        id="about"
+      >
+        <SimpleGrid 
+          minChildWidth="120px"
+          spacing={12} 
+          mt={20} 
+          ml={20} 
+          mr={20}
         >
-          <Box w="80%">
-            <Text>
+          <Box>
+            <Text 
+              fontSize="2rem"
+            >
               Impulsionar uma plataforma virtual interativa que centralize
               necessidades de instituições e organizações sociais de Santa
               Maria. Faz um bem! propõe-se como uma platagorma virtual
@@ -368,28 +393,28 @@ export default function Home() {
               de recursos.
             </Text>
           </Box>
-          <Box w="100%">
+          <Box>
             <Text
               color="bluish.100"
-              fontSize={150}
+              fontSize="5rem"
               textAlign="center"
               fontWeight={500}
             >
               SOBRE
             </Text>
           </Box>
-        </Grid>
+        </SimpleGrid>
       </Box>
-      <Box bg="bluish.100" width="100%" textAlign="center" pb={20}>
+      <Box bg="bluish.100" width="100%" textAlign="center" pb={20} id="institutes">
         <Text
-          pt={20}
-          ml="45%"
+          ml="44%"
           style={{
             width: 0,
             height: 0,
             borderLeft: "5rem solid transparent",
             borderRight: "5rem solid transparent",
             borderTop: "5rem solid #E2E8F0",
+            marginBottom: "2rem"
           }}
         />
         <h1 className="slider_title">INSTITUIÇÕES PARTICIPANTES</h1>
@@ -409,26 +434,37 @@ export default function Home() {
                     src={`https://fazumbem.inf.ufsm.br/images/logos/${institute.picture_url}.png`}
                   />
                 </div>
-                <ul className="institute-icons">
-                  <li>
-                    <a href="/">
-                      <i>
-                        <IconButton
-                          aria-label="info"
-                          borderRadius="10px"
-                          transform="translateY(-3px)"
-                          bgColor="white"
-                          icon={<InfoIcon />}
-                          _hover={{
-                            bgColor: "bluish.400",
-                            borderRadius: "10px",
-                            transform: "translateY(-3px)",
-                          }}
-                        />
-                      </i>
-                    </a>
-                  </li>
-                </ul>
+                <Tooltip 
+                  hasArrow 
+                  label="Ver informações"
+                  bg="bluish.300" 
+                  color="white"
+                  placement="right"
+                  borderRadius="8px"
+                  transition="0.4s"
+                  ml={1}
+                >
+                  <ul className="institute-icons">
+                    <li>
+                      <a href="/">
+                        <i>
+                          <IconButton
+                            aria-label="info"
+                            borderRadius="10px"
+                            transform="translateY(-3px)"
+                            bgColor="white"
+                            icon={<InfoIcon />}
+                            _hover={{
+                              bgColor: "bluish.400",
+                              borderRadius: "10px",
+                              transform: "translateY(-3px)",
+                            }}
+                          />
+                        </i>
+                      </a>
+                    </li>
+                  </ul>
+                </Tooltip>
                 <div className="institute-details" title={institute.name}>
                   <h5>{truncateName(institute.name)}</h5>
                 </div>
@@ -437,8 +473,20 @@ export default function Home() {
           ))}
         </SimpleGrid>
       </Box>
-      <Box backgroundColor="brownish.200" width="100%" color="brand.300" p={2}>
-        <SimpleGrid minChildWidth="120px" spacing={12} mt={20} ml={20} mr={20}>
+      <Box 
+        backgroundColor="brownish.200" 
+        width="100%" 
+        color="brand.300" 
+        p={2} 
+        id="footer"
+      >
+        <SimpleGrid 
+          minChildWidth="120px" 
+          spacing={12} 
+          mt={20} 
+          ml={20} 
+          mr={20}
+        >
           <Box>
             <Heading size="1xl" mb={4} color="brand.300">
               Mapa do site
@@ -469,12 +517,18 @@ export default function Home() {
                 </Text>
               </li>
               <li>
-                <Text as={Link} href="/">
+                <Text 
+                  as={Link}
+                  onClick={() => scrollToElement('institutes')} 
+                >
                   Instituições
                 </Text>
               </li>
               <li>
-                <Text as={Link} href="/">
+                <Text
+                  as={Link}
+                  onClick={() => scrollToElement('about')} 
+                >
                   Sobre
                 </Text>
               </li>
@@ -499,39 +553,74 @@ export default function Home() {
                 Maria - RS, 97105-900
               </Text>
             </Box>
-            <Box as={Link} hreaf="/">
-              <div style={{ marginBottom: "-28px" }}>
-                <FaRegEnvelope />
-              </div>
-              <Text ml={6}>e_mail@mail.com</Text>
-            </Box>
-            <Box>
-              <Heading size="1xl" mb={2} color="brand.300">
-                Siga-nos
-              </Heading>
-              <Flex flax-direction="row">
+          </Box>
+          <Box>
+            <Heading size="1xl" mb={2} color="brand.300">
+              Siga-nos
+            </Heading>
+            <Flex flex-direction="row">
+              <Tooltip 
+                hasArrow 
+                label="Facebook"
+                bg="bluish.100" 
+                color="white"
+                placement="bottom"
+                borderRadius="8px"
+                transition="0.2s"
+                mt={1}
+              >
                 <Box m={2} as={Link} href="/">
-                  <FaFacebook size={35} />
+                  <FaFacebook size={50} />
                 </Box>
+              </Tooltip>
+              <Tooltip 
+                hasArrow 
+                label="Instagram"
+                bg="bluish.100" 
+                color="white"
+                placement="bottom"
+                borderRadius="8px"
+                transition="0.2s"
+                mt={1}
+              >
                 <Box m={2} as={Link} href="/">
-                  <FaInstagram size={35} />
+                  <FaInstagram size={50} />
                 </Box>
-                <Box m={2} as={Link} href="/">
-                  <FaYoutube size={35} />
-                </Box>
-              </Flex>
-            </Box>
-            <Box>
-              <Image
-                boxSize="450px"
-                height="15rem"
-                objectFit="contain"
-                mb={20}
-                mt={-10}
-                src={blueLogo}
-                alt="brand logo"
+              </Tooltip>
+              <Tooltip 
+                hasArrow 
+                label="Youtube"
+                bg="bluish.100" 
+                color="white"
+                placement="bottom"
+                borderRadius="8px"
+                transition="0.2s"
+                mt={1}
+              >
+              <Box m={2} as={Link} href="/">
+                <FaYoutube size={50} />
+              </Box>
+              </Tooltip>
+              <Text
+                height= "250px"
+                borderLeft= "3px solid"
+                marginLeft="auto"
+                mt={-5}
               />
-            </Box>
+              </Flex>
+          </Box>
+          <Box>
+            <Image
+              boxSize="450px"
+              height="15rem"
+              objectFit="contain"
+              mb={20}
+              mt={-10}
+              src={blueLogo}
+              alt="brand logo"
+              onClick={() => window.scrollTo(0, 0)}
+              cursor="pointer"
+            />
           </Box>
         </SimpleGrid>
         <Box backgroundColor="rgba(255,255,255, 0.3)">
