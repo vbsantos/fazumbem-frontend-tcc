@@ -31,7 +31,7 @@ export const RegisterType = ({ setChecked, checked }: Props) => {
         color="gray.600"
         fontWeight={checked ? "bold" : "normal"}
       >
-        Curador
+        Usuário
       </Text>
     </Box>
   );

@@ -3,10 +3,11 @@ import { Link, VStack } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import InputEmail from "../../../components/InputEmail";
 import InputPassword from "../../../components/InputPassword";
 import Logo from "../../../components/Logo";
+import { loginUser, useAuthDispatch } from "../../../context";
 import Container from "./Container";
 
 type FormData = {
@@ -21,12 +22,19 @@ export default function Login() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
+  const dispatch = useAuthDispatch();
   const toast = useToast();
+  const history = useHistory();
 
   const onSubmit = async (data: FormData) => {
     try {
-      await new Promise((r) => setTimeout(r, 3000));
-      console.log(data);
+      const payload = { username: data.email, password: data.password };
+
+      const response = await loginUser(dispatch, payload);
+
+      if (!response?.token) throw new Error("Login error!");
+
+      history.push("/dashboard");
     } catch {
       toast({
         title: "Erro no login!",
@@ -52,6 +60,7 @@ export default function Login() {
           }}
           error={errors.email}
         />
+
         <InputPassword
           register={{
             ...register("password", {

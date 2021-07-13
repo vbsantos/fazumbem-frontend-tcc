@@ -1,5 +1,6 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import { InputFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
@@ -10,7 +11,7 @@ export default function InputExternalLink({
   ...props
 }: InputFieldProps) {
   return (
-    <>
+    <Box w="full">
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
@@ -26,6 +27,6 @@ export default function InputExternalLink({
       </InputGroup>
 
       <InputError error={error} />
-    </>
+    </Box>
   );
 }

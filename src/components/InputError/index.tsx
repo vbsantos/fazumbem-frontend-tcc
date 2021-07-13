@@ -8,7 +8,7 @@ interface Props {
 
 const InputError = ({ error }: Props) => {
   return error ? (
-    <Alert status="error" variant="left-accent">
+    <Alert status="error" variant="left-accent" marginTop={3}>
       <AlertIcon />
       <AlertTitle fontSize="sm">{error.message}</AlertTitle>
     </Alert>

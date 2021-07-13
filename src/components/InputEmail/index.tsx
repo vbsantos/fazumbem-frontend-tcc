@@ -1,6 +1,6 @@
 import { EmailIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
-import React from "react";
+import { Box } from "@chakra-ui/react";
 import { InputFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
 
@@ -10,7 +10,7 @@ export default function InputEmail({
   ...props
 }: InputFieldProps) {
   return (
-    <>
+    <Box w="full">
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
@@ -27,6 +27,6 @@ export default function InputEmail({
       </InputGroup>
 
       <InputError error={error} />
-    </>
+    </Box>
   );
 }

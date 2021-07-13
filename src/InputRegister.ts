@@ -1,5 +1,10 @@
 import { InputProps, TextareaProps } from "@chakra-ui/react";
-import { ChangeHandler, FieldError, RefCallBack } from "react-hook-form";
+import {
+  ChangeHandler,
+  Control,
+  FieldError,
+  RefCallBack,
+} from "react-hook-form";
 
 export type InputRegister = {
   onChange: ChangeHandler;
@@ -11,6 +16,12 @@ export type InputRegister = {
 export type InputFieldProps = InputProps & {
   register: InputRegister;
   error?: FieldError;
+};
+
+export type InputControlledFieldProps = InputProps & {
+  control: Control<any>;
+  error?: FieldError;
+  name: string;
 };
 
 export type TextAreaFieldProps = TextareaProps & {

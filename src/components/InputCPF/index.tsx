@@ -1,25 +1,48 @@
 import { InfoIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
-import React from "react";
-import { InputFieldProps } from "../../InputRegister";
+import { Box } from "@chakra-ui/react";
+import { Controller } from "react-hook-form";
+import { InputControlledFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
+import { formatCPF, isValidCPF } from "@brazilian-utils/brazilian-utils";
 
-export default function InputAddress({
+export default function InputCPF({
   error,
-  register,
+  control,
+  name,
   ...props
-}: InputFieldProps) {
+}: InputControlledFieldProps) {
   return (
-    <>
-      <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<InfoIcon color="gray.300" />}
-        />
-        <Input placeholder="CPF" isInvalid={!!error} {...register} {...props} />
-      </InputGroup>
+    <Box w="full">
+      <Controller
+        name={name}
+        render={({ field }) => (
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<InfoIcon color="gray.300" />}
+            />
+            <Input
+              {...field}
+              placeholder="CPF"
+              isInvalid={!!error}
+              onChange={(e) => {
+                field.onChange(formatCPF(e.target.value));
+              }}
+            />
+          </InputGroup>
+        )}
+        control={control}
+        rules={{
+          required: "Campo obrigatório",
+          validate: {
+            validCPF: (x) => (!!isValidCPF(x) ? true : "CPF inválido!"),
+          },
+        }}
+        {...props}
+      />
 
       <InputError error={error} />
-    </>
+    </Box>
   );
 }

@@ -1,48 +1,63 @@
 /* eslint-disable no-useless-escape */
 import { Button } from "@chakra-ui/button";
 import { Link, VStack } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/react";
+import { Input, Select, SimpleGrid, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink } from "react-router-dom";
-import InputAddress from "../../../components/InputAddress";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import InputCNPJ from "../../../components/InputCNPJ";
 import InputCPF from "../../../components/InputCPF";
 import InputEmail from "../../../components/InputEmail";
+import InputError from "../../../components/InputError";
 import InputExternalLink from "../../../components/InputExternalLink";
 import InputOrganizationTitle from "../../../components/InputOrganizationTitle";
 import InputPassword from "../../../components/InputPassword";
 import InputPhone from "../../../components/InputPhone";
 import InputProjectDescription from "../../../components/InputProjectDescription";
 import Logo from "../../../components/Logo";
+import { httpClient } from "../../../services/httpClient";
 import Container from "./Container";
 import RegisterType from "./RegisterType";
+import { getStates } from "@brazilian-utils/brazilian-utils";
+import InputCEP from "../../../components/InputCEP";
 
 type FormData = {
   organizationTitle: string;
   email: string;
   password: string;
-  address: string;
+  street: string;
+  number: string;
+  complement: string;
+  cep: string;
+  city: string;
+  state: string;
   phone: string;
   externalLink: string;
   description: string;
   cpf: string;
   cnpj: string;
+  cpfFormated: string;
 };
 
 export default function Register() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>();
   const toast = useToast();
+  const history = useHistory();
 
   const onSubmit = async (data: FormData) => {
     try {
-      await new Promise((r) => setTimeout(r, 3000));
-      console.log(data);
+      const payload = { ...data, username: data.email };
+      await httpClient({
+        method: "POST",
+        url: "/user/register",
+        data: payload,
+      });
 
       toast({
         title: "Cadastrado com sucesso!",
@@ -52,6 +67,8 @@ export default function Register() {
         position: "top",
         isClosable: true,
       });
+
+      history.push("/login");
     } catch {
       toast({
         title: "Erro no cadastro!",
@@ -64,12 +81,12 @@ export default function Register() {
     }
   };
 
-  const [isCurador, setIsCurador] = useState(false);
-  const registerType = isCurador ? "CURADOR" : "INSTITUICAO";
+  const [isUser, setIsUser] = useState(false);
+  const registerType = isUser ? "USER" : "INSTITUICAO";
 
   useEffect(() => {
     reset();
-  }, [isCurador, reset]);
+  }, [isUser, reset]);
 
   function getFields(type: typeof registerType) {
     const isInstitution = type === "INSTITUICAO";
@@ -89,31 +106,9 @@ export default function Register() {
         )}
 
         {isInstitution ? (
-          <InputCNPJ
-            register={{
-              ...register("cnpj", {
-                required: "Campo obrigatório",
-                pattern: {
-                  value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/,
-                  message: "Padrão XX.XXX.XXX/0001-XX",
-                },
-              }),
-            }}
-            error={errors.cnpj}
-          />
+          <InputCNPJ name="cnpj" control={control} error={errors.cnpj} />
         ) : (
-          <InputCPF
-            register={{
-              ...register("cpf", {
-                required: "Campo obrigatório",
-                pattern: {
-                  value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
-                  message: "Padrão XXX.XXX.XXX-XX",
-                },
-              }),
-            }}
-            error={errors.cpf}
-          />
+          <InputCPF name="cpf" control={control} error={errors.cpf} />
         )}
 
         <InputEmail
@@ -133,30 +128,9 @@ export default function Register() {
           }}
           error={errors.password}
         />
-        {isInstitution && (
-          <InputAddress
-            register={{
-              ...register("address", {
-                required: "Campo obrigatório",
-                minLength: { value: 8, message: "Mínimo 8 caracteres" },
-              }),
-            }}
-            error={errors.address}
-          />
-        )}
 
-        <InputPhone
-          register={{
-            ...register("phone", {
-              required: "Campo obrigatório",
-              pattern: {
-                value: /\(\d{2}\)\s\d{4,5}\-\d{4}/g,
-                message: "(XX) XXXXX-XXXX",
-              },
-            }),
-          }}
-          error={errors.phone}
-        />
+        <InputPhone name="phone" control={control} error={errors.phone} />
+
         {isInstitution && (
           <InputExternalLink
             register={{
@@ -171,6 +145,74 @@ export default function Register() {
             error={errors.externalLink}
           />
         )}
+
+        <InputCEP name="cep" control={control} error={errors.cep} />
+
+        <div>
+          <Input
+            placeholder="Rua"
+            width="full"
+            isInvalid={!!errors.street}
+            {...register("street", {
+              required: "Campo obrigatório",
+              minLength: { value: 4, message: "Mínimo 4 caracteres" },
+            })}
+          />
+
+          <InputError error={errors.street} />
+        </div>
+
+        <div>
+          <Input
+            placeholder="Número"
+            width="full"
+            isInvalid={!!errors.number}
+            {...register("number", {
+              required: "Campo obrigatório",
+            })}
+            type="number"
+          />
+          <InputError error={errors.number} />
+        </div>
+
+        <div>
+          <Input
+            placeholder="Complemento"
+            width="full"
+            isInvalid={!!errors.complement}
+            {...register("complement", {
+              required: "Campo obrigatório",
+            })}
+          />
+          <InputError error={errors.complement} />
+        </div>
+
+        <div>
+          <Select
+            placeholder="Estado"
+            isInvalid={!!errors.state}
+            {...register("state", {
+              required: "Campo obrigatório",
+            })}
+          >
+            {getStates().map((state) => (
+              <option value={state.code}>{state.name}</option>
+            ))}
+          </Select>
+          <InputError error={errors.state} />
+        </div>
+
+        <div>
+          <Input
+            placeholder="Cidade"
+            width="full"
+            isInvalid={!!errors.city}
+            {...register("city", {
+              required: "Campo obrigatório",
+            })}
+          />
+          <InputError error={errors.city} />
+        </div>
 
         {isInstitution && (
           <InputProjectDescription
@@ -191,9 +233,11 @@ export default function Register() {
       <Container>
         <Logo />
 
-        <RegisterType checked={isCurador} setChecked={setIsCurador} />
+        <RegisterType checked={isUser} setChecked={setIsUser} />
 
-        {getFields(registerType)}
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} marginY={10}>
+          {getFields(registerType)}
+        </SimpleGrid>
 
         <VStack>
           <Button type="submit" colorScheme="brand" isLoading={isSubmitting}>

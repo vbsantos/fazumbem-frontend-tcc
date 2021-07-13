@@ -13,9 +13,10 @@ export default function Container({ children }: Props): ReactElement {
     <Flex justify="center" align="center" minH="100vh">
       <VStack
         spacing={4}
+        marginY={10}
         justifyContent="center"
-        maxW="400px"
-        w="400px"
+        maxW="700px"
+        w="full"
         padding={6}
         background={formBackground}
         rounded={10}

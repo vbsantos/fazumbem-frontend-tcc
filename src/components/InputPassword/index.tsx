@@ -6,6 +6,7 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/input";
+import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { InputFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
@@ -19,7 +20,7 @@ export default function InputPassword({
   const handleClick = () => setShow(!show);
 
   return (
-    <>
+    <Box w="full">
       <InputGroup>
         <InputGroup>
           <InputLeftElement
@@ -50,6 +51,6 @@ export default function InputPassword({
         </InputRightElement>
       </InputGroup>
       <InputError error={error} />
-    </>
+    </Box>
   );
 }
