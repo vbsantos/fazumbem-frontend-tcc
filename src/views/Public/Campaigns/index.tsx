@@ -22,11 +22,11 @@ import "../../../css/instituicoes.css";
   console.log("show details");
 }*/
 
-function truncateName(name: String) {
-  if (name.length > 12) {
-    return name.substr(0, 12);
-  }
-}
+// function truncateName(name: String) {
+//   if (name.length > 12) {
+//     return name.substr(0, 12);
+//   }
+// }
 
 export default function Home() {
   const [showMenu, setShowMenu] = useState(true);
@@ -107,83 +107,83 @@ export default function Home() {
       picture_url: 15,
     },
   ];
-  const institutes = [
-    {
-      id: 0,
-      name: "Instituição 1",
-      picture_url: 1,
-    },
-    {
-      id: 1,
-      name: "Instituição 2",
-      picture_url: 2,
-    },
-    {
-      id: 2,
-      name: "Instituição 3",
-      picture_url: 3,
-    },
-    {
-      id: 3,
-      name: "Instituição 4",
-      picture_url: 4,
-    },
-    {
-      id: 4,
-      name: "Instituição 5",
-      picture_url: 5,
-    },
-    {
-      id: 5,
-      name: "Instituição 6",
-      picture_url: 6,
-    },
-    {
-      id: 6,
-      name: "Instituição 7",
-      picture_url: 7,
-    },
-    {
-      id: 7,
-      name: "Instituição 8",
-      picture_url: 8,
-    },
-    {
-      id: 8,
-      name: "Instituição 9",
-      picture_url: 9,
-    },
-    {
-      id: 9,
-      name: "Instituição 10",
-      picture_url: 10,
-    },
-    {
-      id: 10,
-      name: "Instituição 11",
-      picture_url: 11,
-    },
-    {
-      id: 11,
-      name: "Instituição 12",
-      picture_url: 12,
-    },
-    {
-      id: 12,
-      name: "Instituição 13",
-      picture_url: 13,
-    },
-    {
-      id: 13,
-      name: "Instituição 14",
-      picture_url: 14,
-    },
-    {
-      id: 14,
-      name: "Instituição 15",
-      picture_url: 15,
-    },
-  ];
+  // const institutes = [
+  //   {
+  //     id: 0,
+  //     name: "Instituição 1",
+  //     picture_url: 1,
+  //   },
+  //   {
+  //     id: 1,
+  //     name: "Instituição 2",
+  //     picture_url: 2,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Instituição 3",
+  //     picture_url: 3,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Instituição 4",
+  //     picture_url: 4,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Instituição 5",
+  //     picture_url: 5,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Instituição 6",
+  //     picture_url: 6,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Instituição 7",
+  //     picture_url: 7,
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Instituição 8",
+  //     picture_url: 8,
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "Instituição 9",
+  //     picture_url: 9,
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "Instituição 10",
+  //     picture_url: 10,
+  //   },
+  //   {
+  //     id: 10,
+  //     name: "Instituição 11",
+  //     picture_url: 11,
+  //   },
+  //   {
+  //     id: 11,
+  //     name: "Instituição 12",
+  //     picture_url: 12,
+  //   },
+  //   {
+  //     id: 12,
+  //     name: "Instituição 13",
+  //     picture_url: 13,
+  //   },
+  //   {
+  //     id: 13,
+  //     name: "Instituição 14",
+  //     picture_url: 14,
+  //   },
+  //   {
+  //     id: 14,
+  //     name: "Instituição 15",
+  //     picture_url: 15,
+  //   },
+  // ];
   return (
     <Box backgroundColor="gray.200">
       <Box
