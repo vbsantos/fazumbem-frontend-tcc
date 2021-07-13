@@ -2,6 +2,7 @@ import React from "react";
 import Home from "../views/Public/Home";
 import Login from "../views/Public/Login";
 import Register from "../views/Public/Register";
+import Campaigns from "../views/Public/Campaigns";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -39,6 +40,11 @@ export default function AppRouter() {
     {
       path: "/register",
       component: Register,
+      isPrivate: false,
+    },
+    {
+      path: "/campaigns",
+      component: Campaigns,
       isPrivate: false,
     },
   ];
