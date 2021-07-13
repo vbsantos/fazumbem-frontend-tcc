@@ -1,11 +1,107 @@
 
-.institute-card {
+.all-card {
   width: 100%;
-  height: 160px;
+  height: 10rem;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  box-shadow: 5px 10px 10px rgba(150, 150, 150, 0.3);
+}
+.all-card .all-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: #000;
+  transition: 0.5s;
+}
+.all-card .all-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.all-card:hover img {
+  opacity: 0.4;
+  transition: 0.5s;
+}
+.all-card:hover .all-card-image {
+  transform: translateY(-70px);
+  transition: all 0.9s;
+}
+.all-icons {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  display: flex;
+}
+.all-icons li {
+  list-style: none;
+}
+.all-icons li a {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: #fff;
+  font-size: 23px;
+  color: #298EE6;
+  font-weight: bold;
+  margin: 0 6px;
+  transition: 0.4s;
+  transform: translateY(200px);
+  opacity: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.all-card:hover .all-icons li a {
+  transform: translateY(0px);
+  opacity: 1;
+}
+.all-icons li a:hover {
+  background: #298EE6;
+  color: #fff;
+  transition: 0.2s;
+  transform: rotateY(360);
+}
+.all-icons li a i {
+  transition: 0.2s;
+}
+.all-card:hover li:nth-child(1) a {
+  transition-delay: 0.1s;
+}
+.all-details {
+  position: absolute;
+  bottom: 400px;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  z-index: 1;
+  padding: 10px;
+  transition: 0.6s;
+  font-weight: 500;
+  height: 70px;
+}
+.all-details h5 {
+  margin: 0px 0;
+  padding: 0;
+  text-align: center;
+}
+.all-card:hover .all-details {
+  bottom: 0;
+}
+
+
+.institute-card {
+  width: 100%;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
 }
 .institute-card .institute-card-image {
   position: absolute;
@@ -27,12 +123,12 @@
   transition: 0.5s;
 }
 .institute-card:hover .institute-card-image {
-  transform: translateY(-50px);
+  transform: translateY(-70px);
   transition: all 0.9s;
 }
 .institute-icons {
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
@@ -81,14 +177,14 @@
   left: 0;
   background: #fff;
   width: 100%;
-  height: 105px;
   z-index: 1;
   padding: 10px;
   transition: 0.6s;
   font-weight: 500;
+  height: 70px;
 }
 .institute-details h5 {
-  margin: 55px 0;
+  margin: 0px 0;
   padding: 0;
   text-align: center;
 }

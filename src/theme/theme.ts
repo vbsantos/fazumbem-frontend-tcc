@@ -23,6 +23,11 @@ const theme = extendTheme({
       700: "#298EE6",
       800: "#29B1E6",
       900: "#51CEE6"
+    },
+    brownish: {
+      100: "#A37633",
+      200: "#FCC068",
+      300: "#FFCD82"
     }
   },
 });

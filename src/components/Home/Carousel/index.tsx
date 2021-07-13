@@ -7,7 +7,8 @@ import  "../../../css/carousel.css";
 import { FaLandmark, FaEye } from "react-icons/fa";
 import { IconButton } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
-//import CSS from "csstype";
+import { Link as RouterLink } from "react-router-dom";
+import { Heading } from "@chakra-ui/layout";
 
 function showCampaignDetails(camp: Props){
   console.log(camp.campanhas[0]);
@@ -39,11 +40,15 @@ export default function Carousel(listaCampanhas: Props) {
                 <a href="/">
                   <i>
                     <IconButton 
-                      aria-label="info" 
+                      aria-label="info"
+                      borderRadius="10px"
+                      transform="translateY(-3px)"
+                      bgColor="white"
                       icon={<InfoIcon />}  
                       _hover={{ 
                         bgColor: "bluish.400", 
-                        transition: "0.2s"
+                        borderRadius: "10px",
+                        transform: "translateY(-3px)"
                       }} 
                     />
                   </i>
@@ -53,13 +58,17 @@ export default function Carousel(listaCampanhas: Props) {
                 <a href="/">
                   <i>
                     <IconButton 
-                      aria-label="institute" 
+                      aria-label="info"
+                      borderRadius="10px"
+                      transform="translateY(-3px)"
+                      bgColor="white"
                       icon={<FaLandmark />}  
                       _hover={{ 
                         bgColor: "bluish.400", 
-                        transition: "0.2s"
+                        borderRadius: "10px",
+                        transform: "translateY(-3px)"
                       }} 
-                      />
+                    />
                   </i>
                 </a>
               </li>
@@ -75,7 +84,15 @@ export default function Carousel(listaCampanhas: Props) {
             <div className="card-image-more">
               <Image filter="blur(4px);" src={`https://fazumbem.inf.ufsm.br/images/entidades/${15}.png`}/>
               <div className="more-details">
-                <h2>VER MAIS CAMPANHAS <FaEye /></h2> 
+                <Heading
+                  fontWeight="none"
+                  size="md"
+                  cursor="pointer"
+                  as={RouterLink}
+                  to="/campaigns"
+                >
+                  <h2>VER TODAS CAMPANHAS</h2>
+                </Heading>
               </div>
             </div>
           </div>
