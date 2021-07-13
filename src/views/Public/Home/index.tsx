@@ -562,12 +562,11 @@ export default function Home() {
               <Tooltip 
                 hasArrow 
                 label="Facebook"
-                bg="bluish.100" 
+                bg="bluish.200" 
                 color="white"
-                placement="bottom"
+                placement="top"
                 borderRadius="8px"
                 transition="0.2s"
-                mt={1}
               >
                 <Box m={2} as={Link} href="/">
                   <FaFacebook size={50} />
@@ -576,12 +575,11 @@ export default function Home() {
               <Tooltip 
                 hasArrow 
                 label="Instagram"
-                bg="bluish.100" 
+                bg="bluish.200" 
                 color="white"
-                placement="bottom"
+                placement="top"
                 borderRadius="8px"
                 transition="0.2s"
-                mt={1}
               >
                 <Box m={2} as={Link} href="/">
                   <FaInstagram size={50} />
@@ -590,12 +588,11 @@ export default function Home() {
               <Tooltip 
                 hasArrow 
                 label="Youtube"
-                bg="bluish.100" 
+                bg="bluish.200" 
                 color="white"
-                placement="bottom"
+                placement="top"
                 borderRadius="8px"
                 transition="0.2s"
-                mt={1}
               >
               <Box m={2} as={Link} href="/">
                 <FaYoutube size={50} />
