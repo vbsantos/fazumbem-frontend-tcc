@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Image } from "@chakra-ui/image";
 import "../../../css/carousel.css";
 import { FaLandmark } from "react-icons/fa";
-import { IconButton, Tooltip } from "@chakra-ui/react";
+import { IconButton, Tooltip, useMediaQuery } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 import { Heading } from "@chakra-ui/layout";
@@ -18,11 +18,18 @@ interface Props {
   campanhas: {}[];
 }
 export default function Carousel(listaCampanhas: Props) {
+
+  const [isMobile] = useMediaQuery("(max-width: 576px)")
+  const [isDesktop] = useMediaQuery("(min-width: 769px)")
+  let slides;
+  if (isMobile) slides = 1;
+  else if (isDesktop) slides = 3;
+  else slides = 2;
   let settings = {
     dot: true,
     infinite: true,
     speed: 400,
-    slidesToShow: 3,
+    slidesToShow: slides,
     slidesToScroll: 1,
     cssEase: "linear",
   };

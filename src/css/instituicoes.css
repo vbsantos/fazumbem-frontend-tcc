@@ -40,7 +40,7 @@
 .all-icons li {
   list-style: none;
 }
-.all-icons li a {
+.all-icons li span {
   position: relative;
   display: block;
   width: 50px;
@@ -58,17 +58,17 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.all-card:hover .all-icons li a {
+.all-card:hover .all-icons li span {
   transform: translateY(0px);
   opacity: 1;
 }
-.all-icons li a:hover {
+.all-icons li span:hover {
   background: #298EE6;
   color: #fff;
   transition: 0.2s;
   transform: rotateY(360);
 }
-.all-icons li a i {
+.all-icons li span i {
   transition: 0.2s;
 }
 .all-card:hover li:nth-child(1) a {
@@ -137,7 +137,7 @@
 .institute-icons li {
   list-style: none;
 }
-.institute-icons li a {
+.institute-icons li span {
   position: relative;
   display: block;
   width: 50px;
@@ -155,17 +155,17 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.institute-card:hover .institute-icons li a {
+.institute-card:hover .institute-icons li span {
   transform: translateY(0px);
   opacity: 1;
 }
-.institute-icons li a:hover {
+.institute-icons li span:hover {
   background: #298EE6;
   color: #fff;
   transition: 0.2s;
   transform: rotateY(360);
 }
-.institute-icons li a i {
+.institute-icons li span i {
   transition: 0.2s;
 }
 .institute-card:hover li:nth-child(1) a {

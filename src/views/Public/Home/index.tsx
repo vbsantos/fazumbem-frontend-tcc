@@ -1,24 +1,22 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import "../../../css/instituicoes.css";
-import { Box, Flex, Heading, HStack } from "@chakra-ui/layout";
-import { Image, Link, Text, SimpleGrid, Tooltip } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import HeadLogo from "../../../components/Home/HeadLogo";
-import ImgLogo from "../../../components/Home/Logo";
+import { Box } from "@chakra-ui/layout";
+import { 
+  Image, 
+  Text, 
+  SimpleGrid, 
+  Tooltip, 
+  useMediaQuery
+} from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
-import { InfoIcon, HamburgerIcon } from "@chakra-ui/icons";
-import blueLogo from "../../../assets/images/logo.svg";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaRegEnvelope,
-  FaYoutube,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
+import { InfoIcon } from "@chakra-ui/icons";
 import Carousel from "../../../components/Home/Carousel";
-
+import Header from "../../../components/PublicHeader";
+import Footer from "../../../components/Footer";
+import TopLayoutDesktop from "../../../components/Home/Top/LayoutDesktop";
+import TopLayoutMobile from "../../../components/Home/Top/LayoutMobile";
+import TopLayoutTablet from "../../../components/Home/Top/LayoutTablet";
 /*function showCampaignDetails(){
   console.log("show details");
 }*/
@@ -29,12 +27,11 @@ function truncateName(name: String) {
   }
 }
 
-function scrollToElement(element: string) {
-  (document.getElementById(element) as HTMLInputElement).scrollIntoView();
-}
-
 export default function Home() {
-  const [showMenu, setShowMenu] = useState(true);
+  const [isMobile] = useMediaQuery("(max-width: 576px)")
+  const [isDesktop] = useMediaQuery("(min-width: 769px)")
+  let isTablet = false;
+  if (!isMobile && !isDesktop) isTablet = true; 
   const campanhas = [
     {
       id: 0,
@@ -190,173 +187,17 @@ export default function Home() {
     },
   ];
   return (
-    <Box backgroundColor="gray.200">
-      <Box
-        as="header"
-        boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
-        backgroundColor="bluish.100"
-      >
-        <div>
-          <Flex
-            maxW="1400px"
-            padding={0}
-            justify="space-between"
-            align="center"
-            wrap="wrap"
-            margin="0 auto"
-          >
-            <Tooltip 
-              hasArrow 
-              label={!showMenu ? "Exibir menu" : "Ocultar menu"} 
-              bg="brownish.200" 
-              color="bluish.100"
-              placement="right"
-              borderRadius="8px"
-              transition="0.4s"
-              ml={2}
-            >
-              <Heading
-                color="white"
-                fontWeight="none"
-                size="md"
-                cursor="pointer"
-                onClick={(event) => setShowMenu(!showMenu)}
-              >
-                <HamburgerIcon marginRight={3} marginBottom={1} />
-                  Menu
-              </Heading>
-            </Tooltip>
-            <HeadLogo height="7rem" width="7rem" />
-            <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
-              <Heading
-                color="white"
-                fontWeight="none"
-                size="md"
-                cursor="pointer"
-                as={RouterLink}
-                to="/login"
-              >
-                Login
-              </Heading>
-              <Heading
-                color="white"
-                fontWeight="none"
-                size="md"
-                cursor="pointer"
-                as={RouterLink}
-                to="/register"
-              >
-                Cadastro
-              </Heading>
-            </HStack>
-          </Flex>
-        </div>
-      </Box>
-      {showMenu ? (
-        <Box
-          as="header"
-          boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
-          backgroundColor="brownish.200"
-          id="menu"
-        >
-          <Flex
-            maxW="1400px"
-            paddingX={{ base: "35px", sm: "50px" }}
-            justify="space-between"
-            align="center"
-            wrap="wrap"
-            margin="0 auto"
-            p="0.7rem"
-          >
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="/campaigns"
-              as={Link}
-            >
-              Campanhas
-            </Heading>
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="#instituicoes"
-              as={Link}
-              onClick={() => scrollToElement('institutes')}
-            >
-              Instituições
-            </Heading>
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="#sobre"
-              as={Link}
-              onClick={() => scrollToElement('about')}
-            >
-              Sobre
-            </Heading>
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="#contacts"
-              as={Link}
-              onClick={() => scrollToElement('footer')}
-            >
-              Contatos
-            </Heading>
-          </Flex>
-        </Box>
-      ) : (
-        ""
-      )}
-      <Flex
-        maxW="1400px"
-        paddingX={{ base: "30px", sm: "50px" }}
-        paddingY={2}
-        pb={10}
-        justify="space-between"
-        align="center"
-        wrap="wrap"
-        margin="0 auto"
-      >
-        <ImgLogo type="bluish" />
-        <Heading color="bluish.100" size="2xl" textAlign="center">
-          BEM-VINDO AO FAZ UM <br /> BEM!
-          <br />
-          <Box
-            as="button"
-            borderRadius={16}
-            bg="bluish.100"
-            color="white"
-            mt={10}
-            p={4}
-            pl={10}
-            pr={10}
-            width="max-content"
-            boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
-            _hover={{
-              background: "bluish.200",
-              transition: ".5s",
-            }}
-          >
-            <Text
-              fontSize="2xl"
-              color="white"
-              fontWeight="medium"
-              textAlign="center"
-            >
-              Saiba mais
-            </Text>
-          </Box>
-        </Heading>
-      </Flex>       
+    <Box backgroundColor="gray.200" >
+      <Header />
+      {isMobile ? (
+        <TopLayoutMobile />
+      ) : ("")}
+      {isDesktop ? (
+        <TopLayoutDesktop />
+      ) : ("")}
+      {isTablet ? (
+        <TopLayoutTablet />
+      ) : ("")}
       <Box
         backgroundColor="bluish.100"
         width="100%"
@@ -365,59 +206,114 @@ export default function Home() {
         pb={20}
         textAlign="center"
       >
-        <h1 className="slider_title">CAMPANHAS EM ANDAMENTO</h1>
+        <h1 
+          className="slider_title" 
+          style={{ fontSize: isMobile ? "1.5rem" : "3rem" }}
+        >
+          CAMPANHAS EM ANDAMENTO
+        </h1>
         <Carousel campanhas={campanhas} />
       </Box>
       <Box 
-        width="100%" 
-        color="brand.300" 
         p={1} 
         pb={20} 
         id="about"
       >
-        <SimpleGrid 
-          minChildWidth="120px"
-          spacing={12} 
-          mt={20} 
-          ml={20} 
-          mr={20}
-        >
-          <Box>
-            <Text 
-              fontSize="2rem"
+          {isDesktop ? (
+            <SimpleGrid 
+              minChildWidth="120px"
+              spacing={12} 
+              mt={20} 
+              ml={20} 
+              mr={20}
             >
-              Impulsionar uma plataforma virtual interativa que centralize
-              necessidades de instituições e organizações sociais de Santa
-              Maria. Faz um bem! propõe-se como uma platagorma virtual
-              interativa, incentivadora e mediadora entre doadores e receptores
-              de recursos.
-            </Text>
-          </Box>
-          <Box>
-            <Text
-              color="bluish.100"
-              fontSize="5rem"
-              textAlign="center"
-              fontWeight={500}
+              <Box>
+                <Text 
+                  fontSize="2rem"
+                >
+                  Impulsionar uma plataforma virtual interativa que centralize
+                  necessidades de instituições e organizações sociais de Santa
+                  Maria. Faz um bem! propõe-se como uma platagorma virtual
+                  interativa, incentivadora e mediadora entre doadores e receptores
+                  de recursos.
+                </Text>
+              </Box>
+              {/* 
+                backgroundImage={BackgroundImage}
+                backgroundPosition="right"
+                backgroundSize="cover"
+              */}
+              <Box>
+                <Text
+                  color="bluish.100"
+                  fontSize="5rem"
+                  textAlign="center"
+                  fontWeight={500}
+                >
+                  SOBRE
+                </Text>
+              </Box>
+            </SimpleGrid>
+          ) : (
+            <SimpleGrid 
+              minChildWidth="120px"
+              spacing={5} 
+              mt={10} 
+              ml={10} 
+              mr={10}
             >
-              SOBRE
-            </Text>
-          </Box>
-        </SimpleGrid>
+              <Box>
+                <Text
+                  color="bluish.100"
+                  fontSize={isMobile ? "3rem" : "5rem"}
+                  textAlign="center"
+                  fontWeight={500}
+                  mb={10}
+                >
+                  SOBRE
+                </Text>
+              </Box>
+              {/* 
+                backgroundImage={BackgroundImage}
+                backgroundPosition="right"
+                backgroundSize="cover"
+              */}
+              <Box>
+                <Text 
+                  fontSize={isMobile ? "1rem" : "2rem"}
+                >
+                  Impulsionar uma plataforma virtual interativa que centralize
+                  necessidades de instituições e organizações sociais de Santa
+                  Maria. Faz um bem! propõe-se como uma platagorma virtual
+                  interativa, incentivadora e mediadora entre doadores e receptores
+                  de recursos.
+                </Text>
+              </Box>
+            </SimpleGrid>
+          )}
       </Box>
-      <Box bg="bluish.100" width="100%" textAlign="center" pb={20} id="institutes">
+      <Box bg="bluish.100" width="100%" textAlign="center" p={0} id="institutes">
         <Text
-          ml="44%"
+          ml={isMobile ? "34%" : "44%"}
           style={{
             width: 0,
             height: 0,
-            borderLeft: "5rem solid transparent",
-            borderRight: "5rem solid transparent",
-            borderTop: "5rem solid #E2E8F0",
-            marginBottom: "2rem"
+            borderLeft: isMobile ? "3rem solid transparent" : "5rem solid transparent",
+            borderRight: isMobile ? "3rem solid transparent" : "5rem solid transparent",
+            borderTop: isMobile ? "3rem solid #E2E8F0" : "5rem solid #E2E8F0",
+            marginBottom:"2rem",
+            marginTop: "-1rem"
           }}
         />
-        <h1 className="slider_title">INSTITUIÇÕES PARTICIPANTES</h1>
+        <h1 
+          className="slider_title" 
+          style={{ 
+            fontSize: isMobile ? "2rem" : (
+              isDesktop ? "5rem" : "3rem"
+            )}}
+        >
+          INSTITUIÇÕES PARTICIPANTES
+        </h1>
         <SimpleGrid
           minChildWidth={{ base: "40%", sm: "20%", lg: "150px" }}
           spacing={10}
@@ -425,6 +321,7 @@ export default function Home() {
           paddingY={4}
           maxW="1600px"
           margin="0 auto"
+          pb={20}
         >
           {institutes.map((institute: any = []) => (
             <div key={institute.id}>
@@ -446,7 +343,7 @@ export default function Home() {
                 >
                   <ul className="institute-icons">
                     <li>
-                      <a href="/">
+                      <span>
                         <i>
                           <IconButton
                             aria-label="info"
@@ -461,7 +358,7 @@ export default function Home() {
                             }}
                           />
                         </i>
-                      </a>
+                      </span>
                     </li>
                   </ul>
                 </Tooltip>
@@ -473,179 +370,7 @@ export default function Home() {
           ))}
         </SimpleGrid>
       </Box>
-      <Box 
-        backgroundColor="brownish.200" 
-        width="100%" 
-        color="brand.300" 
-        p={2} 
-        id="footer"
-      >
-        <SimpleGrid 
-          minChildWidth="120px" 
-          spacing={12} 
-          mt={20} 
-          ml={20} 
-          mr={20}
-        >
-          <Box>
-            <Heading size="1xl" mb={4} color="brand.300">
-              Mapa do site
-            </Heading>
-            <ul
-              style={{
-                listStyleType: "none",
-              }}
-            >
-              <li>
-                <Text as={Link} href="/">
-                  Início
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/login">
-                  Login
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/register">
-                  Cadastro
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/campaigns">
-                  Campanhas
-                </Text>
-              </li>
-              <li>
-                <Text 
-                  as={Link}
-                  onClick={() => scrollToElement('institutes')} 
-                >
-                  Instituições
-                </Text>
-              </li>
-              <li>
-                <Text
-                  as={Link}
-                  onClick={() => scrollToElement('about')} 
-                >
-                  Sobre
-                </Text>
-              </li>
-            </ul>
-          </Box>
-          <Box>
-            <Heading size="1xl" mb={4} color="brand.300">
-              Contato
-            </Heading>
-            <Box as={Link} hreaf="/">
-              <div style={{ marginBottom: "-28px" }}>
-                <FaRegEnvelope />
-              </div>
-              <Text ml={6}>e_mail@mail.com</Text>
-            </Box>
-            <Box mt={2} textAlign="justify">
-              <div style={{ marginBottom: "-28px" }}>
-                <FaMapMarkerAlt />
-              </div>
-              <Text ml={6}>
-                Av. Roraima nº 1000 Cidade Universitária Bairro - Camobi, Santa
-                Maria - RS, 97105-900
-              </Text>
-            </Box>
-          </Box>
-          <Box>
-            <Heading size="1xl" mb={2} color="brand.300">
-              Siga-nos
-            </Heading>
-            <Flex flex-direction="row">
-              <Tooltip 
-                hasArrow 
-                label="Facebook"
-                bg="bluish.200" 
-                color="white"
-                placement="top"
-                borderRadius="8px"
-                transition="0.2s"
-              >
-                <Box m={2} as={Link} href="/">
-                  <FaFacebook size={50} />
-                </Box>
-              </Tooltip>
-              <Tooltip 
-                hasArrow 
-                label="Instagram"
-                bg="bluish.200" 
-                color="white"
-                placement="top"
-                borderRadius="8px"
-                transition="0.2s"
-              >
-                <Box m={2} as={Link} href="/">
-                  <FaInstagram size={50} />
-                </Box>
-              </Tooltip>
-              <Tooltip 
-                hasArrow 
-                label="Youtube"
-                bg="bluish.200" 
-                color="white"
-                placement="top"
-                borderRadius="8px"
-                transition="0.2s"
-              >
-              <Box m={2} as={Link} href="/">
-                <FaYoutube size={50} />
-              </Box>
-              </Tooltip>
-              <Text
-                height= "250px"
-                borderLeft= "3px solid"
-                marginLeft="auto"
-                mt={-5}
-              />
-              </Flex>
-          </Box>
-          <Box>
-            <Image
-              boxSize="450px"
-              height="15rem"
-              objectFit="contain"
-              mb={20}
-              mt={-10}
-              src={blueLogo}
-              alt="brand logo"
-              onClick={() => window.scrollTo(0, 0)}
-              cursor="pointer"
-            />
-          </Box>
-        </SimpleGrid>
-        <Box backgroundColor="rgba(255,255,255, 0.3)">
-          <Text fontSize="sm" textAlign="center">
-            Desenvolvido por{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Rafael de Lima
-            </Text>
-            ,{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Raíssa Arantes
-            </Text>
-            ,{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Vitória Pizzuti
-            </Text>
-            ,{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Yuri Becker
-            </Text>{" "}
-            e{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Tayna ??
-            </Text>
-            .
-          </Text>
-        </Box>
-      </Box>
+      <Footer />
     </Box>
   );
 }
