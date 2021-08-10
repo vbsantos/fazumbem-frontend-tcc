@@ -1,22 +1,28 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { HamburgerIcon, InfoIcon } from "@chakra-ui/icons";
-import { Box, Flex, Heading, HStack } from "@chakra-ui/layout";
-import { IconButton, Image, Link, SimpleGrid, Text, Tooltip } from "@chakra-ui/react";
-import React, { useState } from "react";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaLandmark,
-  FaMapMarkerAlt,
-  FaRegEnvelope,
-  FaYoutube,
-} from "react-icons/fa";
-import { Link as RouterLink } from "react-router-dom";
-import blueLogo from "../../../assets/images/logo.svg";
-import Carousel from "../../../components/Home/Carousel";
-import HeadLogo from "../../../components/Home/HeadLogo";
+import { InfoIcon } from "@chakra-ui/icons";
+import { Box, Heading } from "@chakra-ui/layout";
+import { 
+  IconButton, 
+  Image, 
+  SimpleGrid, 
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  /* useMediaQuery, */
+  Text,
+  Center
+} from "@chakra-ui/react";
+import { FaLandmark } from "react-icons/fa";
 import "../../../css/instituicoes.css";
+import Header from "../../../components/PublicHeader";
+import Footer from "../../../components/Footer";
 
 /*function showCampaignDetails(){
   console.log("show details");
@@ -28,13 +34,16 @@ import "../../../css/instituicoes.css";
 //   }
 // }
 
+
 export default function Home() {
-  const [showMenu, setShowMenu] = useState(true);
+  /* const [isMobile] = useMediaQuery("(max-width: 576px)")
+  const [isDesktop] = useMediaQuery("(min-width: 769px)") */
+  let { isOpen, onClose, onOpen } = useDisclosure();
   const campanhas = [
     {
       id: 0,
       title: "Campanha 1",
-      picture_url: 1,
+      picture_url: 1
     },
     {
       id: 1,
@@ -109,134 +118,21 @@ export default function Home() {
   ];
   return (
     <Box backgroundColor="gray.200">
-      <Box
-        as="header"
-        boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
-        backgroundColor="bluish.100"
-      >
-        <div>
-          <Flex
-            maxW="1400px"
-            padding={0}
-            justify="space-between"
-            align="center"
-            wrap="wrap"
-            margin="0 auto"
-          >
-            <Tooltip 
-              hasArrow label={!showMenu ? "Exibir menu" : "Ocultar menu"} 
-              bg="brownish.200" 
-              color="bluish.100"
-              placement="right"
-              ml={2}
-            >
-              <Heading
-                color="white"
-                fontWeight="none"
-                size="md"
-                cursor="pointer"
-                onClick={(event) => setShowMenu(!showMenu)}
-              >
-                  <HamburgerIcon marginRight={3} marginBottom={1} />
-                  Menu
-              </Heading>
-            </Tooltip>
-            <HeadLogo height="7rem" width="7rem" />
-            <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
-              <Heading
-                color="white"
-                fontWeight="none"
-                size="md"
-                cursor="pointer"
-                as={RouterLink}
-                to="/login"
-              >
-                Login
-              </Heading>
-              <Heading
-                color="white"
-                fontWeight="none"
-                size="md"
-                cursor="pointer"
-                as={RouterLink}
-                to="/register"
-              >
-                Cadastro
-              </Heading>
-            </HStack>
-          </Flex>
-        </div>
-      </Box>
-      {showMenu ? (
-        <Box
-          as="header"
-          boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
-          backgroundColor="brownish.200"
-          id="menu"
-        >
-          <Flex
-            maxW="1400px"
-            paddingX={{ base: "35px", sm: "50px" }}
-            justify="space-between"
-            align="center"
-            wrap="wrap"
-            margin="0 auto"
-            p="0.7rem"
-          >
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="/campaigns"
-              as={Link}
-            >
-              Campanhas
-            </Heading>
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="#instituicoes"
-              as={Link}
-            >
-              Instituições
-            </Heading>
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="#sobre"
-              as={Link}
-            >
-              Sobre
-            </Heading>
-            <Heading
-              color="bluish.100"
-              fontWeight="none"
-              size="md"
-              cursor="pointer"
-              href="#sobre"
-              as={Link}
-            >
-              Contatos
-            </Heading>
-          </Flex>
-        </Box>
-      ) : (
-        ""
-      )}
+      <Header />
       <Heading
         color="bluish.100"
         size="2xl"
         textAlign="center"
         mt="5rem"
-        mb="5rem"
+        mb="2rem"
       >
         CAMPANHAS EM ANDAMENTO
       </Heading>
+      <Text color="bluish.100" fontSize="1.4rem" m={10} textAlign="center">
+        Confira as campanhas que estão em andamento e participe! Loga abaixo você
+        pode conferir as informações das campanhas em maiores detalhes e verificar
+        a instituição que as estão organizando.
+      </Text>
       <SimpleGrid
         minChildWidth={{ base: "40%", sm: "20%", lg: "150px" }}
         spacing={10}
@@ -256,7 +152,7 @@ export default function Home() {
               </div>
               <ul className="all-icons">
                 <li>
-                  <a href="/">
+                  <span>
                     <i>
                       <IconButton
                         aria-label="info"
@@ -269,12 +165,13 @@ export default function Home() {
                           borderRadius: "10px",
                           transform: "translateY(-3px)",
                         }}
+                        onClick={onOpen}
                       />
                     </i>
-                  </a>
+                  </span>
                 </li>
                 <li>
-                  <a href="/">
+                  <span>
                     <i>
                       <IconButton
                         aria-label="info"
@@ -289,7 +186,7 @@ export default function Home() {
                         }}
                       />
                     </i>
-                  </a>
+                  </span>
                 </li>
               </ul>
               <div className="all-details">
@@ -307,126 +204,146 @@ export default function Home() {
         pb={20}
         textAlign="center"
       >
-        <h1 className="slider_title">CAMPANHAS PASSADAS</h1>
-        <Carousel campanhas={campanhas} />
-      </Box>
-      <Box backgroundColor="brownish.200" width="100%" color="brand.300" p={2}>
-        <SimpleGrid minChildWidth="120px" spacing={12} mt={20} ml={20} mr={20}>
-          <Box>
-            <Heading size="1xl" mb={4} color="brand.300">
-              Mapa do site
-            </Heading>
-            <ul
-              style={{
-                listStyleType: "none",
-              }}
-            >
-              <li>
-                <Text as={Link} href="/">
-                  Início
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/login">
-                  Login
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/register">
-                  Cadastro
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/campaigns">
-                  Campanhas
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/">
-                  Instituições
-                </Text>
-              </li>
-              <li>
-                <Text as={Link} href="/">
-                  Sobre
-                </Text>
-              </li>
-            </ul>
-          </Box>
-          <Box>
-            <Heading size="1xl" mb={4} color="brand.300">
-              Contato
-            </Heading>
-            <Box as={Link} hreaf="/">
-              <div style={{ marginBottom: "-28px" }}>
-                <FaRegEnvelope />
+        <Heading
+          color="white"
+          size="2xl"
+          textAlign="center"
+          mt="2rem"
+          mb="2rem"
+        >
+          CAMPANHAS PASSADAS
+        </Heading>
+        <Text color="white" fontSize="1.4rem" m={10} textAlign="center">
+          Deseja ver informações de campanhas passadas? Confira a seguir
+          detalhes de campanhas que já se encerraram e as suas instituições 
+          organizadoras.
+        </Text>
+        <SimpleGrid
+          minChildWidth={{ base: "40%", sm: "20%", lg: "150px" }}
+          spacing={10}
+          paddingX={{ base: 4, md: 6, lg: 10 }}
+          paddingY={4}
+          pb="5rem"
+          maxW="1600px"
+          margin="0 auto"
+        >
+          {campanhas.map((campanha: any = []) => (
+            <div className="all-card-wrapper" key={campanha.id}>
+              <div className="all-card">
+                <div className="all-card-image">
+                  <Image
+                    src={`https://fazumbem.inf.ufsm.br/images/entidades/${campanha.picture_url}.png`}
+                  />
+                </div>
+                <ul className="all-icons">
+                  <li>
+                    <span>
+                      <i>
+                        <IconButton
+                          aria-label="info"
+                          borderRadius="10px"
+                          transform="translateY(-3px)"
+                          bgColor="white"
+                          icon={<InfoIcon />}
+                          _hover={{
+                            bgColor: "bluish.400",
+                            borderRadius: "10px",
+                            transform: "translateY(-3px)",
+                          }}
+                          onClick={onOpen}
+                        />
+                      </i>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <i>
+                        <IconButton
+                          aria-label="info"
+                          borderRadius="10px"
+                          transform="translateY(-3px)"
+                          bgColor="white"
+                          icon={<FaLandmark />}
+                          _hover={{
+                            bgColor: "bluish.400",
+                            borderRadius: "10px",
+                            transform: "translateY(-3px)",
+                          }}
+                        />
+                      </i>
+                    </span>
+                  </li>
+                </ul>
+                <div className="all-details">
+                  <h2>{campanha.title}</h2>
+                </div>
               </div>
-              <Text ml={6}>e_mail@mail.com</Text>
-            </Box>
-            <Box mt={2} textAlign="justify">
-              <div style={{ marginBottom: "-28px" }}>
-                <FaMapMarkerAlt />
-              </div>
-              <Text ml={6}>
-                Av. Roraima nº 1000 Cidade Universitária Bairro - Camobi, Santa
-                Maria - RS, 97105-900
-              </Text>
-            </Box>
-          </Box>
-          <Box>
-            <Heading size="1xl" mb={2} color="brand.300">
-              Siga-nos
-            </Heading>
-            <Flex flax-direction="row">
-              <Box m={2} as={Link} href="/">
-                <FaFacebook size={35} />
-              </Box>
-              <Box m={2} as={Link} href="/">
-                <FaInstagram size={35} />
-              </Box>
-              <Box m={2} as={Link} href="/">
-                <FaYoutube size={35} />
-              </Box>
-            </Flex>
-          </Box>
-          <Box>
-            <Image
-              boxSize="450px"
-              height="15rem"
-              objectFit="contain"
-              mb={20}
-              mt={-10}
-              src={blueLogo}
-              alt="brand logo"
-            />
-          </Box>
+            </div>
+          ))}
         </SimpleGrid>
-        <Box backgroundColor="rgba(255,255,255, 0.3)">
-          <Text fontSize="sm" textAlign="center">
-            Desenvolvido por{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Rafael de Lima
-            </Text>
-            ,{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Raíssa Arantes
-            </Text>
-            ,{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Vitória Pizzuti
-            </Text>
-            ,{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Yuri Becker
-            </Text>{" "}
-            e{" "}
-            <Text as={Link} href="" fontWeight={500}>
-              Tayna ??
-            </Text>
-            .
-          </Text>
-        </Box>
       </Box>
+      <Footer />
+      <Modal isOpen={isOpen} onClose={onClose} onEsc={onClose} size={"xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader color={"bluish.100"} fontWeight="none">Informações da campanha</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Center >
+              <Image
+                src={`https://fazumbem.inf.ufsm.br/images/entidades/1.png`}
+                borderRadius="16px"
+                maxWidth="400px"
+                mb={5}
+              />
+            </Center>
+            <Text color="bluish.100" fontSize="1.4rem">
+              Instituição organizadora
+            </Text>
+            <p>Instituição X</p>
+            <Text color="bluish.100" fontSize="1.4rem">
+              Nome da campanha
+            </Text>
+            <p>Campanha X</p>
+            <Text color="bluish.100" fontSize="1.4rem">
+              Descrição
+            </Text>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Integer volutpat ligula vel nunc finibus rutrum. Proin mattis 
+              odio id purus posuere, in euismod mauris malesuada. Suspendisse 
+              lacerat dictum nulla, at porttitor dui placerat pellentesque. 
+              Curabitur vulputate felis feugiat libero maximus, et eleifend dui 
+              convallis. Ut tempor, lacus in sollicitudin elementum, erat lorem 
+              laoreet enim, semper tincidunt lorem arcu sed dolor. Aenean sed 
+              porttitor leo. Praesent eu purus at sem placerat hendrerit a nec 
+              massa. Proin bibendum arcu cursus ultricies dapibus. In ultrices 
+              lacinia arcu vitae varius. Suspendisse scelerisque ullamcorper ante, 
+              nec ullamcorper elit mattis et. Phasellus vel mauris erat. Integer ac 
+              sagittis urna. Nam consectetur commodo finibus. Praesent tincidunt ac 
+              massa sed tincidunt. Donec eget neque placerat ante efficitur 
+              pellentesque sed rhoncus quam. Fusce tristique nunc dui, non 
+              pellentesque odio efficitur vitae.
+            </p>
+            <p>
+              Quisque posuere dapibus erat. Aenean imperdiet ut elit ac vestibulum. 
+              Suspendisse vestibulum libero nisi. Quisque sit amet leo velit. Curabitur 
+              non aliquet enim, imperdiet rhoncus mi. Donec non condimentum dui. Proin 
+              maximus magna id mauris porta consectetur. Proin lacus arcu, volutpat eget 
+              mattis vel, egestas vitae magna. Nam quis venenatis augue. Nunc a blandit 
+              velit, at semper mauris.
+            </p>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" mr={3} onClick={onClose}>
+              Fechar
+            </Button>
+            <Button colorScheme="blue" background="bluish.100" color="white">
+              Ver detalhes da campanha
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
