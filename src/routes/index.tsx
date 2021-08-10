@@ -16,6 +16,10 @@ import Campaigns from "../views/Private/Campaigns";
 import Home from "../views/Public/Home";
 import Login from "../views/Public/Login";
 import Register from "../views/Public/Register";
+import PublicCampaigns from "../views/Public/Campaigns";
+import Institutes from "../views/Public/Institutes";
+import About from "../views/Public/About";
+import Contacts from "../views/Public/Contacts";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -25,19 +29,38 @@ export default function AppRouter() {
     {
       path: "/login",
       component: Login,
+      isPrivate: false,
     },
     {
       path: "/",
       component: Home,
+      isPrivate: false,
     },
     {
       path: "/register",
       component: Register,
+      isPrivate: false,
     },
     {
       path: "/campaigns",
-      component: Campaigns,
+      component: PublicCampaigns,
+      isPrivate: false,
     },
+    {
+      path: "/institutes",
+      component: Institutes,
+      isPrivate: false,
+    },
+    {
+      path: "/about",
+      component: About,
+      isPrivate: false,
+    },
+    {
+      path: "/contact",
+      component: Contacts,
+      isPrivate: false,
+    }
   ];
 
   const privateRoutes = [
