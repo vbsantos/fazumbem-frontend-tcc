@@ -12,8 +12,29 @@ export async function loginUser(
     });
 
     if (response?.data?.token) {
-      dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
-      localStorage.setItem("currentUser", JSON.stringify(response.data));
+      const responseUser = await httpClient<any>({
+        method: "GET",
+        url: "/user",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          apikey: "1",
+          Authorization: `Bearer ${response?.data?.token}`,
+        },
+      });
+
+      const user = responseUser?.data?.find(
+        (x: any) => x.username === loginPayload.username
+      );
+
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: { ...response.data, ...user },
+      });
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({ ...response.data, ...user })
+      );
       return response.data;
     }
 

@@ -10,7 +10,7 @@ const defaultHeaders = () =>
         "Content-Type": "application/json",
         Accept: "application/json",
         apikey: "1",
-        authorization: token,
+        Authorization: `Bearer ${token}`,
       }
     : {
         "Content-Type": "application/json",
