@@ -4,6 +4,8 @@ import { useState, ReactElement } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import HeadLogo from "../Home/HeadLogo";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import "@fontsource/montserrat/600.css"
+import "@fontsource/comfortaa/700.css"
 
 export default function LayoutDesktop(): ReactElement {
   const [showMenu, setShowMenu] = useState(true);
@@ -24,10 +26,10 @@ export default function LayoutDesktop(): ReactElement {
             wrap="wrap"
             margin="0 auto"
           >
-            <Tooltip 
-              hasArrow 
-              label={!showMenu ? "Exibir menu" : "Ocultar menu"} 
-              bg="brownish.200" 
+            <Tooltip
+              hasArrow
+              label={!showMenu ? "Exibir menu" : "Ocultar menu"}
+              bg="brownish.200"
               color="bluish.100"
               placement="right"
               borderRadius="8px"
@@ -50,6 +52,11 @@ export default function LayoutDesktop(): ReactElement {
               <Heading
                 color="white"
                 fontWeight="none"
+                fontSize="22px"
+                backgroundColor="#ED6A5A"
+                padding="12px 56px"
+                borderRadius="50px"
+                boxShadow="0px 4px 4px 0px #00000040"
                 size="md"
                 cursor="pointer"
                 as={RouterLink}
@@ -58,8 +65,13 @@ export default function LayoutDesktop(): ReactElement {
                 Login
               </Heading>
               <Heading
-                color="white"
+                color="bluish.100"
                 fontWeight="none"
+                fontSize="22px"
+                backgroundColor="white"
+                padding="12px 39px"
+                borderRadius="50px"
+                boxShadow="0px 4px 4px 0px #00000040"
                 size="md"
                 cursor="pointer"
                 as={RouterLink}
@@ -74,8 +86,8 @@ export default function LayoutDesktop(): ReactElement {
       {showMenu ? (
         <Box
           as="header"
-          boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
-          backgroundColor="brownish.200"
+          //boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
+          backgroundColor="#ED6A5A"
           id="menu"
         >
           <Flex
@@ -88,8 +100,10 @@ export default function LayoutDesktop(): ReactElement {
             p="0.7rem"
           >
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
+              fontFamily="Comfortaa"
+              fontSize="22px"
               size="md"
               cursor="pointer"
               href="/campaigns"
@@ -98,8 +112,10 @@ export default function LayoutDesktop(): ReactElement {
               Campanhas
             </Heading>
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
+              fontFamily="Comfortaa"
+              fontSize="22px"
               size="md"
               cursor="pointer"
               href="/institutes"
@@ -108,8 +124,10 @@ export default function LayoutDesktop(): ReactElement {
               Instituições
             </Heading>
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
+              fontFamily="Comfortaa"
+              fontSize="22px"
               size="md"
               cursor="pointer"
               href="/about"
@@ -118,8 +136,10 @@ export default function LayoutDesktop(): ReactElement {
               Sobre
             </Heading>
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
+              fontFamily="Comfortaa"
+              fontSize="22px"
               size="md"
               cursor="pointer"
               href="/contact"

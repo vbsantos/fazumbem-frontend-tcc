@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import "../../../css/instituicoes.css";
-import { Box } from "@chakra-ui/layout";
-import { 
-  Image, 
-  Text, 
-  SimpleGrid, 
-  Tooltip, 
+import { Box, Heading } from "@chakra-ui/layout";
+import {
+  Image,
+  Text,
+  SimpleGrid,
+  Tooltip,
   useMediaQuery
 } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
@@ -31,7 +31,7 @@ export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   let isTablet = false;
-  if (!isMobile && !isDesktop) isTablet = true; 
+  if (!isMobile && !isDesktop) isTablet = true;
   const campanhas = [
     {
       id: 0,
@@ -206,29 +206,35 @@ export default function Home() {
         pb={20}
         textAlign="center"
       >
-        <h1 
-          className="slider_title" 
-          style={{ fontSize: isMobile ? "1.5rem" : "3rem" }}
+        <Heading>
+        <Text
+          display="inline"
+          fontSize="55px"
+          fontFamily="Comfortaa"
+          color="white"
+          backgroundColor="#ED6A5A"
         >
-          CAMPANHAS EM ANDAMENTO
-        </h1>
+          Campanhas em<br/>
+          andamento
+        </Text>
+        </Heading>
         <Carousel campanhas={campanhas} />
       </Box>
-      <Box 
-        p={1} 
-        pb={20} 
+      <Box
+        p={1}
+        pb={20}
         id="about"
       >
           {isDesktop ? (
-            <SimpleGrid 
+            <SimpleGrid
               minChildWidth="120px"
-              spacing={12} 
-              mt={20} 
-              ml={20} 
+              spacing={12}
+              mt={20}
+              ml={20}
               mr={20}
             >
               <Box>
-                <Text 
+                <Text
                   fontSize="2rem"
                 >
                   Impulsionar uma plataforma virtual interativa que centralize
@@ -238,7 +244,7 @@ export default function Home() {
                   de recursos.
                 </Text>
               </Box>
-              {/* 
+              {/*
                 backgroundImage={BackgroundImage}
                 backgroundPosition="right"
                 backgroundSize="cover"
@@ -255,11 +261,11 @@ export default function Home() {
               </Box>
             </SimpleGrid>
           ) : (
-            <SimpleGrid 
+            <SimpleGrid
               minChildWidth="120px"
-              spacing={5} 
-              mt={10} 
-              ml={10} 
+              spacing={5}
+              mt={10}
+              ml={10}
               mr={10}
             >
               <Box>
@@ -273,13 +279,13 @@ export default function Home() {
                   SOBRE
                 </Text>
               </Box>
-              {/* 
+              {/*
                 backgroundImage={BackgroundImage}
                 backgroundPosition="right"
                 backgroundSize="cover"
               */}
               <Box>
-                <Text 
+                <Text
                   fontSize={isMobile ? "1rem" : "2rem"}
                 >
                   Impulsionar uma plataforma virtual interativa que centralize
@@ -305,9 +311,9 @@ export default function Home() {
             marginTop: "-1rem"
           }}
         />
-        <h1 
-          className="slider_title" 
-          style={{ 
+        <h1
+          className="slider_title"
+          style={{
             fontSize: isMobile ? "2rem" : (
               isDesktop ? "5rem" : "3rem"
             )}}
@@ -331,10 +337,10 @@ export default function Home() {
                     src={`https://fazumbem.inf.ufsm.br/images/logos/${institute.picture_url}.png`}
                   />
                 </div>
-                <Tooltip 
-                  hasArrow 
+                <Tooltip
+                  hasArrow
                   label="Ver informações"
-                  bg="bluish.300" 
+                  bg="bluish.300"
                   color="white"
                   placement="right"
                   borderRadius="8px"
