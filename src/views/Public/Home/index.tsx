@@ -209,7 +209,7 @@ export default function Home() {
         <Heading>
         <Text
           display="inline"
-          fontSize="55px"
+          fontSize={isMobile ? "35px" : "55px"}
           fontFamily="Comfortaa"
           color="white"
           backgroundColor="#ED6A5A"

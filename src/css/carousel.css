@@ -203,11 +203,11 @@
 }
 
 .slick-next {
-  right: 50px;
+  right: 1.5%;
 }
 
 .slick-prev {
-  left: 50px;
+  left: 1.5%;
 }
 
 
@@ -219,5 +219,24 @@
 @media (max-width: 576px) {
   .slick-list {
     width: 100%;
+  }
+
+  .slick-next {
+    right: -18%;
+  }
+
+  .slick-prev {
+    left: -18%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+  .slick-next {
+    right: -3%;
+  }
+
+  .slick-prev {
+    left: -3%;
   }
 }
