@@ -7,20 +7,19 @@ import {
   Switch,
 } from "react-router-dom";
 import Header from "../components/Header";
-import Institutions from "../views/Private/Institutions";
 import Sidebar from "../components/Sidebar";
-import UserProfile from "../views/Private/UserProfile";
 import { useAuthState } from "../context";
-import Dashboard from "../views/Private/Dashboard";
 import Campaigns from "../views/Private/Campaigns";
+import Institutions from "../views/Private/Institutions";
+import NewInstitution from "../views/Private/NewInstitution";
+import UserProfile from "../views/Private/UserProfile";
+import About from "../views/Public/About";
+import PublicCampaigns from "../views/Public/Campaigns";
+import Contacts from "../views/Public/Contacts";
 import Home from "../views/Public/Home";
+import Institutes from "../views/Public/Institutes";
 import Login from "../views/Public/Login";
 import Register from "../views/Public/Register";
-import PublicCampaigns from "../views/Public/Campaigns";
-import Institutes from "../views/Public/Institutes";
-import About from "../views/Public/About";
-import Contacts from "../views/Public/Contacts";
-import NewInstitution from "../views/Private/NewInstitution";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -65,10 +64,6 @@ export default function AppRouter() {
   ];
 
   const privateRoutes = [
-    {
-      path: "/dashboard",
-      component: Dashboard,
-    },
     {
       path: "/perfil",
       component: UserProfile,

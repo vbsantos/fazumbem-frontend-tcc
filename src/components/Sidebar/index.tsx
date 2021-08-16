@@ -25,9 +25,6 @@ const SidebarContent = () => {
 
   return (
     <VStack>
-      <Button onClick={() => history.push("/dashboard")} w="100%">
-        Dashboard
-      </Button>
       <Button onClick={() => history.push("/perfil")} w="100%">
         Meu perfil
       </Button>

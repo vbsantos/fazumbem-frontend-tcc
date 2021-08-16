@@ -34,7 +34,7 @@ export default function Login() {
 
       if (!response?.token) throw new Error("Login error!");
 
-      history.push("/dashboard");
+      history.push("/instituições");
     } catch {
       toast({
         title: "Erro no login!",

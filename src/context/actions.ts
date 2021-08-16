@@ -32,7 +32,7 @@ export async function loginUser(
       });
       localStorage.setItem(
         "currentUser",
-        JSON.stringify({ ...response.data, user })
+        JSON.stringify({ ...response.data, user: user.data })
       );
       return response.data;
     }

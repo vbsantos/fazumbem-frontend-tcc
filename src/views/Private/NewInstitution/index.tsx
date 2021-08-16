@@ -7,6 +7,7 @@ import {
   FormLabel,
   Text,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import InputCNPJ from "../../../components/InputCNPJ";
@@ -18,6 +19,7 @@ import { httpClient } from "../../../services/httpClient";
 
 const NewInstituition = () => {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
+  const toast = useToast();
 
   const {
     control,
@@ -27,12 +29,31 @@ const NewInstituition = () => {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
-    await httpClient<any>({
-      method: "POST",
-      url: "/institution",
-      data: { ...data },
-    });
+    try {
+      await httpClient<any>({
+        method: "POST",
+        url: "/institution",
+        data: { ...data },
+      });
+
+      toast({
+        title: "Cadastrado com sucesso!",
+        description: "Acesse o login e entre na sua conta.",
+        status: "success",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+    } catch (e) {
+      toast({
+        title: "Houve um erro!",
+        status: "error",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+      console.log(e);
+    }
   };
 
   return (
@@ -220,9 +241,6 @@ const NewInstituition = () => {
           </HStack>
         </Box>
         <Center pb={10}>
-          <Button variant="ghost" mr={3}>
-            Cancelar
-          </Button>
           <Button
             colorScheme="blue"
             background="bluish.100"

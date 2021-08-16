@@ -105,12 +105,13 @@ const Institutions = (props: Props) => {
           <ModalCloseButton />
           <ModalBody>
             <Stack spacing={2}>
+              <Text fontSize="md">Informações</Text>
               <Text fontSize="sm">{opened?.cnpj}</Text>
               <Text fontSize="sm">{opened?.email}</Text>
               <Text fontSize="sm">{opened?.telephone}</Text>
               <Divider />
-              <Text fontSize="lg">Descrição</Text>
-              <Text fontSize="md">{opened?.description}</Text>
+              <Text fontSize="md">Descrição</Text>
+              <Text fontSize="sm">{opened?.description}</Text>
               <Divider />
               <Box>
                 <Text fontSize="md">Endereço</Text>

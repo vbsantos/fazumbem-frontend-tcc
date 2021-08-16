@@ -8,6 +8,7 @@ import {
   Button,
   Divider,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import InputText from "../../../components/InputText";
@@ -23,9 +24,7 @@ const UserProfile = (props: Props) => {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
   const userDetails = useAuthState();
   const dispatch = useAuthDispatch();
-
-  console.log(userDetails);
-
+  const toast = useToast();
   const { password, address, verified, ...others } = userDetails.user;
 
   const {
@@ -33,19 +32,39 @@ const UserProfile = (props: Props) => {
     handleSubmit,
     formState: { errors },
     register,
-  } = useForm({ defaultValues: { ...address, ...others } });
+  } = useForm({ defaultValues: { address: { ...address }, ...others } });
 
   const onSubmit = async (data: any) => {
-    const req = await httpClient<any>({
-      method: "PUT",
-      url: "/user",
-      data: { ...data, username: userDetails.username },
-    });
+    try {
+      const req = await httpClient<any>({
+        method: "PUT",
+        url: "/user",
+        data: { ...data, username: userDetails.username },
+      });
 
-    dispatch({
-      type: "LOGIN_SUCCESS",
-      payload: { ...userDetails, ...req.data },
-    });
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: { ...userDetails, user: { ...userDetails.user, ...req.data } },
+      });
+
+      toast({
+        title: "Cadastrado com sucesso!",
+        description: "Acesse o login e entre na sua conta.",
+        status: "success",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Houve um erro!",
+        status: "error",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+      console.log(error);
+    }
   };
 
   return (
