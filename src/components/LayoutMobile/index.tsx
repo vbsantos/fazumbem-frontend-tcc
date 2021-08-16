@@ -1,15 +1,15 @@
 import { Box, Flex, Heading } from "@chakra-ui/layout";
-import { 
-  Link, 
-  Tooltip, 
-  useDisclosure, 
+import {
+  Link,
+  Tooltip,
+  useDisclosure,
   Divider,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -34,10 +34,10 @@ export default function LayoutMobile(): ReactElement {
             wrap="wrap"
             margin="0 auto"
           >
-            <Tooltip 
-              hasArrow 
-              label={!isOpen ? "Exibir menu" : "Ocultar menu"} 
-              bg="brownish.200" 
+            <Tooltip
+              hasArrow
+              label={!isOpen ? "Exibir menu" : "Ocultar menu"}
+              bg="brownish.200"
               color="bluish.100"
               placement="right"
               borderRadius="8px"
@@ -52,7 +52,7 @@ export default function LayoutMobile(): ReactElement {
                 onClick={onOpen}
               >
                 <HamburgerIcon marginRight={3} marginBottom={1} />
-                  Menu
+                Menu
               </Heading>
             </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
@@ -63,18 +63,20 @@ export default function LayoutMobile(): ReactElement {
       <Modal isOpen={isOpen} onClose={onClose} onEsc={onClose} size={"xs"}>
         <ModalOverlay />
         <ModalContent background={"brownish.200"}>
-          <ModalHeader color={"bluish.100"} fontWeight="none">Menu</ModalHeader>
+          <ModalHeader color={"bluish.100"} fontWeight="none">
+            Menu
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ul style={{ listStyle : "none" }}>
+            <ul style={{ listStyle: "none" }}>
               <li>
-                <Box 
+                <Box
                   color="bluish.100"
-                  width="100%" 
-                  _hover={{ 
-                    textDecoration: "none", 
+                  width="100%"
+                  _hover={{
+                    textDecoration: "none",
                     color: "white",
-                    transition: ".1s" 
+                    transition: ".1s",
                   }}
                 >
                   <Heading
@@ -82,8 +84,8 @@ export default function LayoutMobile(): ReactElement {
                     size="md"
                     cursor="pointer"
                     href="/campaigns"
-                    _hover={{ 
-                      textDecoration: "none"
+                    _hover={{
+                      textDecoration: "none",
                     }}
                     as={Link}
                   >
@@ -92,13 +94,13 @@ export default function LayoutMobile(): ReactElement {
                 </Box>
               </li>
               <li>
-                <Box 
+                <Box
                   color="bluish.100"
-                  width="100%" 
-                  _hover={{ 
-                    textDecoration: "none", 
+                  width="100%"
+                  _hover={{
+                    textDecoration: "none",
                     color: "white",
-                    transition: ".1s" 
+                    transition: ".1s",
                   }}
                 >
                   <Heading
@@ -106,8 +108,8 @@ export default function LayoutMobile(): ReactElement {
                     size="md"
                     cursor="pointer"
                     href="/institutes"
-                    _hover={{ 
-                      textDecoration: "none"
+                    _hover={{
+                      textDecoration: "none",
                     }}
                     as={Link}
                   >
@@ -116,13 +118,13 @@ export default function LayoutMobile(): ReactElement {
                 </Box>
               </li>
               <li>
-                <Box 
+                <Box
                   color="bluish.100"
-                  width="100%" 
-                  _hover={{ 
-                    textDecoration: "none", 
+                  width="100%"
+                  _hover={{
+                    textDecoration: "none",
                     color: "white",
-                    transition: ".1s" 
+                    transition: ".1s",
                   }}
                 >
                   <Heading
@@ -130,8 +132,8 @@ export default function LayoutMobile(): ReactElement {
                     size="md"
                     cursor="pointer"
                     href="/about"
-                    _hover={{ 
-                      textDecoration: "none"
+                    _hover={{
+                      textDecoration: "none",
                     }}
                     as={Link}
                   >
@@ -140,13 +142,13 @@ export default function LayoutMobile(): ReactElement {
                 </Box>
               </li>
               <li>
-                <Box 
+                <Box
                   color="bluish.100"
-                  width="100%" 
-                  _hover={{ 
-                    textDecoration: "none", 
+                  width="100%"
+                  _hover={{
+                    textDecoration: "none",
                     color: "white",
-                    transition: ".1s" 
+                    transition: ".1s",
                   }}
                 >
                   <Heading
@@ -154,8 +156,8 @@ export default function LayoutMobile(): ReactElement {
                     size="md"
                     cursor="pointer"
                     href="/contact"
-                    _hover={{ 
-                      textDecoration: "none"
+                    _hover={{
+                      textDecoration: "none",
                     }}
                     as={Link}
                   >
@@ -182,12 +184,12 @@ export default function LayoutMobile(): ReactElement {
                     fontWeight={500}
                     size="md"
                     cursor="pointer"
-                    _hover={{ 
+                    _hover={{
                       color: "white",
-                      textDecoration: "none", 
-                      background: "bluish.100", 
+                      textDecoration: "none",
+                      background: "bluish.100",
                       borderColor: "bluish.100",
-                      transition: ".1s" 
+                      transition: ".1s",
                     }}
                     as={RouterLink}
                     to="/login"
@@ -202,12 +204,12 @@ export default function LayoutMobile(): ReactElement {
                     fontWeight={500}
                     size="md"
                     cursor="pointer"
-                    _hover={{ 
+                    _hover={{
                       color: "white",
-                      textDecoration: "none", 
+                      textDecoration: "none",
                       borderColor: "bluish.100",
                       background: "bluish.100",
-                      transition: ".1s" 
+                      transition: ".1s",
                     }}
                     as={RouterLink}
                     to="/register"

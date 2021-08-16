@@ -20,6 +20,7 @@ import PublicCampaigns from "../views/Public/Campaigns";
 import Institutes from "../views/Public/Institutes";
 import About from "../views/Public/About";
 import Contacts from "../views/Public/Contacts";
+import NewInstitution from "../views/Private/NewInstitution";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -60,7 +61,7 @@ export default function AppRouter() {
       path: "/contact",
       component: Contacts,
       isPrivate: false,
-    }
+    },
   ];
 
   const privateRoutes = [
@@ -79,6 +80,10 @@ export default function AppRouter() {
     {
       path: "/instituições",
       component: Institutions,
+    },
+    {
+      path: "/nova-instituição",
+      component: NewInstitution,
     },
   ];
 

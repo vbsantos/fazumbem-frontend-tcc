@@ -1,29 +1,26 @@
 /* eslint-disable no-useless-escape */
+import { getStates } from "@brazilian-utils/brazilian-utils";
 import { Button } from "@chakra-ui/button";
 import { Link, VStack } from "@chakra-ui/layout";
 import { Input, Select, SimpleGrid, useToast } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, useHistory } from "react-router-dom";
-import InputCNPJ from "../../../components/InputCNPJ";
+import InputCEP from "../../../components/InputCEP";
 import InputCPF from "../../../components/InputCPF";
 import InputEmail from "../../../components/InputEmail";
 import InputError from "../../../components/InputError";
-import InputExternalLink from "../../../components/InputExternalLink";
-import InputOrganizationTitle from "../../../components/InputOrganizationTitle";
 import InputPassword from "../../../components/InputPassword";
 import InputPhone from "../../../components/InputPhone";
-import InputProjectDescription from "../../../components/InputProjectDescription";
+import InputText from "../../../components/InputText";
 import Logo from "../../../components/Logo";
 import { httpClient } from "../../../services/httpClient";
 import Container from "./Container";
-import RegisterType from "./RegisterType";
-import { getStates } from "@brazilian-utils/brazilian-utils";
-import InputCEP from "../../../components/InputCEP";
 
 type FormData = {
   organizationTitle: string;
-  email: string;
+  username: string;
+  name: string;
   password: string;
   street: string;
   number: string;
@@ -31,12 +28,11 @@ type FormData = {
   cep: string;
   city: string;
   state: string;
-  phone: string;
+  telephone: string;
   externalLink: string;
   description: string;
   cpf: string;
   cnpj: string;
-  cpfFormated: string;
 };
 
 export default function Register() {
@@ -50,9 +46,28 @@ export default function Register() {
   const toast = useToast();
   const history = useHistory();
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async ({
+    cep,
+    city,
+    complement,
+    number,
+    state,
+    street,
+    ...others
+  }: FormData) => {
     try {
-      const payload = { ...data, username: data.email };
+      const payload = {
+        ...others,
+        address: {
+          cep,
+          city,
+          complement,
+          number,
+          state,
+          street,
+        },
+      };
+
       await httpClient({
         method: "POST",
         url: "/user/register",
@@ -81,43 +96,31 @@ export default function Register() {
     }
   };
 
-  const [isUser, setIsUser] = useState(false);
-  const registerType = isUser ? "USER" : "INSTITUICAO";
+  const registerType = "USER";
 
   useEffect(() => {
     reset();
-  }, [isUser, reset]);
+  }, [reset]);
 
   function getFields(type: typeof registerType) {
-    const isInstitution = type === "INSTITUICAO";
-
     return (
       <>
-        {isInstitution && (
-          <InputOrganizationTitle
-            register={{
-              ...register("organizationTitle", {
-                required: "Campo obrigatório",
-                minLength: { value: 8, message: "Mínimo 8 caracteres" },
-              }),
-            }}
-            error={errors.organizationTitle}
-          />
-        )}
+        <InputCPF name="cpf" control={control} error={errors.cpf} />
 
-        {isInstitution ? (
-          <InputCNPJ name="cnpj" control={control} error={errors.cnpj} />
-        ) : (
-          <InputCPF name="cpf" control={control} error={errors.cpf} />
-        )}
+        <InputText
+          name="name"
+          control={control}
+          error={errors.name}
+          placeholder="Nome"
+        />
 
         <InputEmail
           register={{
-            ...register("email", {
+            ...register("username", {
               required: "Campo obrigatório",
             }),
           }}
-          error={errors.email}
+          error={errors.username}
         />
         <InputPassword
           register={{
@@ -129,22 +132,11 @@ export default function Register() {
           error={errors.password}
         />
 
-        <InputPhone name="phone" control={control} error={errors.phone} />
-
-        {isInstitution && (
-          <InputExternalLink
-            register={{
-              ...register("externalLink", {
-                pattern: {
-                  value:
-                    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-                  message: "Digite uma URL válida",
-                },
-              }),
-            }}
-            error={errors.externalLink}
-          />
-        )}
+        <InputPhone
+          name="telephone"
+          control={control}
+          error={errors.telephone}
+        />
 
         <InputCEP name="cep" control={control} error={errors.cep} />
 
@@ -213,17 +205,6 @@ export default function Register() {
           />
           <InputError error={errors.city} />
         </div>
-
-        {isInstitution && (
-          <InputProjectDescription
-            register={{
-              ...register("description", {
-                required: "Campo obrigatório",
-              }),
-            }}
-            error={errors.description}
-          />
-        )}
       </>
     );
   }
@@ -233,7 +214,7 @@ export default function Register() {
       <Container>
         <Logo />
 
-        <RegisterType checked={isUser} setChecked={setIsUser} />
+        {/* <RegisterType checked={isUser} setChecked={setIsUser} /> */}
 
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} marginY={10}>
           {getFields(registerType)}

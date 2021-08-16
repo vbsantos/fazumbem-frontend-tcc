@@ -1,50 +1,37 @@
-import "../../../css/instituicoes.css";
 import { Box, HStack } from "@chakra-ui/layout";
 import {
-  Text,
+  Button,
+  Center,
+  Divider,
   FormControl,
   FormLabel,
-  Center,
-  Button,
-  Divider,
+  Text,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import InputText from "../../../components/InputText";
-import InputPassword from "../../../components/InputPassword";
-import InputCPF from "../../../components/InputCPF";
+import InputCNPJ from "../../../components/InputCNPJ";
 import InputPhone from "../../../components/InputPhone";
-import { useAuthDispatch, useAuthState } from "../../../context";
+import InputProjectDescription from "../../../components/InputProjectDescription";
+import InputText from "../../../components/InputText";
+import "../../../css/instituicoes.css";
 import { httpClient } from "../../../services/httpClient";
 
-interface Props {}
-
-const UserProfile = (props: Props) => {
+const NewInstituition = () => {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
-  const userDetails = useAuthState();
-  const dispatch = useAuthDispatch();
-
-  console.log(userDetails);
-
-  const { password, address, verified, ...others } = userDetails.user;
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     register,
-  } = useForm({ defaultValues: { ...address, ...others } });
+  } = useForm();
 
   const onSubmit = async (data: any) => {
-    const req = await httpClient<any>({
-      method: "PUT",
-      url: "/user",
-      data: { ...data, username: userDetails.username },
-    });
-
-    dispatch({
-      type: "LOGIN_SUCCESS",
-      payload: { ...userDetails, ...req.data },
+    console.log(data);
+    await httpClient<any>({
+      method: "POST",
+      url: "/institution",
+      data: { ...data },
     });
   };
 
@@ -65,13 +52,13 @@ const UserProfile = (props: Props) => {
             fontWeight={500}
             p={10}
           >
-            MEU PERFIL
+            Nova Instituição
           </Text>
         </Box>
 
         <Box m={20} mt={0} pb={10} color="bluish.100">
           <Text color="bluish.100" fontSize="1.8rem" textAlign="left" pb={5}>
-            Informações básicas da conta
+            Informações básicas
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
             <FormControl
@@ -88,34 +75,15 @@ const UserProfile = (props: Props) => {
               />
             </FormControl>
             <FormControl
-              id="username"
+              id="email"
               fontSize={isMobile ? "1rem" : "2rem"}
               isRequired
             >
               <FormLabel>Email</FormLabel>
               <InputText
-                name="username"
+                name="email"
                 control={control}
                 error={errors.username}
-                background="white"
-                isDisabled
-              />
-            </FormControl>
-            <FormControl
-              isRequired
-              id="password"
-              fontSize={isMobile ? "1rem" : "2rem"}
-            >
-              <FormLabel>Senha</FormLabel>
-              <InputPassword
-                register={{
-                  ...register("password", {
-                    required: "Campo obrigatório",
-                    minLength: { value: 6, message: "Mínimo 6 caracteres" },
-                  }),
-                }}
-                error={errors.password}
-                placeholder="*********"
                 background="white"
               />
             </FormControl>
@@ -207,11 +175,11 @@ const UserProfile = (props: Props) => {
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
             <FormControl
               isRequired
-              id="cpf"
+              id="cnpj"
               fontSize={isMobile ? "1rem" : "2rem"}
             >
-              <FormLabel>CPF</FormLabel>
-              <InputCPF name="cpf" control={control} error={errors.cpf} />
+              <FormLabel>CNPJ</FormLabel>
+              <InputCNPJ name="cnpj" control={control} error={errors.cnpj} />
             </FormControl>
 
             <FormControl
@@ -226,7 +194,7 @@ const UserProfile = (props: Props) => {
                 error={errors.phone}
               />
             </FormControl>
-            {/* <FormControl id="url" fontSize={isMobile ? "1rem" : "2rem"}>
+            <FormControl id="url" fontSize={isMobile ? "1rem" : "2rem"}>
               <FormLabel>Url da página</FormLabel>
 
               <InputText
@@ -248,7 +216,7 @@ const UserProfile = (props: Props) => {
                 }}
                 error={errors.description}
               />
-            </FormControl> */}
+            </FormControl>
           </HStack>
         </Box>
         <Center pb={10}>
@@ -275,4 +243,4 @@ const UserProfile = (props: Props) => {
   );
 };
 
-export default UserProfile;
+export default NewInstituition;

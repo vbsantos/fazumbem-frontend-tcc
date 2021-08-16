@@ -1,4 +1,5 @@
 import { httpClient } from "../services/httpClient";
+import jwt_decode from "jwt-decode";
 
 export async function loginUser(
   dispatch: any,
@@ -12,9 +13,11 @@ export async function loginUser(
     });
 
     if (response?.data?.token) {
-      const responseUser = await httpClient<any>({
+      const decoded: any = jwt_decode(response?.data?.token);
+
+      const user = await httpClient<any>({
         method: "GET",
-        url: "/user",
+        url: "/user/" + decoded?.sub,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -23,17 +26,13 @@ export async function loginUser(
         },
       });
 
-      const user = responseUser?.data?.find(
-        (x: any) => x.username === loginPayload.username
-      );
-
       dispatch({
         type: "LOGIN_SUCCESS",
-        payload: { ...response.data, ...user },
+        payload: { ...response.data, user: user.data },
       });
       localStorage.setItem(
         "currentUser",
-        JSON.stringify({ ...response.data, ...user })
+        JSON.stringify({ ...response.data, user })
       );
       return response.data;
     }

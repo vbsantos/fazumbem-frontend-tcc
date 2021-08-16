@@ -34,6 +34,9 @@ const SidebarContent = () => {
       <Button onClick={() => history.push("/campanhas")} w="100%">
         Campanhas
       </Button>
+      <Button onClick={() => history.push("/nova-instituição")} w="100%">
+        Nova Instituição
+      </Button>
       <Button onClick={() => history.push("/instituições")} w="100%">
         Instituições
       </Button>
