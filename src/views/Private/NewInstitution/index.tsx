@@ -38,7 +38,7 @@ const NewInstituition = () => {
 
       toast({
         title: "Cadastrado com sucesso!",
-        description: "Acesse o login e entre na sua conta.",
+        description: "Acesse o página Instituições no menu lateral",
         status: "success",
         duration: 3000,
         position: "top",
@@ -226,19 +226,19 @@ const NewInstituition = () => {
                 background="white"
               />
             </FormControl>
-            <FormControl id="description" fontSize={isMobile ? "1rem" : "2rem"}>
-              <FormLabel>Descrição da instituição</FormLabel>
-
-              <InputProjectDescription
-                register={{
-                  ...register("description", {
-                    required: "Campo obrigatório",
-                  }),
-                }}
-                error={errors.description}
-              />
-            </FormControl>
           </HStack>
+          <FormControl id="description" fontSize={isMobile ? "1rem" : "2rem"}>
+            <FormLabel>Descrição da instituição</FormLabel>
+
+            <InputProjectDescription
+              register={{
+                ...register("description", {
+                  required: "Campo obrigatório",
+                }),
+              }}
+              error={errors.description}
+            />
+          </FormControl>
         </Box>
         <Center pb={10}>
           <Button

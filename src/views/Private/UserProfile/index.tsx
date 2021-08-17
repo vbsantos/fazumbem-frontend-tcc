@@ -48,8 +48,7 @@ const UserProfile = (props: Props) => {
       });
 
       toast({
-        title: "Cadastrado com sucesso!",
-        description: "Acesse o login e entre na sua conta.",
+        title: "Alterado com sucesso!",
         status: "success",
         duration: 3000,
         position: "top",
@@ -245,35 +244,9 @@ const UserProfile = (props: Props) => {
                 error={errors.phone}
               />
             </FormControl>
-            {/* <FormControl id="url" fontSize={isMobile ? "1rem" : "2rem"}>
-              <FormLabel>Url da página</FormLabel>
-
-              <InputText
-                name="url"
-                control={control}
-                error={errors.complement}
-                placeholder="https://ufsm.fazumbem.br"
-                background="white"
-              />
-            </FormControl>
-            <FormControl id="description" fontSize={isMobile ? "1rem" : "2rem"}>
-              <FormLabel>Descrição da instituição</FormLabel>
-
-              <InputProjectDescription
-                register={{
-                  ...register("description", {
-                    required: "Campo obrigatório",
-                  }),
-                }}
-                error={errors.description}
-              />
-            </FormControl> */}
           </HStack>
         </Box>
         <Center pb={10}>
-          <Button variant="ghost" mr={3}>
-            Cancelar
-          </Button>
           <Button
             colorScheme="blue"
             background="bluish.100"
