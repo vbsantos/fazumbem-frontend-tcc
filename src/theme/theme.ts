@@ -32,7 +32,8 @@ const theme = extendTheme({
     }
   },
   fonts: {
-    heading: "Montserrat"
+    heading: "Montserrat",
+    body: "Montserrat"
   }
 });
 

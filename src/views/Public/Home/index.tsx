@@ -187,6 +187,7 @@ export default function Home() {
     },
   ];
   return (
+    <>
     <Box backgroundColor="gray.200" >
       <Header />
       {isMobile ? (
@@ -221,84 +222,52 @@ export default function Home() {
         <Carousel campanhas={campanhas} />
       </Box>
       <Box
-        p={1}
-        pb={20}
-        id="about"
+        width="100%"
+        padding={isMobile ? "80px 8px" : "80px;"}
+        textAlign="center"
       >
+        <Heading>
+          <Text
+            display="inline"
+            fontSize={isMobile ? "35px" : "55px"}
+            fontFamily="Comfortaa"
+            color="white"
+            backgroundColor="#ED6A5A"
+          >
+            Sobre
+          </Text>
+        </Heading>
+        <Box
+          marginTop="50px;"
+        >
+          <Text
+            fontSize={isMobile ? "18px" : "26px"}
+            color="bluish.100"
+            lineHeight="31.69px"
+          >
           {isDesktop ? (
-            <SimpleGrid
-              minChildWidth="120px"
-              spacing={12}
-              mt={20}
-              ml={20}
-              mr={20}
-            >
-              <Box>
-                <Text
-                  fontSize="2rem"
-                >
-                  Impulsionar uma plataforma virtual interativa que centralize
-                  necessidades de instituições e organizações sociais de Santa
-                  Maria. Faz um bem! propõe-se como uma platagorma virtual
-                  interativa, incentivadora e mediadora entre doadores e receptores
-                  de recursos.
-                </Text>
-              </Box>
-              {/*
-                backgroundImage={BackgroundImage}
-                backgroundPosition="right"
-                backgroundSize="cover"
-              */}
-              <Box>
-                <Text
-                  color="bluish.100"
-                  fontSize="5rem"
-                  textAlign="center"
-                  fontWeight={500}
-                >
-                  SOBRE
-                </Text>
-              </Box>
-            </SimpleGrid>
+            <>
+            Faz um bem! propõe-se, como uma plataforma virtual interativa,<br/> a
+            <strong> interligar doadores e receptores de recursos</strong>, centralizando<br/>
+            as necessidades de instituições e organizações sociais de<br/> Santa Maria. Traz,
+            portanto, <strong>informações sobre campanhas<br/> que estão acontecendo </strong>
+            na cidade e como doadores e<br/> voluntários podem colaborar.
+            </>
           ) : (
-            <SimpleGrid
-              minChildWidth="120px"
-              spacing={5}
-              mt={10}
-              ml={10}
-              mr={10}
-            >
-              <Box>
-                <Text
-                  color="bluish.100"
-                  fontSize={isMobile ? "3rem" : "5rem"}
-                  textAlign="center"
-                  fontWeight={500}
-                  mb={10}
-                >
-                  SOBRE
-                </Text>
-              </Box>
-              {/*
-                backgroundImage={BackgroundImage}
-                backgroundPosition="right"
-                backgroundSize="cover"
-              */}
-              <Box>
-                <Text
-                  fontSize={isMobile ? "1rem" : "2rem"}
-                >
-                  Impulsionar uma plataforma virtual interativa que centralize
-                  necessidades de instituições e organizações sociais de Santa
-                  Maria. Faz um bem! propõe-se como uma platagorma virtual
-                  interativa, incentivadora e mediadora entre doadores e receptores
-                  de recursos.
-                </Text>
-              </Box>
-            </SimpleGrid>
+            <>
+            Faz um bem! propõe-se, como uma plataforma virtual interativa, a
+            <strong> interligar doadores e receptores de recursos</strong>, centralizando
+            as necessidades de instituições e organizações sociais de Santa Maria. Traz,
+            portanto, <strong>informações sobre campanhas que estão acontecendo </strong>
+            na cidade e como doadores e voluntários podem colaborar.
+            </>
           )}
+          </Text>
+        </Box>
       </Box>
+      <>
       <Box bg="bluish.100" width="100%" textAlign="center" p={0} id="institutes">
+        {/*
         <Text
           ml={isMobile ? "34%" : "44%"}
           style={{
@@ -311,6 +280,7 @@ export default function Home() {
             marginTop: "-1rem"
           }}
         />
+        */}
         <h1
           className="slider_title"
           style={{
@@ -377,6 +347,8 @@ export default function Home() {
         </SimpleGrid>
       </Box>
       <Footer />
+      </>
     </Box>
+    </>
   );
 }
