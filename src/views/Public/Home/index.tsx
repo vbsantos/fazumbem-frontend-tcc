@@ -2,21 +2,25 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import "../../../css/instituicoes.css";
 import { Box, Heading } from "@chakra-ui/layout";
+import { Collapse } from "@chakra-ui/transition";
 import {
   Image,
   Text,
   SimpleGrid,
   Tooltip,
+  Link,
   useMediaQuery
 } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
-import { InfoIcon } from "@chakra-ui/icons";
+import { InfoIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/button";
 import Carousel from "../../../components/Home/Carousel";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import TopLayoutDesktop from "../../../components/Home/Top/LayoutDesktop";
 import TopLayoutMobile from "../../../components/Home/Top/LayoutMobile";
 import TopLayoutTablet from "../../../components/Home/Top/LayoutTablet";
+import React from "react";
 /*function showCampaignDetails(){
   console.log("show details");
 }*/
@@ -32,6 +36,8 @@ export default function Home() {
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   let isTablet = false;
   if (!isMobile && !isDesktop) isTablet = true;
+  const [show, setShow] = React.useState(false)
+  const handleToggle = () => setShow(!show)
   const campanhas = [
     {
       id: 0,
@@ -266,85 +272,134 @@ export default function Home() {
         </Box>
       </Box>
       <>
-      <Box bg="bluish.100" width="100%" textAlign="center" p={0} id="institutes">
-        {/*
-        <Text
-          ml={isMobile ? "34%" : "44%"}
-          style={{
-            width: 0,
-            height: 0,
-            borderLeft: isMobile ? "3rem solid transparent" : "5rem solid transparent",
-            borderRight: isMobile ? "3rem solid transparent" : "5rem solid transparent",
-            borderTop: isMobile ? "3rem solid #E2E8F0" : "5rem solid #E2E8F0",
-            marginBottom:"2rem",
-            marginTop: "-1rem"
-          }}
-        />
-        */}
-        <h1
-          className="slider_title"
-          style={{
-            fontSize: isMobile ? "2rem" : (
-              isDesktop ? "5rem" : "3rem"
-            )}}
-        >
-          INSTITUIÇÕES PARTICIPANTES
-        </h1>
-        <SimpleGrid
-          minChildWidth={{ base: "40%", sm: "20%", lg: "150px" }}
-          spacing={10}
-          paddingX={{ base: 4, md: 6, lg: 10 }}
-          paddingY={4}
-          maxW="1600px"
-          margin="0 auto"
-          pb={20}
-        >
-          {institutes.map((institute: any = []) => (
-            <div key={institute.id}>
-              <div className="institute-card">
-                <div className="institute-card-image">
-                  <Image
-                    src={`https://fazumbem.inf.ufsm.br/images/logos/${institute.picture_url}.png`}
-                  />
-                </div>
-                <Tooltip
-                  hasArrow
-                  label="Ver informações"
-                  bg="bluish.300"
-                  color="white"
-                  placement="right"
-                  borderRadius="8px"
-                  transition="0.4s"
-                  ml={1}
-                >
-                  <ul className="institute-icons">
-                    <li>
-                      <span>
-                        <i>
-                          <IconButton
-                            aria-label="info"
-                            borderRadius="10px"
-                            transform="translateY(-3px)"
-                            bgColor="white"
-                            icon={<InfoIcon />}
-                            _hover={{
-                              bgColor: "bluish.400",
-                              borderRadius: "10px",
-                              transform: "translateY(-3px)",
-                            }}
-                          />
-                        </i>
-                      </span>
-                    </li>
-                  </ul>
-                </Tooltip>
-                <div className="institute-details" title={institute.name}>
-                  <h5>{truncateName(institute.name)}</h5>
+      <Box
+        bg="#ED6A5A"
+        width="100%"
+        textAlign="center"
+        p={2}
+        pt={20}
+        pb={20}
+        id="institutes"
+      >
+
+        <Heading>
+          <Text
+            display="inline"
+            fontSize={isMobile ? "35px" : "55px"}
+            fontFamily="Comfortaa"
+            color="white"
+            backgroundColor="bluish.100"
+          >
+            &nbsp;Instituições&nbsp;<br/>
+            &nbsp;partipantes&nbsp;
+          </Text>
+        </Heading>
+        <Collapse startingHeight={isMobile ? 850 : 560} in={show} transition={{enter: {duration: 2.5}, exit: {duration: 2.5}}}>
+          <SimpleGrid
+            columns={4}
+            minChildWidth={isMobile ? "30%" : "160px"}//{{ base: "40%", sm: "30%", lg: "160px" }}
+            spacingX={40}
+            spacingY={20}
+            paddingX={{ base: 4, md: 6, lg: 60 }}
+            paddingY={4}
+            maxW="1600px"
+            margin="50px auto 0"
+            pb={20}
+          >
+
+            {institutes.map((institute: any = []) => (
+              <div key={institute.id}>
+                <div className="institute-card">
+                  <div className="institute-card-image">
+                    <Image
+                      src={`https://fazumbem.inf.ufsm.br/images/logos/${institute.picture_url}.png`}
+                    />
+                  </div>
+                  <div>
+                    <Text
+                      color="white"
+                      margin="5px 0"
+                      fontSize="18px"
+                    >
+                    {institute.name}
+                    </Text>
+                  </div>
+                  <Tooltip
+                    hasArrow
+                    label="Ver informações"
+                    bg="bluish.300"
+                    color="white"
+                    placement="right"
+                    borderRadius="8px"
+                    transition="0.4s"
+                    ml={1}
+                  >
+                    <ul className="institute-icons">
+                      <li>
+                        <span>
+                          <i>
+                            <IconButton
+                              aria-label="info"
+                              borderRadius="10px"
+                              transform="translateY(-3px)"
+                              bgColor="white"
+                              icon={<InfoIcon />}
+                              _hover={{
+                                bgColor: "bluish.400",
+                                borderRadius: "10px",
+                                transform: "translateY(-3px)",
+                              }}
+                            />
+                          </i>
+                        </span>
+                      </li>
+                    </ul>
+                  </Tooltip>
+                  {/*
+                    <div className="institute-details" title={institute.name}>
+                  //   <h5>{truncateName(institute.name)}</h5>
+                  // </div>
+                  */}
+
                 </div>
               </div>
-            </div>
-          ))}
-        </SimpleGrid>
+            ))}
+          </SimpleGrid>
+        </Collapse>
+        <Heading
+          display="inline-block"
+          color="white"
+          backgroundColor="transparent"
+          fontSize="18px"
+          fontWeight="500"
+          marginTop="15px"
+          size="md"
+          cursor="pointer"
+          onClick={handleToggle}
+          as={Link}
+          _hover={{
+            textDecoration: "none"
+          }}
+        >
+          Ver {show ? "menos" : "mais"}
+        </Heading>
+        <br/>
+        <IconButton
+          aria-label="Ver mais"
+          icon={show ? <ChevronUpIcon w={8} h={8}/> : <ChevronDownIcon w={8} h={8}/>}
+          marginTop="15px"
+          backgroundColor="#ED6A5A"
+          color="white"
+          border="white solid 3px"
+          borderRadius="50px"
+          boxShadow="0px 4px 4px 0px #00000040"
+          _hover={{
+            background: "#F18C7E",
+            transition: ".5s",
+          }}
+          onClick={handleToggle}
+        >
+        </IconButton>
       </Box>
       <Footer />
       </>

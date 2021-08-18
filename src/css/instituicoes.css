@@ -97,46 +97,59 @@
 
 
 .institute-card {
-  width: 100%;
-  height: 160px;
-  border-radius: 50%;
-  overflow: hidden;
+  /* width: 100%; */
+  /* height: 160px; */
+  /* border-radius: 50%; */
+  /* overflow: hidden; */
   position: relative;
 }
+
+.institute-card-image {
+  margin: 0 auto;
+}
+
 .institute-card .institute-card-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* position: absolute; */
+  /* top: 0; */
+  /* left: 0; */
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
   z-index: 3;
   background-color: #000;
   transition: 0.5s;
 }
+
 .institute-card .institute-card-image img {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
 }
+
 .institute-card:hover img {
   opacity: 0.4;
   transition: 0.5s;
 }
+
 .institute-card:hover .institute-card-image {
-  transform: translateY(-70px);
+  /* transform: translateY(-70px); */
   transition: all 0.9s;
 }
+
 .institute-icons {
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
   display: flex;
 }
+
 .institute-icons li {
   list-style: none;
 }
+
 .institute-icons li span {
   position: relative;
   display: block;
@@ -155,22 +168,27 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
 .institute-card:hover .institute-icons li span {
   transform: translateY(0px);
   opacity: 1;
 }
+
 .institute-icons li span:hover {
   background: #298EE6;
   color: #fff;
   transition: 0.2s;
   transform: rotateY(360);
 }
+
 .institute-icons li span i {
   transition: 0.2s;
 }
+
 .institute-card:hover li:nth-child(1) a {
   transition-delay: 0.1s;
 }
+
 .institute-details {
   position: absolute;
   bottom: 400px;
@@ -183,11 +201,13 @@
   font-weight: 500;
   height: 70px;
 }
+
 .institute-details h5 {
   margin: 0px 0;
   padding: 0;
   text-align: center;
 }
+
 .institute-card:hover .institute-details {
   bottom: 0;
 }
