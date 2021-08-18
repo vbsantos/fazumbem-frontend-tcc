@@ -119,12 +119,12 @@ const NewInstituition = () => {
         <Box m={0}>
           <Text
             color="bluish.100"
-            fontSize="3rem"
+            fontSize="2.5rem"
             textAlign="center"
             fontWeight={500}
             p={10}
           >
-            Nova Instituição
+            {institutionToEdit ? institutionToEdit.name : "Nova Instituição"}
           </Text>
         </Box>
 
