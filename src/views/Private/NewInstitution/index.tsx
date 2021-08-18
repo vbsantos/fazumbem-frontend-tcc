@@ -5,11 +5,14 @@ import {
   Divider,
   FormControl,
   FormLabel,
+  Spinner,
   Text,
   useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import InputCNPJ from "../../../components/InputCNPJ";
 import InputPhone from "../../../components/InputPhone";
 import InputProjectDescription from "../../../components/InputProjectDescription";
@@ -19,6 +22,9 @@ import { httpClient } from "../../../services/httpClient";
 
 const NewInstituition = () => {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
+  let { id } = useParams<{ id: string }>();
+  const [isLoading, setIsLoading] = useState(Boolean(id));
+  const [institutionToEdit, setInstitutionToEdit] = useState<any>();
   const toast = useToast();
 
   const {
@@ -26,15 +32,47 @@ const NewInstituition = () => {
     handleSubmit,
     formState: { errors },
     register,
-  } = useForm();
+    reset,
+  } = useForm({ defaultValues: institutionToEdit });
+
+  useEffect(() => {
+    if (id) {
+      setIsLoading(true);
+
+      httpClient<any>({
+        method: "GET",
+        url: "/institution",
+      })
+        .then((req) => {
+          const inst = req?.data?.find(
+            (item) => item.idInstitution === Number(id)
+          );
+
+          setInstitutionToEdit(inst);
+
+          reset(inst);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [id, reset]);
 
   const onSubmit = async (data: any) => {
     try {
-      await httpClient<any>({
-        method: "POST",
-        url: "/institution",
-        data: { ...data },
-      });
+      if (institutionToEdit) {
+        await httpClient({
+          method: "PUT",
+          url: "/institution",
+          data: { ...data },
+        });
+      } else {
+        await httpClient({
+          method: "POST",
+          url: "/institution",
+          data: { ...data },
+        });
+      }
 
       toast({
         title: "Cadastrado com sucesso!",
@@ -55,6 +93,19 @@ const NewInstituition = () => {
       console.log(e);
     }
   };
+
+  if (isLoading) {
+    return (
+      <Box
+        height="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner colorScheme="brand" size="xl" />
+      </Box>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -223,11 +274,15 @@ const NewInstituition = () => {
                 control={control}
                 error={errors.complement}
                 placeholder="https://ufsm.fazumbem.br"
-                background="white"
               />
             </FormControl>
           </HStack>
-          <FormControl id="description" fontSize={isMobile ? "1rem" : "2rem"}>
+
+          <FormControl
+            mt="4"
+            id="description"
+            fontSize={isMobile ? "1rem" : "2rem"}
+          >
             <FormLabel>Descrição da instituição</FormLabel>
 
             <InputProjectDescription

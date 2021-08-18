@@ -26,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { httpClient } from "../../../services/httpClient";
 
 interface Props {}
@@ -34,6 +35,7 @@ const Institutions = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [opened, setOpened] = useState<any>();
+  const history = useHistory();
 
   useEffect(() => {
     const getList = async () => {
@@ -88,7 +90,15 @@ const Institutions = (props: Props) => {
                     >
                       Mais informações
                     </MenuItem>
-                    <MenuItem>Editar</MenuItem>
+                    <MenuItem
+                      onClick={() =>
+                        history.push(
+                          "/instituição/:id".replace(":id", item.idInstitution)
+                        )
+                      }
+                    >
+                      Editar
+                    </MenuItem>
                     <MenuItem>Excluir</MenuItem>
                   </MenuList>
                 </Menu>

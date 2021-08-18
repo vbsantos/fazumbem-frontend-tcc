@@ -1,11 +1,11 @@
 import axios, { AxiosResponse, AxiosPromise, AxiosRequestConfig } from "axios";
 
-let token = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser") as string).token
-  : "";
+const defaultHeaders = () => {
+  let token = localStorage.getItem("currentUser")
+    ? JSON.parse(localStorage.getItem("currentUser") as string).token
+    : "";
 
-const defaultHeaders = () =>
-  token
+  return token
     ? {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -16,6 +16,7 @@ const defaultHeaders = () =>
         "Content-Type": "application/json",
         Accept: "application/json",
       };
+};
 
 export const requestInterceptor = async (config: AxiosRequestConfig) => {
   try {
@@ -43,13 +44,13 @@ const responseSuccessInterceptor = (response: AxiosResponse) => {
 };
 
 const responseErrorInterceptor = (error: any) => {
-  // const response = error?.response as AxiosResponse;
+  const response = error?.response as AxiosResponse;
 
-  // if (response.status === 401) {
-  //   localStorage.removeItem("currentUser");
-  //   alert("Sua sessão expirou!");
-  //   window.location.reload();
-  // }
+  if (response.status === 401 && localStorage.getItem("currentUser")) {
+    localStorage.removeItem("currentUser");
+    alert("Sua sessão expirou!");
+    // window.location.reload();
+  }
 
   console.error(JSON.stringify({ "Response error": error }));
   return Promise.reject(error);

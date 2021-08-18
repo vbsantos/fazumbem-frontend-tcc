@@ -25,7 +25,7 @@ const Header = ({ showSidebarButton = true, onShowSidebar }: Props) => {
       </Box>
       <Center flex="1" h="40px">
         <Text fontSize="xl" textTransform="capitalize">
-          {location.pathname.replace("/", "")}
+          {location.pathname?.split("/")[1]?.replace("/", "")}
         </Text>
       </Center>
       <Box flex="1" />

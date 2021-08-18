@@ -15,6 +15,8 @@ export async function loginUser(
     if (response?.data?.token) {
       const decoded: any = jwt_decode(response?.data?.token);
 
+      localStorage.setItem("currentUser", JSON.stringify({ ...response.data }));
+
       const user = await httpClient<any>({
         method: "GET",
         url: "/user/" + decoded?.sub,
@@ -26,14 +28,16 @@ export async function loginUser(
         },
       });
 
-      dispatch({
-        type: "LOGIN_SUCCESS",
-        payload: { ...response.data, user: user.data },
-      });
       localStorage.setItem(
         "currentUser",
         JSON.stringify({ ...response.data, user: user.data })
       );
+
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: { ...response.data, user: user.data },
+      });
+
       return response.data;
     }
 

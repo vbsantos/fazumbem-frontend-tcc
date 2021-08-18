@@ -80,6 +80,10 @@ export default function AppRouter() {
       path: "/nova-instituição",
       component: NewInstitution,
     },
+    {
+      path: "/instituição/:id",
+      component: NewInstitution,
+    },
   ];
 
   const userDetails = useAuthState();
