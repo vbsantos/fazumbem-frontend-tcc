@@ -3,7 +3,6 @@ import {
   Link,
   Tooltip,
   useDisclosure,
-  Divider,
   VStack,
   Modal,
   ModalOverlay,

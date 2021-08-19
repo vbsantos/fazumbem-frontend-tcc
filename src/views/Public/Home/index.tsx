@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
 import { InfoIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Button } from "@chakra-ui/button";
 import Carousel from "../../../components/Home/Carousel";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
@@ -25,11 +24,11 @@ import React from "react";
   console.log("show details");
 }*/
 
-function truncateName(name: String) {
-  if (name.length > 12) {
-    return name.substr(0, 12);
-  }
-}
+// function truncateName(name: String) {
+//   if (name.length > 12) {
+//     return name.substr(0, 12);
+//   }
+// }
 
 export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)")

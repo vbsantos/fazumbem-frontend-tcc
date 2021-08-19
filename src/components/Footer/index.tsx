@@ -1,13 +1,11 @@
-import { Box, Flex, Heading } from "@chakra-ui/layout";
-import { Image, Link, Text, SimpleGrid, Tooltip, Grid, GridItem, HStack, VStack, useMediaQuery } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/layout";
+import { Image, Link, Text, Tooltip, Grid, GridItem, HStack, VStack, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import blueLogo from "../../assets/images/logo.svg";
 import {
   FaFacebookSquare,
   FaInstagram,
   FaRegEnvelope,
-  FaYoutube,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { ReactElement } from "react";
 
@@ -18,8 +16,6 @@ function scrollToElement(element: string) {
 export default function Footer(): ReactElement {
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
-  let isTablet = false;
-  if (!isMobile && !isDesktop) isTablet = true;
 
   return (
     <>

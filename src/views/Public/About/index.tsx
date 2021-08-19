@@ -7,7 +7,6 @@ import {
   Link,
   Image,
   Grid,
-  SimpleGrid,
   useMediaQuery
 } from "@chakra-ui/react";
 import Header from "../../../components/PublicHeader";
