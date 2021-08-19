@@ -24,6 +24,7 @@ export default function Footer(): ReactElement {
   return (
     <>
     <Box
+      backgroundColor="#F5F5F5"
       width="100%"
       color="brand.300"
       padding={isDesktop ? "20px 10%" : "20px 25px"}
@@ -285,7 +286,7 @@ export default function Footer(): ReactElement {
                 color="bluish.100"
                 fontSize={isDesktop ? "18px" : "16px"}
                 fontWeight="400"
-                onClick={() => scrollToElement('about')}
+                href="/about"
                 as={Link}
               >
                 Sobre
