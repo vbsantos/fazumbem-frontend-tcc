@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack } from "@chakra-ui/layout";
+import { Box, Flex, Heading, VStack } from "@chakra-ui/layout";
 import { Link, Tooltip } from "@chakra-ui/react";
 import { useState, ReactElement } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -18,6 +18,7 @@ export default function LayoutDesktop(): ReactElement {
         as="header"
         boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
         backgroundColor="bluish.100"
+        padding="0 50px"
       >
         <div>
           <Flex
@@ -28,10 +29,10 @@ export default function LayoutDesktop(): ReactElement {
             wrap="wrap"
             margin="0 auto"
           >
-            <Tooltip 
-              hasArrow 
-              label={!showMenu ? "Exibir menu" : "Ocultar menu"} 
-              bg="brownish.200" 
+            <Tooltip
+              hasArrow
+              label={!showMenu ? "Exibir menu" : "Ocultar menu"}
+              bg="brownish.200"
               color="bluish.100"
               placement="right"
               borderRadius="8px"
@@ -50,11 +51,15 @@ export default function LayoutDesktop(): ReactElement {
               </Heading>
             </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
-            <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
+            <VStack spacing={2} margin={{ lg: "initial" }} pt={2}>
               <Heading
                 color="white"
                 fontWeight="none"
-                size="md"
+                fontSize="18px"
+                backgroundColor="#ED6A5A"
+                padding="8px 35px"
+                borderRadius="50px"
+                boxShadow="0px 4px 4px 0px #00000040"
                 cursor="pointer"
                 as={RouterLink}
                 to="/login"
@@ -62,24 +67,28 @@ export default function LayoutDesktop(): ReactElement {
                 Login
               </Heading>
               <Heading
-                color="white"
+                color="bluish.100"
                 fontWeight="none"
-                size="md"
+                fontSize="18px"
+                backgroundColor="white"
+                padding="8px 20px"
+                borderRadius="50px"
+                boxShadow="0px 4px 4px 0px #00000040"
                 cursor="pointer"
                 as={RouterLink}
                 to="/register"
               >
                 Cadastro
               </Heading>
-            </HStack>
+            </VStack>
           </Flex>
         </div>
       </Box>
       {showMenu ? (
         <Box
           as="header"
-          boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
-          backgroundColor="brownish.200"
+          // boxShadow="5px 5px 10px rgba(0, 0, 0, 0.3)"
+          backgroundColor="#ED6A5A"
           id="menu"
         >
           <Flex
@@ -92,9 +101,10 @@ export default function LayoutDesktop(): ReactElement {
             p="0.7rem"
           >
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
-              size="md"
+              fontSize="18px"
+              fontFamily="Comfortaa"
               cursor="pointer"
               href="/campaigns"
               as={Link}
@@ -102,9 +112,10 @@ export default function LayoutDesktop(): ReactElement {
               Campanhas
             </Heading>
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
-              size="md"
+              fontSize="18px"
+              fontFamily="Comfortaa"
               cursor="pointer"
               href="#instituicoes"
               as={Link}
@@ -113,9 +124,10 @@ export default function LayoutDesktop(): ReactElement {
               Instituições
             </Heading>
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
-              size="md"
+              fontSize="18px"
+              fontFamily="Comfortaa"
               cursor="pointer"
               href="#sobre"
               as={Link}
@@ -124,15 +136,16 @@ export default function LayoutDesktop(): ReactElement {
               Sobre
             </Heading>
             <Heading
-              color="bluish.100"
+              color="white"
               fontWeight="none"
-              size="md"
+              fontSize="18px"
+              fontFamily="Comfortaa"
               cursor="pointer"
               href="#contacts"
               as={Link}
               onClick={() => scrollToElement('footer')}
             >
-              Contatos
+              Contato
             </Heading>
           </Flex>
         </Box>

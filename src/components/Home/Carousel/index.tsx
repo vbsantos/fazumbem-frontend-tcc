@@ -48,10 +48,10 @@ export default function Carousel(listaCampanhas: Props) {
                 />
               </div>
             <ul className="icons">
-              <Tooltip 
-                hasArrow 
+              <Tooltip
+                hasArrow
                 label="Ver detalhes da Campanha"
-                bg="bluish.300" 
+                bg="bluish.300"
                 color="white"
                 placement="bottom"
                 borderRadius="8px"
@@ -77,10 +77,10 @@ export default function Carousel(listaCampanhas: Props) {
                   </a>
                 </li>
               </Tooltip>
-              <Tooltip 
-                hasArrow 
+              <Tooltip
+                hasArrow
                 label="Ver informações da Instituição"
-                bg="bluish.300" 
+                bg="bluish.300"
                 color="white"
                 placement="bottom"
                 borderRadius="8px"
@@ -132,7 +132,7 @@ export default function Carousel(listaCampanhas: Props) {
                   as={RouterLink}
                   to="/campaigns"
                 >
-                  <h2>VER TODAS CAMPANHAS</h2>
+                  <h2>Ver todas as campanhas</h2>
                 </Heading>
               </div>
             </div>

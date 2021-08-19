@@ -31,6 +31,10 @@ const theme = extendTheme({
       400: "#f9e3c1"
     }
   },
+  fonts: {
+    heading: "Montserrat",
+    body: "Montserrat"
+  }
 });
 
 export default theme;

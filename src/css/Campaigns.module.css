@@ -1,0 +1,77 @@
+/* CARDS DAS CAMPANHAS */
+.card-wrapper {
+  width: 260px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 100%;
+  height: 370px;
+  border-radius: 25px;
+  overflow: hidden;
+  background-color: white;
+  text-align: left;
+  color: #034074;
+  box-shadow: 2px 4px 9px rgba(0, 0, 0, 0.25);
+}
+
+.card .card-image {
+  margin: 2.5%;
+  width: 95%;
+  height: 60%;
+  z-index: 3;
+  background-color: black;
+  transition: 0.5s;
+  border-radius: 25px;
+}
+
+.card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 5% 10%;
+  line-height: 29.26px;
+}
+
+.card-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  margin: 5% 10%;
+  font-size: 16px;
+  overflow: hidden;
+  height: 20%;
+}
+
+.card:hover img {
+  opacity: 0.4;
+  background-color: #000;
+  transition: 0.5s;
+}
+
+.card:hover .card-image {
+  transform: none !important;
+  transition: all 0.9s;
+}
+
+.card:hover .campaign-icons {
+  transform: translateY(-270px);
+}
+
+/* @media (min-width: 577px) and (max-width: 1200px) {
+  /* .card-wrapper {
+    width: 200px;
+  }
+} */
+
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 20px;
+  }
+}
