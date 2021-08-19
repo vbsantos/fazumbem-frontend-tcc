@@ -1,9 +1,9 @@
 import { Box, Flex, Heading } from "@chakra-ui/layout";
-import { Image, Link, Text, SimpleGrid, Tooltip } from "@chakra-ui/react";
+import { Image, Link, Text, SimpleGrid, Tooltip, Grid, GridItem, HStack, VStack, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import blueLogo from "../../assets/images/logo.svg";
 import {
-  FaFacebook,
+  FaFacebookSquare,
   FaInstagram,
   FaRegEnvelope,
   FaYoutube,
@@ -16,180 +16,353 @@ function scrollToElement(element: string) {
 }
 
 export default function Footer(): ReactElement {
+  const [isMobile] = useMediaQuery("(max-width: 576px)")
+  const [isDesktop] = useMediaQuery("(min-width: 769px)")
+  let isTablet = false;
+  if (!isMobile && !isDesktop) isTablet = true;
 
   return (
-    <Box 
-      backgroundColor="brownish.200" 
-      width="100%" 
-      color="brand.300" 
-      p={2} 
+    <>
+    <Box
+      width="100%"
+      color="brand.300"
+      padding={isDesktop ? "20px 10%" : "20px 25px"}
       id="footer"
     >
-      <SimpleGrid 
-        minChildWidth="120px" 
-        spacing={12} 
-        mt={20} 
-        ml={20} 
-        mr={20}
-      >
-        <Box>
-          <Heading size="1xl" mb={4} color="brand.300">
-            Mapa do site
-          </Heading>
-          <ul
-            style={{
-              listStyleType: "none",
-            }}
-          >
-            <li>
-              <Text as={Link} href="/">
-                Início
-              </Text>
-            </li>
-            <li>
-              <Text as={Link} href="/login">
-                Login
-              </Text>
-            </li>
-            <li>
-              <Text as={Link} href="/register">
-                Cadastro
-              </Text>
-            </li>
-            <li>
-              <Text as={Link} href="/campaigns">
-                Campanhas
-              </Text>
-            </li>
-            <li>
-              <Text 
-                as={Link}
-                onClick={() => scrollToElement('institutes')} 
+    {isMobile ? (
+      <>
+        <Box padding="0 20%">
+          <HStack spacing="24px">
+            <Box>
+              <Tooltip
+                hasArrow
+                label="E-mail"
+                bg="bluish.200"
+                color="white"
+                placement="top"
+                borderRadius="8px"
+                transition="0.2s"
               >
-                Instituições
-              </Text>
-            </li>
-            <li>
-              <Text
-                as={Link}
-                onClick={() => scrollToElement('about')} 
-              >
-                Sobre
-              </Text>
-            </li>
-          </ul>
-        </Box>
-        <Box>
-          <Heading size="1xl" mb={4} color="brand.300">
-            Contato
-          </Heading>
-          <Box as={Link} hreaf="/">
-            <div style={{ marginBottom: "-28px" }}>
-              <FaRegEnvelope />
-            </div>
-            <Text ml={6}>e_mail@mail.com</Text>
-          </Box>
-          <Box mt={2} textAlign="justify">
-            <div style={{ marginBottom: "-28px" }}>
-              <FaMapMarkerAlt />
-            </div>
-            <Text ml={6}>
-              Av. Roraima nº 1000 Cidade Universitária Bairro - Camobi, Santa
-              Maria - RS, 97105-900
-            </Text>
-          </Box>
-        </Box>
-        <Box>
-          <Heading size="1xl" mb={2} color="brand.300">
-            Siga-nos
-          </Heading>
-          <Flex flex-direction="row">
-            <Tooltip 
-              hasArrow 
-              label="Facebook"
-              bg="bluish.200" 
-              color="white"
-              placement="top"
-              borderRadius="8px"
-              transition="0.2s"
-            >
-              <Box m={2} as={Link} href="/">
-                <FaFacebook size={50} />
-              </Box>
-            </Tooltip>
-            <Tooltip 
-              hasArrow 
-              label="Instagram"
-              bg="bluish.200" 
-              color="white"
-              placement="top"
-              borderRadius="8px"
-              transition="0.2s"
-            >
-              <Box m={2} as={Link} href="/">
-                <FaInstagram size={50} />
-              </Box>
-            </Tooltip>
-            <Tooltip 
-              hasArrow 
-              label="Youtube"
-              bg="bluish.200" 
-              color="white"
-              placement="top"
-              borderRadius="8px"
-              transition="0.2s"
-            >
-            <Box m={2} as={Link} href="/">
-              <FaYoutube size={50} />
+                <Box
+                  as={Link}
+                  href="/"
+                >
+                  <FaRegEnvelope  size={50}/>
+                </Box>
+              </Tooltip>
             </Box>
-            </Tooltip>
-            <Text
-              height= "250px"
-              borderLeft= "3px solid"
-              marginLeft="auto"
-              mt={-5}
-            />
-            </Flex>
+            <Box>
+              <Tooltip
+                hasArrow
+                label="Instagram"
+                bg="bluish.200"
+                color="white"
+                placement="top"
+                borderRadius="8px"
+                transition="0.2s"
+              >
+                <Box
+                  as={Link}
+                  href="/"
+                >
+                  <FaInstagram size={50} />
+                </Box>
+              </Tooltip>
+            </Box>
+            <Box>
+              <Tooltip
+                hasArrow
+                label="Facebook"
+                bg="bluish.200"
+                color="white"
+                placement="top"
+                borderRadius="8px"
+                transition="0.2s"
+              >
+                <Box
+                  as={Link}
+                  href="/"
+                >
+                  <FaFacebookSquare size={48} />
+                </Box>
+              </Tooltip>
+            </Box>
+          </HStack>
+        </Box>
+        <Box marginTop="25px" padding="25px 0" borderTop="2px solid">
+          <VStack spacing="24px">
+            <Heading
+              color="bluish.100"
+              fontSize={isDesktop ? "18px" : "16px"}
+              fontWeight="400"
+              href="/campaigns"
+              as={Link}
+            >
+              Campanhas
+            </Heading>
+            <Heading
+              color="bluish.100"
+              fontSize={isDesktop ? "18px" : "16px"}
+              fontWeight="400"
+              as={Link}
+              onClick={() => scrollToElement('institutes')}
+            >
+              Instituições
+            </Heading>
+            <Heading
+              color="bluish.100"
+              fontSize={isDesktop ? "18px" : "16px"}
+              fontWeight="400"
+              onClick={() => scrollToElement('about')}
+              as={Link}
+            >
+              Sobre
+            </Heading>
+            <Heading
+              color="bluish.100"
+              fontSize={isDesktop ? "18px" : "16px"}
+              fontWeight="400"
+              href="/contact"
+              as={Link}
+            >
+              Contato
+            </Heading>
+            <Heading
+              color="bluish.100"
+              fontSize={isDesktop ? "18px" : "16px"}
+              fontWeight="400"
+            >
+              <Link href="/login">Login</Link> | <Link href="/register">Cadastro</Link>
+            </Heading>
+            <Heading
+              color="bluish.100"
+              fontSize={isDesktop ? "18px" : "16px"}
+              fontWeight="400"
+              href="/"
+              as={Link}
+            >
+              Termos de uso
+            </Heading>
+          </VStack>
         </Box>
         <Box>
           <Image
-            boxSize="450px"
+            // boxSize="450px"
             height="15rem"
+            margin="0 auto"
             objectFit="contain"
-            mb={20}
-            mt={-10}
             src={blueLogo}
             alt="brand logo"
             onClick={() => window.scrollTo(0, 0)}
             cursor="pointer"
           />
         </Box>
-      </SimpleGrid>
-      <Box backgroundColor="rgba(255,255,255, 0.3)">
-        <Text fontSize="sm" textAlign="center">
-          Desenvolvido por{" "}
-          <Text as={Link} href="" fontWeight={500}>
-            Rafael de Lima
-          </Text>
-          ,{" "}
-          <Text as={Link} href="" fontWeight={500}>
-            Raíssa Arantes
-          </Text>
-          ,{" "}
-          <Text as={Link} href="" fontWeight={500}>
-            Vitória Pizzuti
-          </Text>
-          ,{" "}
-          <Text as={Link} href="" fontWeight={500}>
-            Yuri Becker
-          </Text>{" "}
-          e{" "}
-          <Text as={Link} href="" fontWeight={500}>
-            Tayna ??
-          </Text>
-          .
-        </Text>
-      </Box>
+        </>
+    ) : (
+        <Grid
+          minHeight="200px"
+          templateRows="repeat(3, 33%)"
+          templateColumns={isDesktop ? "repeat(7, 14.2%)" : "repeat(4, 25%)"}
+        >
+          <GridItem rowSpan={1} colSpan={isDesktop ? 6 : 3}>
+            <HStack spacing="24px">
+              <Box>
+                <Tooltip
+                  hasArrow
+                  label="E-mail"
+                  bg="bluish.200"
+                  color="white"
+                  placement="top"
+                  borderRadius="8px"
+                  transition="0.2s"
+                >
+                  <Box //m={2}
+                    as={Link}
+                    href="/"
+                  >
+                    <FaRegEnvelope  size={50}/>
+                  </Box>
+                </Tooltip>
+              </Box>
+              <Box>
+                <Tooltip
+                  hasArrow
+                  label="Instagram"
+                  bg="bluish.200"
+                  color="white"
+                  placement="top"
+                  borderRadius="8px"
+                  transition="0.2s"
+                >
+                  <Box //m={2}
+                    as={Link}
+                    href="/"
+                  >
+                    <FaInstagram size={50} />
+                  </Box>
+                </Tooltip>
+              </Box>
+              <Box>
+                <Tooltip
+                  hasArrow
+                  label="Facebook"
+                  bg="bluish.200"
+                  color="white"
+                  placement="top"
+                  borderRadius="8px"
+                  transition="0.2s"
+                >
+                  <Box
+                  // m={2}
+                    as={Link}
+                    href="/"
+                  >
+                    <FaFacebookSquare size={48} />
+                  </Box>
+                </Tooltip>
+              </Box>
+            </HStack>
+            {/*}
+            <Flex flex-direction="row">
+
+              <Text
+                height= "250px"
+                borderLeft= "3px solid"
+                marginLeft="auto"
+                mt={-5}
+              />
+            </Flex>
+            */}
+          </GridItem>
+          <GridItem rowSpan={3} colSpan={1}>
+            <Box>
+              <Image
+                boxSize="450px"
+                height="15rem"
+                objectFit="contain"
+                src={blueLogo}
+                alt="brand logo"
+                onClick={() => window.scrollTo(0, 0)}
+                cursor="pointer"
+              />
+            </Box>
+          </GridItem>
+          <GridItem rowSpan={2} colSpan={1}
+            borderTop="2px solid"
+            padding="32px 0"
+            color="bluish.100"
+          >
+            <VStack spacing="32px" alignItems="left">
+              <Heading
+                color="bluish.100"
+                fontSize={isDesktop ? "18px" : "16px"}
+                fontWeight="400"
+                href="/campaigns"
+                as={Link}
+              >
+                Campanhas
+              </Heading>
+              <Heading
+                color="bluish.100"
+                fontSize={isDesktop ? "18px" : "16px"}
+                fontWeight="400"
+                onClick={() => scrollToElement('institutes')}
+                as={Link}
+              >
+                Instituições
+              </Heading>
+            </VStack>
+          </GridItem>
+          <GridItem rowSpan={2} colSpan={1}
+            display={isDesktop ? "" : "none"}
+          />
+          <GridItem rowSpan={2} colSpan={1}
+            padding="32px 0"
+            color="bluish.100"
+          >
+            <VStack spacing="32px" alignItems="left">
+              <Heading
+                color="bluish.100"
+                fontSize={isDesktop ? "18px" : "16px"}
+                fontWeight="400"
+                onClick={() => scrollToElement('about')}
+                as={Link}
+              >
+                Sobre
+              </Heading>
+              <Heading
+                color="bluish.100"
+                fontSize={isDesktop ? "18px" : "16px"}
+                fontWeight="400"
+                href="/contact"
+                as={Link}
+              >
+                Contato
+              </Heading>
+            </VStack>
+          </GridItem>
+          <GridItem rowSpan={2} colSpan={1}
+            display={isDesktop ? "" : "none"}
+          />
+          <GridItem rowSpan={2} colSpan={1}
+            padding="32px 0"
+            color="bluish.100"
+          >
+            <VStack spacing="32px" alignItems="left">
+              <Heading
+                color="bluish.100"
+                fontSize={isDesktop ? "18px" : "16px"}
+                fontWeight="400"
+              >
+                <Link href="/login">Login</Link> | <Link href="/register">Cadastro</Link>
+              </Heading>
+              <Heading
+                color="bluish.100"
+                fontSize={isDesktop ? "18px" : "16px"}
+                fontWeight="400"
+                href="/"
+                as={Link}
+              >
+                Termos de uso
+              </Heading>
+            </VStack>
+          </GridItem>
+          <GridItem rowSpan={2} colSpan={1}
+            display={isDesktop ? "" : "none"}
+          />
+        </Grid>
+      )}
+
     </Box>
+    <Box
+      backgroundColor="bluish.100"
+      color="white"
+      padding="15px 0"
+    >
+      <Text fontSize="sm" textAlign="center">
+        Desenvolvido por{" "}
+        <Text as={Link} href="" fontWeight={500}>
+          Rafael de Lima
+        </Text>
+        ,{" "}
+        <Text as={Link} href="" fontWeight={500}>
+          Raíssa Arantes
+        </Text>
+        ,{" "}
+        <Text as={Link} href="" fontWeight={500}>
+          Vitória Pizzutti
+        </Text>
+        ,{" "}
+        <Text as={Link} href="" fontWeight={500}>
+          Yuri Becker
+        </Text>{" "}
+        e{" "}
+        <Text as={Link} href="" fontWeight={500}>
+          Tayná Mai
+        </Text>
+        .
+      </Text>
+    </Box>
+    </>
   );
 }
