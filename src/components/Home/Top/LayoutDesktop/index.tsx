@@ -1,10 +1,11 @@
 
 import "../../../../css/instituicoes.css";
-import { Box, Heading } from "@chakra-ui/layout";
+import { Box/*, Heading*/ } from "@chakra-ui/layout";
 import { ReactElement } from "react";
 import {
   Image,
   Text,
+  Link,
   Grid,
   GridItem
 } from "@chakra-ui/react";
@@ -44,7 +45,6 @@ export default function LayoutDesktop(): ReactElement {
             />
             {/*<Heading color="bluish.100" size="2xl" textAlign="center">*/}
               <Box
-                as="button"
                 borderRadius="50px"
                 bg="#ED6A5A"
                 color="white"
@@ -58,7 +58,10 @@ export default function LayoutDesktop(): ReactElement {
                 mb={20}
                 width="max-content"
                 boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+                href="/about"
+                as={Link}
                 _hover={{
+                  textDecoration: "none",
                   background: "#F18C7E",
                   transition: ".5s",
                 }}

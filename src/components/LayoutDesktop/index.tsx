@@ -145,7 +145,7 @@ export default function LayoutDesktop(): ReactElement {
               href="/contact"
               as={Link}
             >
-              Contatos
+              Contato
             </Heading>
           </Flex>
         </Box>
