@@ -4,17 +4,38 @@ import "../../../css/instituicoes.css";
 import { Box, Heading } from "@chakra-ui/layout";
 import {
   Text,
+  Link,
+  Image,
   Input,
   Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+  useDisclosure,
   useMediaQuery
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
+import blueLogo from "../../../assets/images/logo.svg";
 
 export default function Home() {
+  const {handleSubmit} = useForm<FormData>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const history = useHistory();
+
+  const onSubmit = async (data: FormData) => {
+    onOpen();
+  };
+
   return (
     <Box backgroundColor="gray.200" >
       <Header />
@@ -56,7 +77,7 @@ export default function Home() {
             padding="25px 50px"
             boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
           >
-            <form>
+            <form  onSubmit={handleSubmit(onSubmit)}>
               <Text fontWeight="700" fontSize={isMobile ? "20px" : "22px"}>
                 Email
               </Text>
@@ -132,6 +153,47 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
+      <Modal isOpen={isOpen} onClose={onClose} onEsc={onClose} size={"xl"}>
+        <ModalOverlay />
+        <ModalContent background="white" textAlign="center">
+          <ModalHeader>
+            <Image
+              height="150px"
+              margin="0 auto"
+              objectFit="contain"
+              src={blueLogo}
+              alt="brand logo"
+            />
+          </ModalHeader>
+          <ModalCloseButton color="#ED6A5A" />
+          <ModalBody fontSize="20px" padding="10px 90px" color="bluish.100">
+            <Text><strong>Agradecemos sua mensagem!</strong></Text>
+            <Text marginTop="30px">Retornaremos seu contato o mais rápido possível.</Text>
+          </ModalBody>
+          <ModalFooter
+            textAlign="center"
+            display="block"
+            padding="30px 0"
+          >
+            <Heading
+              color="white"
+              fontWeight="none"
+              fontSize="18px"
+              fontFamily="Comfortaa"
+              backgroundColor="#ED6A5A"
+              padding="10px 32px"
+              borderRadius="50px"
+              boxShadow="0px 4px 4px 0px #00000040"
+              size="md"
+              cursor="pointer"
+              as={Link}
+              onClick={() => history.push("/")}
+            >
+              Voltar para a página inicial
+            </Heading>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Footer />
     </Box>
   );
