@@ -8,17 +8,17 @@ import {
   Image,
   Tooltip,
   SimpleGrid,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  ModalFooter,
-  Button,
+  // Modal,
+  // ModalOverlay,
+  // ModalContent,
+  // ModalHeader,
+  // ModalBody,
+  // ModalCloseButton,
+  // ModalFooter,
+  // Button,
   Text,
-  Center,
-  useDisclosure,
+  // Center,
+  // useDisclosure,
   useMediaQuery
 } from "@chakra-ui/react";
 import { FaLandmark } from "react-icons/fa";
@@ -41,7 +41,7 @@ export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   const [isGreater] = useMediaQuery("(min-width: 1200px)")
-  let { isOpen, onClose, onOpen } = useDisclosure();
+  // let { isOpen, onClose, onOpen } = useDisclosure();
   const campanhas = [
     {
       id: 0,

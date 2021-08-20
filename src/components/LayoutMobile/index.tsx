@@ -86,11 +86,12 @@ export default function LayoutMobile(): ReactElement {
                 fontSize="18px"
                 fontWeight="400"
                 fontFamily="Comfortaa"
+                href="/institutes"
                 as={Link}
-                onClick={() => {
-                  scrollToElement('institutes');
-                  onClose();
-                }}
+                // onClick={() => {
+                //   scrollToElement('institutes');
+                //   onClose();
+                // }}
               >
                 Instituições
               </Heading>
