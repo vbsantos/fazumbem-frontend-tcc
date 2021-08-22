@@ -19,6 +19,7 @@ import InputProjectDescription from "../../../components/InputProjectDescription
 import InputText from "../../../components/InputText";
 import "../../../css/instituicoes.css";
 import { httpClient } from "../../../services/httpClient";
+import Footer from "../../../components/Private/Footer";
 
 const NewInstituition = () => {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
@@ -111,25 +112,33 @@ const NewInstituition = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box backgroundColor="gray.100" m={0} p={0}>
         <Box
-          backgroundColor="brownish.200"
+          backgroundColor="#ED6A5A"
           width="100%"
           color="brand.300"
           p={2}
         ></Box>
-        <Box m={0}>
+        <Box pt={10} textAlign="center">
           <Text
-            color="bluish.100"
             fontSize="2.5rem"
             textAlign="center"
             fontWeight={500}
-            p={10}
+            fontFamily="Comfortaa"
+            color="white"
+            backgroundColor="#ED6A5A"
+            display="inline"
           >
-            {institutionToEdit ? institutionToEdit.name : "Nova Instituição"}
+            &nbsp;{institutionToEdit ? institutionToEdit.name : "Nova Instituição"}&nbsp;
           </Text>
         </Box>
 
         <Box m={20} mt={0} pb={10} color="bluish.100">
-          <Text color="bluish.100" fontSize="1.8rem" textAlign="left" pb={5}>
+          <Text 
+            color="bluish.100" 
+            fontSize="1.8rem" 
+            textAlign="left" 
+            pb={5} 
+            fontFamily="Comfortaa"
+          >
             Informações básicas
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
@@ -141,6 +150,7 @@ const NewInstituition = () => {
               <FormLabel>Nome</FormLabel>
               <InputText
                 name="name"
+                placeholder="Digite seu nome"
                 control={control}
                 error={errors.name}
                 background="white"
@@ -154,6 +164,7 @@ const NewInstituition = () => {
               <FormLabel>Email</FormLabel>
               <InputText
                 name="email"
+                placeholder="Digite seu email"
                 control={control}
                 error={errors.username}
                 background="white"
@@ -161,7 +172,13 @@ const NewInstituition = () => {
             </FormControl>
           </HStack>
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
-          <Text color="bluish.100" fontSize="1.8rem" textAlign="left" pb={5}>
+          <Text 
+            color="bluish.100" 
+            fontSize="1.8rem" 
+            textAlign="left" 
+            pb={5} 
+            fontFamily="Comfortaa"
+          >
             Endereço
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2} pb={5}>
@@ -241,7 +258,13 @@ const NewInstituition = () => {
             </FormControl>
           </HStack>
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
-          <Text color="bluish.100" fontSize="1.8rem" textAlign="left" pb={5}>
+          <Text 
+            color="bluish.100" 
+            fontSize="1.8rem" 
+            textAlign="left" 
+            pb={5} 
+            fontFamily="Comfortaa"
+          >
             Informações complementares
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
@@ -298,19 +321,22 @@ const NewInstituition = () => {
         <Center pb={10}>
           <Button
             colorScheme="blue"
-            background="bluish.100"
+            background="#ED6A5A"
             color="white"
             type="submit"
+            borderRadius="50px"
+            padding="15px 20px 15px"
+            boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+            _hover={{
+              textDecoration: "none",
+              background: "#F18C7E",
+              transition: ".5s",
+            }}
           >
             Salvar alterações
           </Button>
         </Center>
-        <Box
-          backgroundColor="brownish.200"
-          width="100%"
-          color="brand.300"
-          p={2}
-        ></Box>
+        <Footer />
       </Box>
     </form>
   );

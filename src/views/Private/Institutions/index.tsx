@@ -51,18 +51,25 @@ const Institutions = (props: Props) => {
   }, []);
 
   return (
-    <Box mt="10">
+    <Box m="10" 
+      borderRadius= "25px"
+      overflow= "hidden"
+      backgroundColor= "white"
+      textAlign= "center"
+      color= "bluish.100"
+      boxShadow= "2px 4px 9px rgba(0, 0, 0, 0.25)"
+    >
       <Table variant="striped">
         <TableCaption>
           Lista de instituições cadastradas no sistema
         </TableCaption>
-        <Thead>
+        <Thead backgroundColor="#ED6A5A">
           <Tr>
-            <Th>Nome</Th>
-            <Th>Email</Th>
-            <Th>CNPJ</Th>
-            <Th>Nº de usuários</Th>
-            <Th></Th>
+            <Th color="white" font="Comfortaa">Nome</Th>
+            <Th color="white" font="Comfortaa">Email</Th>
+            <Th color="white" font="Comfortaa">CNPJ</Th>
+            <Th color="white" font="Comfortaa">Nº de usuários</Th>
+            <Th color="white" font="Comfortaa"></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -78,6 +85,7 @@ const Institutions = (props: Props) => {
                     as={Button}
                     colorScheme="brand"
                     rightIcon={<ChevronDownIcon />}
+                    borderRadius="50px"
                   >
                     Ações
                   </MenuButton>
