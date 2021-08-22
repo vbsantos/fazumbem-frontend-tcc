@@ -7,11 +7,16 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerContent,
-  VStack,
+  Divider,
+  VStack
 } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import {
+  FaSignOutAlt
+} from "react-icons/fa";
 import { logout, useAuthDispatch } from "../../context";
 import Logo from "../Logo";
+import DefaultButton from "../DefaultButton";
+
 
 interface Props {
   onClose: () => void;
@@ -21,27 +26,57 @@ interface Props {
 
 const SidebarContent = () => {
   const dispatch = useAuthDispatch();
-  const history = useHistory();
 
   return (
-    <VStack>
-      <Button onClick={() => history.push("/perfil")} w="100%">
+    <VStack color="brand.300">
+      <DefaultButton title="Meu perfil" type="sidebar" route="/perfil" />
+      <DefaultButton title="Campanhas" type="sidebar" route="/campanhas" />
+      <DefaultButton title="Nova Campanha" type="sidebar" route="/nova-campanha" />
+      <DefaultButton title="Insituições" type="sidebar" route="/instituições" />
+      <DefaultButton title="Nova Insituição" type="sidebar" route="/nova-instituição" />
+      <Divider borderBottom="1px solid #034074" pt={2} mb={10} />
+      {/* <Button 
+        leftIcon={<FaUser />} 
+        onClick={() => history.push("/perfil")} 
+        variant="ghost"
+        w="100%"
+        fontSize="18px"
+      >
         Meu perfil
       </Button>
-      <Button onClick={() => history.push("/campanhas")} w="100%">
+      <Button 
+        leftIcon={<FaBullhorn />} 
+        onClick={() => history.push("/campanhas")} 
+        variant="ghost"
+        w="100%"
+        fontSize="18px"
+      >
         Campanhas
       </Button>
-      <Button onClick={() => history.push("/nova-instituição")} w="100%">
+      <Button 
+        leftIcon={<FaBuilding />} 
+        onClick={() => history.push("/nova-instituição")} 
+        variant="ghost"
+        w="100%"
+        fontSize="18px"
+      >
         Nova Instituição
       </Button>
-      <Button onClick={() => history.push("/instituições")} w="100%">
+      <Button 
+        onClick={() => history.push("/instituições")} 
+        variant="ghost"
+        w="100%"
+        fontSize="18px"
+      >
         Instituições
-      </Button>
+      </Button> */}
       <Button
-        color="red"
+        color="#ED6A5A"
+        leftIcon={<FaSignOutAlt />} 
         onClick={() => logout(dispatch)}
         w="100%"
         variant="ghost"
+        fontSize="18px"
       >
         Sair
       </Button>
@@ -58,8 +93,7 @@ const Sidebar = ({ isOpen, variant, onClose }: Props) => {
       w="200px"
       top={0}
       h="100%"
-      borderRight="1px"
-      borderColor="brand.300"
+      boxShadow="0px 8px 10px rgba(0, 0, 0, 0.1)"
     >
       <Logo height="150px" mb={5} />
       <SidebarContent />
