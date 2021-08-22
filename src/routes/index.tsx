@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useAuthState } from "../context";
 import Campaigns from "../views/Private/Campaigns";
+import NewCampaign from "../views/Private/NewCampaign";
 import Institutions from "../views/Private/Institutions";
 import NewInstitution from "../views/Private/NewInstitution";
 import UserProfile from "../views/Private/UserProfile";
@@ -20,7 +21,6 @@ import Home from "../views/Public/Home";
 import Institutes from "../views/Public/Institutes";
 import Login from "../views/Public/Login";
 import Register from "../views/Public/Register";
-
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
@@ -71,6 +71,14 @@ export default function AppRouter() {
     {
       path: "/campanhas",
       component: Campaigns,
+    },
+    {
+      path: "/nova-campanha",
+      component: NewCampaign,
+    },
+    {
+      path: "/campanha/:id",
+      component: NewCampaign,
     },
     {
       path: "/instituições",
