@@ -17,9 +17,9 @@ import { Link as RouterLink } from "react-router-dom";
 import HeadLogo from "../Home/HeadLogo";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-function scrollToElement(element: string) {
-  (document.getElementById(element) as HTMLInputElement).scrollIntoView();
-}
+// function scrollToElement(element: string) {
+//   (document.getElementById(element) as HTMLInputElement).scrollIntoView();
+// }
 
 export default function LayoutMobile(): ReactElement {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -58,7 +58,7 @@ export default function LayoutMobile(): ReactElement {
                 onClick={onOpen}
               >
                 <HamburgerIcon marginRight={3} marginBottom={1} />
-                Menu
+                  Menu
               </Heading>
             </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
@@ -86,11 +86,12 @@ export default function LayoutMobile(): ReactElement {
                 fontSize="18px"
                 fontWeight="400"
                 fontFamily="Comfortaa"
+                href="/institutes"
                 as={Link}
-                onClick={() => {
-                  scrollToElement('institutes');
-                  onClose();
-                }}
+                // onClick={() => {
+                //   scrollToElement('institutes');
+                //   onClose();
+                // }}
               >
                 Instituições
               </Heading>
@@ -116,7 +117,7 @@ export default function LayoutMobile(): ReactElement {
           </ModalBody>
           <ModalFooter>
             <HStack spacing={2}>
-                  <Heading
+              <Heading
                 color="white"
                 fontWeight="none"
                 fontSize="18px"
@@ -124,14 +125,14 @@ export default function LayoutMobile(): ReactElement {
                 padding="12px 32px"
                 borderRadius="50px"
                 boxShadow="0px 4px 4px 0px #00000040"
-                    size="md"
-                    cursor="pointer"
-                    as={RouterLink}
-                    to="/login"
-                  >
-                    Login
-                  </Heading>
-                  <Heading
+                size="md"
+                cursor="pointer"
+                as={RouterLink}
+                to="/login"
+              >
+                Login
+              </Heading>
+              <Heading
                 color="bluish.100"
                 fontWeight="none"
                 fontSize="18px"
@@ -139,13 +140,13 @@ export default function LayoutMobile(): ReactElement {
                 padding="12px 24px"
                 borderRadius="50px"
                 boxShadow="0px 4px 4px 0px #00000040"
-                    size="md"
-                    cursor="pointer"
-                    as={RouterLink}
-                    to="/register"
-                  >
-                    Cadastro
-                  </Heading>
+                size="md"
+                cursor="pointer"
+                as={RouterLink}
+                to="/register"
+              >
+                Cadastro
+              </Heading>
             </HStack>
           </ModalFooter>
         </ModalContent>

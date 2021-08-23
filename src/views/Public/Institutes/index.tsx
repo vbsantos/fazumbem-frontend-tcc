@@ -1,38 +1,36 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
+import instituteStyle from '../../../css/Institutes.module.css';
 import { InfoIcon } from "@chakra-ui/icons";
-import { Box, Heading } from "@chakra-ui/layout";
-import { 
-  IconButton, 
-  Image, 
+import { Box, Heading, VStack } from "@chakra-ui/layout";
+import {
+  IconButton,
+  Image,
+  Link,
   SimpleGrid,
   Tooltip,
-  Text
+  Text,
+  useMediaQuery
 } from "@chakra-ui/react";
 import "../../../css/instituicoes.css";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-
-function truncateName(name: String) {
-  if (name.length > 12) {
-    return name.substr(0, 12);
-  }
-}
-/*function showCampaignDetails(){
-  console.log("show details");
-}*/
+import "@fontsource/montserrat/600.css"
 
 // function truncateName(name: String) {
 //   if (name.length > 12) {
 //     return name.substr(0, 12);
 //   }
 // }
-
+/*function showCampaignDetails(){
+  console.log("show details");
+}*/
 
 export default function Home() {
-  /* const [isMobile] = useMediaQuery("(max-width: 576px)")
-  const [isDesktop] = useMediaQuery("(min-width: 769px)") */
-  
+  const [isMobile] = useMediaQuery("(max-width: 576px)")
+  const [isDesktop] = useMediaQuery("(min-width: 769px)")
+  const [isGreater] = useMediaQuery("(min-width: 1200px)")
+
   const institutes = [
     {
       id: 0,
@@ -113,78 +111,155 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
-      <Heading
-        color="bluish.100"
-        size="2xl"
+      <Box
+        padding={!isDesktop ? "50px 5px" : "50px"}
         textAlign="center"
-        mt="5rem"
-        mb="2rem"
       >
-        INSTITUIÇÕES PARTICIPANTES
-      </Heading>
-      <Text color="bluish.100" fontSize="1.4rem" m={10} textAlign="center">
-        O projeto Faz um Bem! é a união de instituições e organizações sociais 
-        de Santa Maria para promover um meio de comunicação entre doadores e 
-        receptores de recuros. Confira a seguir as instituições que estão 
-        participando do projeto atualmente e conheça um pouco mais sobre seu
-        trabalho.
-      </Text>
-      <SimpleGrid
-        minChildWidth={{ base: "40%", sm: "20%", lg: "150px" }}
-        spacing={10}
-        paddingX={{ base: 4, md: 6, lg: 10 }}
-        paddingY={4}
-        pb="5rem"
-        maxW="1600px"
-        margin="0 auto"
-      >
-        {institutes.map((institute: any = []) => (
-            <div key={institute.id}>
-              <div className="institute-card">
-                <div className="institute-card-image">
-                  <Image
-                    src={`https://fazumbem.inf.ufsm.br/images/logos/${institute.picture_url}.png`}
-                  />
-                </div>
-                <Tooltip 
-                  hasArrow 
-                  label="Ver informações"
-                  bg="bluish.300" 
-                  color="white"
-                  placement="right"
-                  borderRadius="8px"
-                  transition="0.4s"
-                  ml={1}
-                >
-                  <ul className="institute-icons">
-                    <li>
-                      <span>
-                        <i>
-                          <IconButton
-                            aria-label="info"
-                            borderRadius="10px"
-                            transform="translateY(-3px)"
-                            bgColor="white"
-                            icon={<InfoIcon />}
-                            _hover={{
-                              bgColor: "bluish.400",
-                              borderRadius: "10px",
-                              transform: "translateY(-3px)",
-                            }}
-                          />
-                        </i>
-                      </span>
-                    </li>
-                  </ul>
-                </Tooltip>
-                <div className="institute-details" title={institute.name}>
-                  <h5>{truncateName(institute.name)}</h5>
-                </div>
-              </div>
-            </div>
-          ))}
-      </SimpleGrid>
-    <Footer />
-  </Box>
+        <Heading>
+          <Text
+            display="inline"
+            fontSize={isMobile ? "35px" : "55px"}
+            fontFamily="Comfortaa"
+            color="white"
+            backgroundColor="#ED6A5A"
+          >
+            &nbsp;Instituições&nbsp;<br/>
+            &nbsp;participantes&nbsp;
+          </Text>
+        </Heading>
+        <Box marginTop="50px">
+          <Text
+            fontSize={isMobile ? "18px" : "26px"}
+            color="bluish.100"
+            lineHeight="31.69px"
+            padding={isGreater ? "0 20%" : "0 5px"}
+          >
+            Conheça as instituições participantes da plataforma Faz um Bem!
+          </Text>
+        </Box>
+        <Box
+          marginTop="50px"
+          padding={isGreater ? "0 15%" : "0 5px"}
+        >
+          <SimpleGrid
+            minChildWidth={isMobile ? "30%" : "160px"}
+            spacingX={40}
+            spacingY={10}
+            margin="50px auto 0"
+          >
+            {institutes.map((institute: any = []) => (
+              <Box className={instituteStyle["card-wrapper"]} key={institute.id}>
+                <Box className={instituteStyle["card"]}>
+                  <Box className={instituteStyle["card-image"]}>
+                    <Image
+                      src={`https://fazumbem.inf.ufsm.br/images/logos/${institute.picture_url}.png`}
+                    />
+                  </Box>
+                  <Box className={instituteStyle["card-title"]}>
+                    <Text
+                      color="bluish.100"
+                    >
+                      {institute.name}
+                    </Text>
+                  </Box>
+                  <Box className={instituteStyle["icons"]}>
+                    <Tooltip
+                      hasArrow
+                      label="Ver informações"
+                      bg="bluish.100"
+                      color="white"
+                      placement="top"
+                      borderRadius="8px"
+                      transition="0.4s"
+                    >
+                      <IconButton
+                        aria-label="info"
+                        borderRadius="10px"
+                        bgColor="white"
+                        color="bluish.100"
+                        icon={<InfoIcon />}
+                        _hover={{
+                          bgColor: "#ED6A5A",
+                          color: "white"
+                        }}
+                      />
+                    </Tooltip>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </Box>
+        <Box
+          marginTop="100px"
+          padding={isGreater ? "0 15%" : "0 5px"}
+          textAlign={isMobile ? "center" : "left"}
+        >
+          <VStack align={isMobile ? "center" : "left"} spacing={10}>
+            <Heading color="bluish.100">Deseja fazer uma doação?</Heading>
+            <Text
+              fontSize={isMobile ? "22px" : "24px"}
+              color="bluish.100"
+            >
+              Veja as campanhas que precisam da sua ajuda:
+            </Text>
+            <Box>
+              <Box
+                fontSize="22px"
+                borderRadius="50px"
+                bg="bluish.100"
+                color="white"
+                padding="12px 19px"
+                boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+                href="/campaigns"
+                as={Link}
+                _hover={{
+                  textDecoration: "none",
+                  background: "bluish.200",
+                  transition: ".5s",
+                }}
+              >
+                  Campanhas
+              </Box>
+            </Box>
+          </VStack>
+        </Box>
+        <Box
+          margin="100px 0 50px"
+          padding={isGreater ? "0 15%" : "0 5px"}
+          textAlign={isMobile ? "center" : "left"}
+        >
+          <VStack align={isMobile ? "center" : "left"} spacing={10}>
+            <Heading color="bluish.100">É uma instituição?</Heading>
+            <Text
+              fontSize={isMobile ? "22px" : "24px"}
+              color="bluish.100"
+            >
+              Faça parte da nossa plataforma e cadastre-se no botão abaixo!
+            </Text>
+            <Box>
+              <Box
+                fontSize="22px"
+                borderRadius="50px"
+                bg="#ED6A5A"
+                color="white"
+                padding="12px 36px"
+                boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+                href="/register"
+                as={Link}
+                _hover={{
+                  textDecoration: "none",
+                  background: "#F18C7E",
+                  transition: ".5s",
+                }}
+              >
+                  Cadastro
+              </Box>
+            </Box>
+          </VStack>
+        </Box>
+      </Box>
+      <Footer />
+    </Box>
   );
 }

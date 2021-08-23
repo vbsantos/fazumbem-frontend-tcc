@@ -101,8 +101,9 @@ export default function Footer(): ReactElement {
               color="bluish.100"
               fontSize={isDesktop ? "18px" : "16px"}
               fontWeight="400"
+              href="/institutes"
               as={Link}
-              onClick={() => scrollToElement('institutes')}
+              // onClick={() => scrollToElement('institutes')}
             >
               Instituições
             </Heading>
@@ -263,7 +264,8 @@ export default function Footer(): ReactElement {
                 color="bluish.100"
                 fontSize={isDesktop ? "18px" : "16px"}
                 fontWeight="400"
-                onClick={() => scrollToElement('institutes')}
+                // onClick={() => scrollToElement('institutes')}
+                href="/institutes"
                 as={Link}
               >
                 Instituições

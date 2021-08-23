@@ -2,8 +2,8 @@
 import "../../../../css/instituicoes.css";
 import { Box, Heading } from "@chakra-ui/layout";
 import { ReactElement } from "react";
-import { 
-  Image, 
+import {
+  Image,
   Text
 } from "@chakra-ui/react";
 import blueLogo from "../../../../assets/images/logo.svg";
@@ -12,10 +12,10 @@ export default function LayoutDesktop(): ReactElement {
 
   return (
     <div>
-      <Box 
-        width="100%" 
-        color="brand.300" 
-        p={10} 
+      <Box
+        width="100%"
+        color="brand.300"
+        p={10}
         id="about"
       >
         <Image
@@ -30,6 +30,7 @@ export default function LayoutDesktop(): ReactElement {
         <Heading color="bluish.100" size="2xl" textAlign="center">
           <Box
             as="button"
+            // TODO: href="/about"
             borderRadius={16}
             bg="bluish.100"
             color="white"

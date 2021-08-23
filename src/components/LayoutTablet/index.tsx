@@ -5,9 +5,9 @@ import { Link as RouterLink } from "react-router-dom";
 import HeadLogo from "../Home/HeadLogo";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-function scrollToElement(element: string) {
-  (document.getElementById(element) as HTMLInputElement).scrollIntoView();
-}
+// function scrollToElement(element: string) {
+//   (document.getElementById(element) as HTMLInputElement).scrollIntoView();
+// }
 
 export default function LayoutDesktop(): ReactElement {
   const [showMenu, setShowMenu] = useState(true);
@@ -117,9 +117,9 @@ export default function LayoutDesktop(): ReactElement {
               fontSize="18px"
               fontFamily="Comfortaa"
               cursor="pointer"
-              href="#instituicoes"
+              href="/institutes"
               as={Link}
-              onClick={() => scrollToElement('institutes')}
+              // onClick={() => scrollToElement('institutes')}
             >
               Instituições
             </Heading>
@@ -129,9 +129,9 @@ export default function LayoutDesktop(): ReactElement {
               fontSize="18px"
               fontFamily="Comfortaa"
               cursor="pointer"
-              href="#sobre"
+              href="/about"
               as={Link}
-              onClick={() => scrollToElement('about')}
+              // onClick={() => scrollToElement('about')}
             >
               Sobre
             </Heading>
@@ -141,9 +141,9 @@ export default function LayoutDesktop(): ReactElement {
               fontSize="18px"
               fontFamily="Comfortaa"
               cursor="pointer"
-              href="#contacts"
+              href="/contact"
               as={Link}
-              onClick={() => scrollToElement('footer')}
+              // onClick={() => scrollToElement('footer')}
             >
               Contato
             </Heading>
