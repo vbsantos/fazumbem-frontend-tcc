@@ -81,7 +81,7 @@ export default function Home() {
                   bg="#ED6A5A"
                   padding="5px 28px 7px"
                   boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
-                  href="/about"
+                  href="/contact"
                   as={Link}
                   _hover={{
                     textDecoration: "none",
