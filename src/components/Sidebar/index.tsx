@@ -8,15 +8,12 @@ import {
   DrawerBody,
   DrawerContent,
   Divider,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
-import {
-  FaSignOutAlt
-} from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import { logout, useAuthDispatch } from "../../context";
 import Logo from "../Logo";
 import DefaultButton from "../DefaultButton";
-
 
 interface Props {
   onClose: () => void;
@@ -31,9 +28,21 @@ const SidebarContent = () => {
     <VStack color="brand.300">
       <DefaultButton title="Meu perfil" type="sidebar" route="/perfil" />
       <DefaultButton title="Campanhas" type="sidebar" route="/campanhas" />
-      <DefaultButton title="Nova Campanha" type="sidebar" route="/nova-campanha" />
-      <DefaultButton title="Insituições" type="sidebar" route="/instituições" />
-      <DefaultButton title="Nova Insituição" type="sidebar" route="/nova-instituição" />
+      <DefaultButton
+        title="Nova Campanha"
+        type="sidebar"
+        route="/nova-campanha"
+      />
+      <DefaultButton
+        title="Instituições"
+        type="sidebar"
+        route="/instituições"
+      />
+      <DefaultButton
+        title="Nova Instituição"
+        type="sidebar"
+        route="/nova-instituição"
+      />
       <Divider borderBottom="1px solid #034074" pt={2} mb={10} />
       {/* <Button 
         leftIcon={<FaUser />} 
@@ -72,7 +81,7 @@ const SidebarContent = () => {
       </Button> */}
       <Button
         color="#ED6A5A"
-        leftIcon={<FaSignOutAlt />} 
+        leftIcon={<FaSignOutAlt />}
         onClick={() => logout(dispatch)}
         w="100%"
         variant="ghost"
