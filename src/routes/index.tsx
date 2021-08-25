@@ -124,7 +124,7 @@ export default function AppRouter() {
                 component={route.component}
               />
             ))}
-            <Route component={() => <Redirect to="/dashboard" />} />
+            <Route component={() => <Redirect to="/perfil" />} />
           </Switch>
         </Box>
       </Router>
