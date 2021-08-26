@@ -5,9 +5,9 @@ import { Link as RouterLink } from "react-router-dom";
 import HeadLogo from "../Home/HeadLogo";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-function scrollToElement(element: string) {
-  (document.getElementById(element) as HTMLInputElement).scrollIntoView();
-}
+// function scrollToElement(element: string) {
+//   (document.getElementById(element) as HTMLInputElement).scrollIntoView();
+// }
 
 export default function LayoutDesktop(): ReactElement {
   const [showMenu, setShowMenu] = useState(true);
