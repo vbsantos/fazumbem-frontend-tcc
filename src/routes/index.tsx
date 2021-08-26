@@ -20,6 +20,7 @@ import CampaignDetails from "../views/Public/CampaignDetails";
 import Contacts from "../views/Public/Contacts";
 import Home from "../views/Public/Home";
 import Institutes from "../views/Public/Institutes";
+import InstituteDetails from "../views/Public/InstituteDetails";
 import Login from "../views/Public/Login";
 import Register from "../views/Public/Register";
 const smVariant = { navigation: "drawer", navigationButton: true };
@@ -55,6 +56,11 @@ export default function AppRouter() {
     {
       path: "/institutes",
       component: Institutes,
+      isPrivate: false,
+    },
+    {
+      path: "/institute/:id",
+      component: InstituteDetails,
       isPrivate: false,
     },
     {
