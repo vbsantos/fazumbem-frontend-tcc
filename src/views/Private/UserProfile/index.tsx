@@ -9,6 +9,7 @@ import {
   Divider,
   useMediaQuery,
   useToast,
+  Input,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import InputText from "../../../components/InputText";
@@ -27,7 +28,6 @@ const UserProfile = (props: Props) => {
   const dispatch = useAuthDispatch();
   const toast = useToast();
   const { password, address, verified, ...others } = userDetails.user;
-
   const {
     control,
     handleSubmit,
@@ -40,7 +40,7 @@ const UserProfile = (props: Props) => {
       const req = await httpClient<any>({
         method: "PUT",
         url: "/user",
-        data: { ...data, username: userDetails.username },
+        data: data,
       });
 
       dispatch({
@@ -85,17 +85,17 @@ const UserProfile = (props: Props) => {
             color="white"
             backgroundColor="#ED6A5A"
             display="inline"
-          > 
+          >
             &nbsp;Meu perfil&nbsp;
           </Text>
         </Box>
 
         <Box m={20} mt={0} pb={10} color="bluish.100">
-          <Text 
-            color="bluish.100" 
-            fontSize="1.8rem" 
-            textAlign="left" 
-            pb={5} 
+          <Text
+            color="bluish.100"
+            fontSize="1.8rem"
+            textAlign="left"
+            pb={5}
             fontFamily="Comfortaa"
           >
             Informações básicas da conta
@@ -120,10 +120,8 @@ const UserProfile = (props: Props) => {
               isRequired
             >
               <FormLabel>Email</FormLabel>
-              <InputText
-                name="username"
-                control={control}
-                error={errors.username}
+              <Input
+                value={userDetails.user.username}
                 background="white"
                 isDisabled
               />
@@ -148,11 +146,11 @@ const UserProfile = (props: Props) => {
             </FormControl>
           </HStack>
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
-          <Text 
-            color="bluish.100" 
-            fontSize="1.8rem" 
-            textAlign="left" 
-            pb={5} 
+          <Text
+            color="bluish.100"
+            fontSize="1.8rem"
+            textAlign="left"
+            pb={5}
             fontFamily="Comfortaa"
           >
             Endereço
@@ -234,11 +232,11 @@ const UserProfile = (props: Props) => {
             </FormControl>
           </HStack>
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
-          <Text 
-            color="bluish.100" 
-            fontSize="1.8rem" 
-            textAlign="left" 
-            pb={5} 
+          <Text
+            color="bluish.100"
+            fontSize="1.8rem"
+            textAlign="left"
+            pb={5}
             fontFamily="Comfortaa"
           >
             Informações complementares
