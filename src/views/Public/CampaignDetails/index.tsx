@@ -253,7 +253,9 @@ export default function Home() {
       email: "instituicao@mail.com"
     },
   ];
+  // eslint-disable-next-line
   const campanha = campanhas.find(element => element.id == id);
+  // eslint-disable-next-line
   const instituicao = institutes.find(element => element.id == campanha.instituteId);
   const settings = {
     dots: true,
