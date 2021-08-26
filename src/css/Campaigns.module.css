@@ -1,6 +1,6 @@
 /* CARDS DAS CAMPANHAS */
 .card-wrapper {
-  width: 260px;
+  width: 260px !important;
   margin: 0 auto;
 }
 

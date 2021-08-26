@@ -1,5 +1,5 @@
 import detailsStyle from '../../../css/CampaignDetails.module.css';
-import "../../../css/campaign-slider.css";
+// import "../../../css/campaign-images-slider.css";
 import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
 import {
   Image,
@@ -360,12 +360,10 @@ export default function Home() {
           textAlign={isMobile ? "center" : "left"}
         >
           <Heading color="bluish.100">Veja fotos da campanha</Heading>
-          <Box margin="70px 0">
+          <Box margin="70px 0" textAlign="center">
             <Slider {...settings}>
               <Box
-                width="80%"
-                borderRadius="25px"
-                overflow="hidden"
+                 className={detailsStyle["image-slide"]}
               >
                 <Image
                   objectFit="cover"
@@ -373,7 +371,7 @@ export default function Home() {
                 />
               </Box>
               <Box
-                width="80%"
+                className={detailsStyle["image-slide"]}
               >
                 <Image
                   objectFit="cover"
@@ -381,7 +379,7 @@ export default function Home() {
                 />
               </Box>
               <Box
-                width="80%"
+                className={detailsStyle["image-slide"]}
               >
                 <Image
                   objectFit="cover"
