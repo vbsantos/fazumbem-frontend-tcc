@@ -48,107 +48,122 @@ export default function Home() {
     {
       id: 0,
       title: "Campanha 1",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 1
+      picture_url: 1,
+      instituteId: 0
     },
     {
       id: 1,
       title: "Campanha 2",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 2,
+      instituteId: 1
     },
     {
       id: 2,
       title: "Campanha 3",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 3,
+      instituteId: 2
     },
     {
       id: 3,
       title: "Campanha 4",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 4,
+      instituteId: 3
     },
     {
       id: 4,
       title: "Campanha 5",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 5,
+      instituteId: 4
     },
     {
       id: 5,
       title: "Campanha 6",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 6,
+      instituteId: 5
     },
     {
       id: 6,
       title: "Campanha 7",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 7,
+      instituteId: 6
     },
     {
       id: 7,
       title: "Campanha 8",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 8,
+      instituteId: 7
     },
     {
       id: 8,
       title: "Campanha 9",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 9,
+      instituteId: 8
     },
     {
       id: 9,
       title: "Campanha 10",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 10,
+      instituteId: 9
     },
     {
       id: 10,
       title: "Campanha 11",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 11,
+      instituteId: 10
     },
     {
       id: 11,
       title: "Campanha 12",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 12,
+      instituteId: 11
     },
     {
       id: 12,
       title: "Campanha 13",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 13,
+      instituteId: 12
     },
     {
       id: 13,
       title: "Campanha 14",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 14,
+      instituteId: 13
     },
     {
       id: 14,
       title: "Campanha 15",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit,"
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
       + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
       picture_url: 15,
+      instituteId: 14
     },
   ];
   return (
@@ -247,6 +262,7 @@ export default function Home() {
                           transform="translateY(-3px)"
                           bgColor="white"
                           icon={<FaLandmark />}
+                          onClick={() => history.push(`/institute/${campanha.instituteId}`)}
                           _hover={{
                             bgColor: "#ED6A5A",
                             color: "white"

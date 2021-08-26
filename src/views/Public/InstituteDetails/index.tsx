@@ -1,6 +1,8 @@
-import detailsStyle from '../../../css/CampaignDetails.module.css';
+import detailsStyle from '../../../css/InstituteDetails.module.css';
+import campaignStyles from '../../../css/Campaigns.module.css';
 // import "../../../css/campaign-images-slider.css";
 import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
+import { InfoIcon } from "@chakra-ui/icons";
 import {
   Image,
   Tooltip,
@@ -8,9 +10,11 @@ import {
   GridItem,
   Link,
   Text,
+  IconButton,
   useMediaQuery
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router";
 import { FaRegEnvelope, FaInstagram, FaFacebookSquare, FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
 import Header from "../../../components/PublicHeader";
@@ -24,6 +28,7 @@ export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const history = useHistory();
   const campanhas = [
     {
       id: 0,
@@ -152,116 +157,147 @@ export default function Home() {
       name: "Instituição 1",
       picture_url: 1,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 1,
       name: "Instituição 2",
       picture_url: 2,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 2,
       name: "Instituição 3",
       picture_url: 3,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 3,
       name: "Instituição 4",
       picture_url: 4,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 4,
       name: "Instituição 5",
       picture_url: 5,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 5,
       name: "Instituição 6",
       picture_url: 6,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 6,
       name: "Instituição 7",
       picture_url: 7,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 7,
       name: "Instituição 8",
       picture_url: 8,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 8,
       name: "Instituição 9",
       picture_url: 9,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 9,
       name: "Instituição 10",
       picture_url: 10,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 10,
       name: "Instituição 11",
       picture_url: 11,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 11,
       name: "Instituição 12",
       picture_url: 12,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 12,
       name: "Instituição 13",
       picture_url: 13,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 13,
       name: "Instituição 14",
       picture_url: 14,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
     {
       id: 14,
       name: "Instituição 15",
       picture_url: 15,
       telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com"
+      email: "instituicao@mail.com",
+      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
     },
   ];
+  // // eslint-disable-next-line
+  // const campanha = campanhas.find(element => element.id == id);
   // eslint-disable-next-line
-  const campanha = campanhas.find(element => element.id == id);
-  // eslint-disable-next-line
-  const instituicao = institutes.find(element => element.id == campanha.instituteId);
+  const instituicao = institutes.find(element => element.id == id);
+  let slides = (isMobile) ? 1 : 3;
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: slides,
     slidesToScroll: 1
   };
   return (
@@ -277,7 +313,15 @@ export default function Home() {
           <Grid
             templateColumns={isMobile ? "" : "repeat(3, 1fr)"}
             templateRows={isMobile ? "repeat(2, 1fr)" : ""}
+            gap={12}
           >
+            <GridItem>
+                  <Box className={detailsStyle["institute-image"]}>
+                    <Image
+                      src={`https://fazumbem.inf.ufsm.br/images/logos/${instituicao.picture_url}.png`}
+                    />
+                  </Box>
+            </GridItem>
             <GridItem colSpan={isMobile ? 1 : 2} textAlign={isMobile ? "center" : "left"}>
               <Heading>
                 <Text
@@ -287,7 +331,7 @@ export default function Home() {
                   color="white"
                   backgroundColor="#ED6A5A"
                 >
-                  {campanha ? campanha.title : ""}
+                  {instituicao.name}
                 </Text>
               </Heading>
               <Box marginTop="50px">
@@ -297,95 +341,79 @@ export default function Home() {
                   lineHeight="31.69px"
                   // padding={isGreater ? "0 20%" : "0 5px"}
                 >
-                  {campanha ? campanha.description : ""}
+                  {instituicao.description}
                 </Text>
-              </Box>
-            </GridItem>
-            <GridItem>
-              <Box className={detailsStyle["card-wrapper"]}>
-                <Box className={detailsStyle["card"]}>
-                  <Box className={detailsStyle["card-text"]}>
-                    Campanha promovida por:
-                  </Box>
-                  <Box className={detailsStyle["card-image"]}>
-                    <Image
-                      src={`https://fazumbem.inf.ufsm.br/images/logos/${instituicao.picture_url}.png`}
-                    />
-                  </Box>
-                  <Box className={detailsStyle["card-title"]}>
-                    {instituicao.name}
-                  </Box>
-                </Box>
               </Box>
             </GridItem>
           </Grid>
         </Box>
+        {/*
         <Box
-          marginTop="50px"
+          marginTop="100px"
           padding={isGreater ? "0 20%" : "0 5px"}
           textAlign={isMobile ? "center" : "left"}
         >
           <VStack align={isMobile ? "center" : "left"} spacing={10}>
-            <Heading color="bluish.100">Como doar?</Heading>
+            <Heading color="bluish.100">Campanhas desta instituição</Heading>
             <Text
               fontSize={isMobile ? "22px" : "24px"}
               color="bluish.100"
             >
               Para fazer uma doação, clique no botão abaixo e saiba mais.
             </Text>
-            <Box>
-              <Box
-                fontSize="22px"
-                borderRadius="50px"
-                bg="bluish.100"
-                color="white"
-                padding="12px 50px"
-                boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
-                href="#"
-                as={Link}
-                _hover={{
-                  textDecoration: "none",
-                  background: "bluish.200",
-                  transition: ".5s",
-                }}
-              >
-                  Doar
-              </Box>
-            </Box>
+
           </VStack>
         </Box>
+        */}
         <Box
           marginTop="100px"
           padding={isGreater ? "0 20%" : "0 5px"}
           textAlign={isMobile ? "center" : "left"}
         >
-          <Heading color="bluish.100">Veja fotos da campanha</Heading>
+          <Heading color="bluish.100">Campanhas desta instituição</Heading>
           <Box margin="70px 0" textAlign="center">
             <Slider {...settings}>
-              <Box
-                 className={detailsStyle["image-slide"]}
-              >
-                <Image
-                  objectFit="cover"
-                  src="https://i1.wp.com/www.action360.com.br/wp-content/uploads/2018/06/doar-agasalho.jpg"
-                />
-              </Box>
-              <Box
-                className={detailsStyle["image-slide"]}
-              >
-                <Image
-                  objectFit="cover"
-                  src="https://odia.ig.com.br/_midias/jpg/2018/05/23/agasalho-6814559.jpg?20210528225115"
-                />
-              </Box>
-              <Box
-                className={detailsStyle["image-slide"]}
-              >
-                <Image
-                  objectFit="cover"
-                  src="https://brechando.com/wp-content/uploads/2016/07/211817_Doa%C3%A7%C3%A3o_roupas.jpg"
-                />
-              </Box>
+              {campanhas.map((campanha: any = []) => (
+                <Box className={campaignStyles["card-wrapper"]} key={campanha.id}>
+                  <Box className={campaignStyles["card"]}>
+                    <Box className={campaignStyles["card-image"]}>
+                      <Image
+                        src={`https://fazumbem.inf.ufsm.br/images/entidades/${campanha.picture_url}.png`}
+                      />
+                    </Box>
+                    <Box className={campaignStyles["card-title"]}>
+                      {campanha.title}
+                    </Box>
+                    <Box className={campaignStyles["card-description"]}>
+                      {campanha.description}
+                    </Box>
+                    <Box className={campaignStyles["campaign-icons"]} textAlign="center">
+                        <Tooltip
+                          hasArrow
+                          label="Ver informações"
+                          bg="bluish.100"
+                          color="white"
+                          placement="top"
+                          borderRadius="8px"
+                          transition="0.4s"
+                        >
+                          <IconButton
+                            aria-label="info"
+                            borderRadius="10px"
+                            transform="translateY(-3px)"
+                            bgColor="white"
+                            icon={<InfoIcon />}
+                            onClick={() => history.push(`/campaign/${campanha.id}`)}
+                            _hover={{
+                              bgColor: "#ED6A5A",
+                              color: "white"
+                            }}
+                          />
+                        </Tooltip>
+                    </Box>
+                  </Box>
+                </Box>
+              ))}
             </Slider>
           </Box>
         </Box>
