@@ -102,7 +102,8 @@ const Sidebar = ({ isOpen, variant, onClose }: Props) => {
       w="200px"
       top={0}
       h="100%"
-      boxShadow="0px 8px 10px rgba(0, 0, 0, 0.1)"
+      boxShadow="0px 8px 10px rgba(0, 0, 0, 0.1)" 
+      background="white"
     >
       <Logo height="150px" mb={5} />
       <SidebarContent />
