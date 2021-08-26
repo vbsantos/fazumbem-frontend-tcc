@@ -21,6 +21,7 @@ import {
   // useDisclosure,
   useMediaQuery
 } from "@chakra-ui/react";
+import { useHistory } from "react-router";
 import { FaLandmark } from "react-icons/fa";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
@@ -41,6 +42,7 @@ export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const history = useHistory();
   // let { isOpen, onClose, onOpen } = useDisclosure();
   const campanhas = [
     {
@@ -223,11 +225,11 @@ export default function Home() {
                           transform="translateY(-3px)"
                           bgColor="white"
                           icon={<InfoIcon />}
+                          onClick={() => history.push(`/campaign/${campanha.id}`)}
                           _hover={{
                             bgColor: "#ED6A5A",
                             color: "white"
                           }}
-                          // onClick={onOpen}
                         />
                       </Tooltip>
                       <Tooltip

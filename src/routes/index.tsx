@@ -16,6 +16,7 @@ import NewInstitution from "../views/Private/NewInstitution";
 import UserProfile from "../views/Private/UserProfile";
 import About from "../views/Public/About";
 import PublicCampaigns from "../views/Public/Campaigns";
+import CampaignDetails from "../views/Public/CampaignDetails";
 import Contacts from "../views/Public/Contacts";
 import Home from "../views/Public/Home";
 import Institutes from "../views/Public/Institutes";
@@ -44,6 +45,11 @@ export default function AppRouter() {
     {
       path: "/campaigns",
       component: PublicCampaigns,
+      isPrivate: false,
+    },
+    {
+      path: "/campaign/:id",
+      component: CampaignDetails,
       isPrivate: false,
     },
     {
