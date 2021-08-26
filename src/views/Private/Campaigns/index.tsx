@@ -23,8 +23,7 @@ import {
   useDisclosure,
   ModalOverlay,
   Stack,
-  Image,
-  Tooltip
+  Image
   /* Divider */
 } from "@chakra-ui/react";
 
@@ -63,7 +62,6 @@ const Campaigns = (props: Props) => {
         method: "GET",
         url: "/campaign",
       });
-
       setList(req.data);
     };
 
@@ -226,21 +224,11 @@ const Campaigns = (props: Props) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {list.map((item) => (
-                    <Tr>
+                  {list.map((item, index) => (
+                    <Tr key={index}>
                       <Td>{item.title}</Td>
                       <Td>
-                        <Tooltip
-                          hasArrow
-                          label={item.description}
-                          bg="brand.300"
-                          color="white"
-                          placement="bottom"
-                          borderRadius="8px"
-                          transition="0.2s"
-                        >
-                          {textTruncate(item.description)}
-                        </Tooltip>
+                        {textTruncate(item.description) || "--"}
                       </Td>
                       <Td isNumeric>
                         <Menu>
@@ -351,21 +339,11 @@ const Campaigns = (props: Props) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {list.map((item) => (
-                    <Tr>
+                  {list.map((item, index) => (
+                    <Tr key={index}>
                       <Td>{item.title}</Td>
                       <Td>
-                        <Tooltip
-                          hasArrow
-                          label={item.description}
-                          bg="brand.300"
-                          color="white"
-                          placement="bottom"
-                          borderRadius="8px"
-                          transition="0.2s"
-                        >
-                          {textTruncate(item.description)}
-                        </Tooltip>
+                        {textTruncate(item.description) || "--"}
                       </Td>
                       <Td isNumeric>
                         <Menu>
