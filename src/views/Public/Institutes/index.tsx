@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import instituteStyle from '../../../css/Institutes.module.css';
+import instituteStyle from "../../../css/Institutes.module.css";
 import { InfoIcon } from "@chakra-ui/icons";
 import { Box, Heading, VStack } from "@chakra-ui/layout";
 import {
@@ -10,12 +10,12 @@ import {
   SimpleGrid,
   Tooltip,
   Text,
-  useMediaQuery
+  useMediaQuery,
 } from "@chakra-ui/react";
 import "../../../css/instituicoes.css";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-import "@fontsource/montserrat/600.css"
+import "@fontsource/montserrat/600.css";
 
 // function truncateName(name: String) {
 //   if (name.length > 12) {
@@ -27,9 +27,9 @@ import "@fontsource/montserrat/600.css"
 }*/
 
 export default function Home() {
-  const [isMobile] = useMediaQuery("(max-width: 576px)")
-  const [isDesktop] = useMediaQuery("(min-width: 769px)")
-  const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const [isMobile] = useMediaQuery("(max-width: 576px)");
+  const [isDesktop] = useMediaQuery("(min-width: 769px)");
+  const [isGreater] = useMediaQuery("(min-width: 1200px)");
 
   const institutes = [
     {
@@ -111,10 +111,7 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
-      <Box
-        padding={!isDesktop ? "50px 5px" : "50px"}
-        textAlign="center"
-      >
+      <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Heading>
           <Text
             display="inline"
@@ -123,7 +120,8 @@ export default function Home() {
             color="white"
             backgroundColor="#ED6A5A"
           >
-            &nbsp;Instituições&nbsp;<br/>
+            &nbsp;Instituições&nbsp;
+            <br />
             &nbsp;participantes&nbsp;
           </Text>
         </Heading>
@@ -137,10 +135,7 @@ export default function Home() {
             Conheça as instituições participantes da plataforma Faz um Bem!
           </Text>
         </Box>
-        <Box
-          marginTop="50px"
-          padding={isGreater ? "0 15%" : "0 5px"}
-        >
+        <Box marginTop="50px" padding={isGreater ? "0 15%" : "0 5px"}>
           <SimpleGrid
             minChildWidth={isMobile ? "30%" : "160px"}
             spacingX={40}
@@ -148,7 +143,10 @@ export default function Home() {
             margin="50px auto 0"
           >
             {institutes.map((institute: any = []) => (
-              <Box className={instituteStyle["card-wrapper"]} key={institute.id}>
+              <Box
+                className={instituteStyle["card-wrapper"]}
+                key={institute.id}
+              >
                 <Box className={instituteStyle["card"]}>
                   <Box className={instituteStyle["card-image"]}>
                     <Image
@@ -156,11 +154,7 @@ export default function Home() {
                     />
                   </Box>
                   <Box className={instituteStyle["card-title"]}>
-                    <Text
-                      color="bluish.100"
-                    >
-                      {institute.name}
-                    </Text>
+                    <Text color="bluish.100">{institute.name}</Text>
                   </Box>
                   <Box className={instituteStyle["icons"]}>
                     <Tooltip
@@ -180,7 +174,7 @@ export default function Home() {
                         icon={<InfoIcon />}
                         _hover={{
                           bgColor: "#ED6A5A",
-                          color: "white"
+                          color: "white",
                         }}
                       />
                     </Tooltip>
@@ -197,10 +191,7 @@ export default function Home() {
         >
           <VStack align={isMobile ? "center" : "left"} spacing={10}>
             <Heading color="bluish.100">Deseja fazer uma doação?</Heading>
-            <Text
-              fontSize={isMobile ? "22px" : "24px"}
-              color="bluish.100"
-            >
+            <Text fontSize={isMobile ? "22px" : "24px"} color="bluish.100">
               Veja as campanhas que precisam da sua ajuda:
             </Text>
             <Box>
@@ -219,12 +210,12 @@ export default function Home() {
                   transition: ".5s",
                 }}
               >
-                  Campanhas
+                Campanhas
               </Box>
             </Box>
           </VStack>
         </Box>
-        <Box
+        {/* <Box
           margin="100px 0 50px"
           padding={isGreater ? "0 15%" : "0 5px"}
           textAlign={isMobile ? "center" : "left"}
@@ -257,7 +248,7 @@ export default function Home() {
               </Box>
             </Box>
           </VStack>
-        </Box>
+        </Box> */}
       </Box>
       <Footer />
     </Box>

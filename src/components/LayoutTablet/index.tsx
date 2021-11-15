@@ -47,7 +47,7 @@ export default function LayoutDesktop(): ReactElement {
                 onClick={(event) => setShowMenu(!showMenu)}
               >
                 <HamburgerIcon marginRight={3} marginBottom={1} />
-                  Menu
+                Menu
               </Heading>
             </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
@@ -66,7 +66,7 @@ export default function LayoutDesktop(): ReactElement {
               >
                 Login
               </Heading>
-              <Heading
+              {/* <Heading
                 color="bluish.100"
                 fontWeight="none"
                 fontSize="18px"
@@ -79,7 +79,7 @@ export default function LayoutDesktop(): ReactElement {
                 to="/register"
               >
                 Cadastro
-              </Heading>
+              </Heading> */}
             </VStack>
           </Flex>
         </div>

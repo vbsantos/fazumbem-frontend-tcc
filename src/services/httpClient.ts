@@ -48,8 +48,8 @@ const responseErrorInterceptor = (error: any) => {
 
   if (response.status === 401 && localStorage.getItem("currentUser")) {
     localStorage.removeItem("currentUser");
-    alert("Sua sessão expirou!");
-    // window.location.reload();
+    alert("Sua sessão expirou, realize login novamente!");
+    window.location.reload();
   }
 
   console.error(JSON.stringify({ "Response error": error }));

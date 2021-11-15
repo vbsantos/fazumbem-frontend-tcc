@@ -10,7 +10,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  ModalCloseButton
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -58,7 +58,7 @@ export default function LayoutMobile(): ReactElement {
                 onClick={onOpen}
               >
                 <HamburgerIcon marginRight={3} marginBottom={1} />
-                  Menu
+                Menu
               </Heading>
             </Tooltip>
             <HeadLogo height="7rem" width="7rem" />
@@ -132,7 +132,7 @@ export default function LayoutMobile(): ReactElement {
               >
                 Login
               </Heading>
-              <Heading
+              {/* <Heading
                 color="bluish.100"
                 fontWeight="none"
                 fontSize="18px"
@@ -146,7 +146,7 @@ export default function LayoutMobile(): ReactElement {
                 to="/register"
               >
                 Cadastro
-              </Heading>
+              </Heading> */}
             </HStack>
           </ModalFooter>
         </ModalContent>

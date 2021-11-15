@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/button";
-import { Link, VStack } from "@chakra-ui/layout";
+import { VStack } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import InputEmail from "../../../components/InputEmail";
 import InputPassword from "../../../components/InputPassword";
 import Logo from "../../../components/Logo";
@@ -75,9 +75,6 @@ export default function Login() {
           <Button colorScheme="brand" type="submit" isLoading={isSubmitting}>
             Entrar
           </Button>
-          <Link as={RouterLink} to="/register" color="brand.300" fontSize="sm">
-            Não possui uma conta?
-          </Link>
         </VStack>
       </Container>
     </form>

@@ -38,11 +38,11 @@ export default function AppRouter() {
       component: Home,
       isPrivate: false,
     },
-    {
-      path: "/register",
-      component: Register,
-      isPrivate: false,
-    },
+    // {
+    //   path: "/register",
+    //   component: Register,
+    //   isPrivate: false,
+    // },
     {
       path: "/campaigns",
       component: PublicCampaigns,
