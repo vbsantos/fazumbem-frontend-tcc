@@ -46,7 +46,7 @@ const responseSuccessInterceptor = (response: AxiosResponse) => {
 const responseErrorInterceptor = (error: any) => {
   const response = error?.response as AxiosResponse;
 
-  if (response.status === 401 && localStorage.getItem("currentUser")) {
+  if (response?.status === 401 && localStorage.getItem("currentUser")) {
     localStorage.removeItem("currentUser");
     alert("Sua sessão expirou, realize login novamente!");
     window.location.reload();
