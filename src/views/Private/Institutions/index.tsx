@@ -44,7 +44,7 @@ const Institutions = (props: Props) => {
     const getList = async () => {
       const req = await httpClient<any>({
         method: "GET",
-        url: "/institution",
+        url: "/user",
       });
 
       setList(req.data);
@@ -55,12 +55,7 @@ const Institutions = (props: Props) => {
 
   return (
     <Box backgroundColor="gray.100" m={0} p={0}>
-      <Box
-        backgroundColor="#ED6A5A"
-        width="100%"
-        color="brand.300"
-        p={2}
-      ></Box>
+      <Box backgroundColor="#ED6A5A" width="100%" color="brand.300" p={2}></Box>
       <Box pt={10} textAlign="center">
         <Text
           fontSize="2.5rem"
@@ -70,7 +65,7 @@ const Institutions = (props: Props) => {
           color="white"
           backgroundColor="#ED6A5A"
           display="inline"
-        > 
+        >
           &nbsp;Instituições&nbsp;
         </Text>
       </Box>
@@ -80,19 +75,21 @@ const Institutions = (props: Props) => {
           fontSize="26px"
           textAlign="center"
           fontWeight={500}
-          fontFamily="Comfortaa" 
+          fontFamily="Comfortaa"
           m={5}
         >
-          Verifique as instituições que estão cadastradas no sistema e o número de usuários cadastrados para cada uma.
+          Verifique as instituições que estão cadastradas no sistema e o número
+          de usuários cadastrados para cada uma.
         </Text>
       </Box>
-      <Box m="10" 
-        borderRadius= "25px"
-        overflow= "hidden"
-        backgroundColor= "white"
-        textAlign= "center"
-        color= "bluish.100"
-        boxShadow= "2px 4px 9px rgba(0, 0, 0, 0.25)"
+      <Box
+        m="10"
+        borderRadius="25px"
+        overflow="hidden"
+        backgroundColor="white"
+        textAlign="center"
+        color="bluish.100"
+        boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
       >
         <Table variant="striped">
           <TableCaption>
@@ -100,10 +97,15 @@ const Institutions = (props: Props) => {
           </TableCaption>
           <Thead backgroundColor="#ED6A5A">
             <Tr>
-              <Th color="white" font="Comfortaa">Nome</Th>
-              <Th color="white" font="Comfortaa">Email</Th>
-              <Th color="white" font="Comfortaa">CNPJ</Th>
-              <Th color="white" font="Comfortaa">Nº de usuários</Th>
+              <Th color="white" font="Comfortaa">
+                Nome
+              </Th>
+              <Th color="white" font="Comfortaa">
+                Email
+              </Th>
+              <Th color="white" font="Comfortaa">
+                CNPJ
+              </Th>
               <Th color="white" font="Comfortaa"></Th>
             </Tr>
           </Thead>
@@ -111,9 +113,8 @@ const Institutions = (props: Props) => {
             {list.map((item) => (
               <Tr>
                 <Td>{item.name}</Td>
-                <Td>{item.email}</Td>
-                <Td>{item.cnpj}</Td>
-                <Td>{item?.users?.length}</Td>
+                <Td>{item.username}</Td>
+                <Td>{item.identifier}</Td>
                 <Td isNumeric>
                   <Menu>
                     <MenuButton
@@ -136,7 +137,10 @@ const Institutions = (props: Props) => {
                       <MenuItem
                         onClick={() =>
                           history.push(
-                            "/instituição/:id".replace(":id", item.idInstitution)
+                            "/instituição/:id".replace(
+                              ":id",
+                              item.idInstitution
+                            )
                           )
                         }
                       >

@@ -22,7 +22,6 @@ import Home from "../views/Public/Home";
 import Institutes from "../views/Public/Institutes";
 import InstituteDetails from "../views/Public/InstituteDetails";
 import Login from "../views/Public/Login";
-import Register from "../views/Public/Register";
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
@@ -113,6 +112,8 @@ export default function AppRouter() {
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
+  const isSuperUser = userDetails?.user?.group === "Curador";
+
   if (isAuth) {
     return (
       <Router>
@@ -136,7 +137,11 @@ export default function AppRouter() {
                 component={route.component}
               />
             ))}
-            <Route component={() => <Redirect to="/perfil" />} />
+            <Route
+              component={() => (
+                <Redirect to={isSuperUser ? "/instituições" : "/perfil"} />
+              )}
+            />
           </Switch>
         </Box>
       </Router>

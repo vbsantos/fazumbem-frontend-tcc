@@ -86,7 +86,7 @@ const UserProfile = (props: Props) => {
             backgroundColor="#ED6A5A"
             display="inline"
           >
-            &nbsp;Meu perfil&nbsp;
+            &nbsp;Minha instituição&nbsp;
           </Text>
         </Box>
 
@@ -98,7 +98,7 @@ const UserProfile = (props: Props) => {
             pb={5}
             fontFamily="Comfortaa"
           >
-            Informações básicas da conta
+            Informações básicas da instituição
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
             <FormControl

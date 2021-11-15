@@ -42,7 +42,7 @@ const NewInstituition = () => {
 
       httpClient<any>({
         method: "GET",
-        url: "/institution",
+        url: "/user",
       })
         .then((req) => {
           const inst = req?.data?.find(
@@ -64,13 +64,13 @@ const NewInstituition = () => {
       if (institutionToEdit) {
         await httpClient({
           method: "PUT",
-          url: "/institution",
+          url: "/user/register",
           data: { ...data },
         });
       } else {
         await httpClient({
           method: "POST",
-          url: "/institution",
+          url: "/user/register",
           data: { ...data },
         });
       }
@@ -127,16 +127,18 @@ const NewInstituition = () => {
             backgroundColor="#ED6A5A"
             display="inline"
           >
-            &nbsp;{institutionToEdit ? institutionToEdit.name : "Nova Instituição"}&nbsp;
+            &nbsp;
+            {institutionToEdit ? institutionToEdit.name : "Nova Instituição"}
+            &nbsp;
           </Text>
         </Box>
 
         <Box m={20} mt={0} pb={10} color="bluish.100">
-          <Text 
-            color="bluish.100" 
-            fontSize="1.8rem" 
-            textAlign="left" 
-            pb={5} 
+          <Text
+            color="bluish.100"
+            fontSize="1.8rem"
+            textAlign="left"
+            pb={5}
             fontFamily="Comfortaa"
           >
             Informações básicas
@@ -172,11 +174,11 @@ const NewInstituition = () => {
             </FormControl>
           </HStack>
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
-          <Text 
-            color="bluish.100" 
-            fontSize="1.8rem" 
-            textAlign="left" 
-            pb={5} 
+          <Text
+            color="bluish.100"
+            fontSize="1.8rem"
+            textAlign="left"
+            pb={5}
             fontFamily="Comfortaa"
           >
             Endereço
@@ -258,11 +260,11 @@ const NewInstituition = () => {
             </FormControl>
           </HStack>
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
-          <Text 
-            color="bluish.100" 
-            fontSize="1.8rem" 
-            textAlign="left" 
-            pb={5} 
+          <Text
+            color="bluish.100"
+            fontSize="1.8rem"
+            textAlign="left"
+            pb={5}
             fontFamily="Comfortaa"
           >
             Informações complementares
