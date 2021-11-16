@@ -273,10 +273,12 @@ export default function Home() {
       email: "instituicao@mail.com",
     },
   ];
-  // eslint-disable-next-line
+
+  // eslint-disable-next-line eqeqeq
   const campanha = campanhas.find((element) => element.id == id);
-  // eslint-disable-next-line
+
   const instituicao = institutes.find(
+    // eslint-disable-next-line eqeqeq
     (element) => element.id == campanha.instituteId
   );
   const settings = {
