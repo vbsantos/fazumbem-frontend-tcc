@@ -25,7 +25,7 @@ const NewInstituition = () => {
   const [isLoading, setIsLoading] = useState(Boolean(id));
   const [institutionToEdit, setInstitutionToEdit] = useState<any>();
   const toast = useToast();
-  debugger;
+
   const onlyView = useLocation().search === "?viewInfo";
 
   const {
@@ -46,8 +46,6 @@ const NewInstituition = () => {
       })
         .then((req) => {
           const inst = req?.data?.find((item) => item.idUser === Number(id));
-
-          debugger;
 
           setInstitutionToEdit(inst);
 
