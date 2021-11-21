@@ -25,7 +25,7 @@ const SidebarContent = () => {
   const dispatch = useAuthDispatch();
 
   const userDetails = useAuthState();
-  const isSuperUser = userDetails?.user?.group === "Curador";
+  const isSuperUser = userDetails?.user?.group === "Curator";
 
   return (
     <VStack color="brand.300">

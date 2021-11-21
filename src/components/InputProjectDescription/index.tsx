@@ -12,7 +12,6 @@ export default function InputProjectDescription({
     <Box w="full">
       <Textarea
         placeholder="Digite aqui uma descrição detalhada do projeto..."
-        isFullWidth
         {...register}
         {...props}
       />

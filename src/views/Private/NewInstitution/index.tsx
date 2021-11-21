@@ -7,12 +7,11 @@ import {
   FormLabel,
   Spinner,
   Text,
-  useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import InputCNPJ from "../../../components/InputCNPJ";
 import InputPhone from "../../../components/InputPhone";
 import InputProjectDescription from "../../../components/InputProjectDescription";
@@ -22,11 +21,12 @@ import { httpClient } from "../../../services/httpClient";
 import Footer from "../../../components/Private/Footer";
 
 const NewInstituition = () => {
-  const [isMobile] = useMediaQuery("(max-width: 576px)");
   let { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(Boolean(id));
   const [institutionToEdit, setInstitutionToEdit] = useState<any>();
   const toast = useToast();
+  debugger;
+  const onlyView = useLocation().search === "?viewInfo";
 
   const {
     control,
@@ -45,9 +45,9 @@ const NewInstituition = () => {
         url: "/user",
       })
         .then((req) => {
-          const inst = req?.data?.find(
-            (item) => item.idInstitution === Number(id)
-          );
+          const inst = req?.data?.find((item) => item.idUser === Number(id));
+
+          debugger;
 
           setInstitutionToEdit(inst);
 
@@ -64,7 +64,7 @@ const NewInstituition = () => {
       if (institutionToEdit) {
         await httpClient({
           method: "PUT",
-          url: "/user/register",
+          url: "/user",
           data: { ...data },
         });
       } else {
@@ -144,11 +144,7 @@ const NewInstituition = () => {
             Informações básicas
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
-            <FormControl
-              id="name"
-              fontSize={isMobile ? "1rem" : "2rem"}
-              isRequired
-            >
+            <FormControl id="name" isRequired>
               <FormLabel>Nome</FormLabel>
               <InputText
                 name="name"
@@ -156,20 +152,18 @@ const NewInstituition = () => {
                 control={control}
                 error={errors.name}
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
-            <FormControl
-              id="email"
-              fontSize={isMobile ? "1rem" : "2rem"}
-              isRequired
-            >
+            <FormControl id="username" isRequired>
               <FormLabel>Email</FormLabel>
               <InputText
-                name="email"
+                name="username"
                 placeholder="Digite seu email"
                 control={control}
                 error={errors.username}
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
           </HStack>
@@ -184,11 +178,7 @@ const NewInstituition = () => {
             Endereço
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2} pb={5}>
-            <FormControl
-              isRequired
-              id="cep"
-              fontSize={isMobile ? "1rem" : "2rem"}
-            >
+            <FormControl isRequired id="cep">
               <FormLabel>CEP</FormLabel>
               <InputText
                 name="address.cep"
@@ -196,27 +186,32 @@ const NewInstituition = () => {
                 error={errors.cep}
                 placeholder="90420041"
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
-            <FormControl
-              isRequired
-              id="city"
-              fontSize={isMobile ? "1rem" : "2rem"}
-            >
+            <FormControl isRequired id="city">
               <FormLabel>Cidade</FormLabel>
               <InputText
                 name="address.city"
                 control={control}
                 error={errors.city}
-                placeholder="Porto alegre"
+                placeholder="Santa Maria"
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
-            <FormControl
-              isRequired
-              id="state"
-              fontSize={isMobile ? "1rem" : "2rem"}
-            >
+            <FormControl isRequired id="district">
+              <FormLabel>Bairro</FormLabel>
+              <InputText
+                name="address.district"
+                control={control}
+                error={errors.city}
+                placeholder="Camobi"
+                background="white"
+                isReadOnly={onlyView}
+              />
+            </FormControl>
+            <FormControl isRequired id="state">
               <FormLabel>Estado</FormLabel>
               <InputText
                 name="address.state"
@@ -224,11 +219,12 @@ const NewInstituition = () => {
                 error={errors.state}
                 placeholder="Rio Grande do Sul"
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
           </HStack>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2} pb={5}>
-            <FormControl id="logradouro" fontSize={isMobile ? "1rem" : "2rem"}>
+            <FormControl id="logradouro">
               <FormLabel>Logradouro</FormLabel>
               <InputText
                 name="address.street"
@@ -236,9 +232,10 @@ const NewInstituition = () => {
                 error={errors.street}
                 placeholder="Jardim Guaíra"
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
-            <FormControl id="number" fontSize={isMobile ? "1rem" : "2rem"}>
+            <FormControl id="number">
               <FormLabel>Número</FormLabel>
               <InputText
                 name="address.number"
@@ -246,9 +243,10 @@ const NewInstituition = () => {
                 error={errors.number}
                 placeholder="1373"
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
-            <FormControl id="complemento" fontSize={isMobile ? "1rem" : "2rem"}>
+            <FormControl id="complemento">
               <FormLabel>Complemento</FormLabel>{" "}
               <InputText
                 name="address.complement"
@@ -256,6 +254,7 @@ const NewInstituition = () => {
                 error={errors.complement}
                 placeholder="apto xxx"
                 background="white"
+                isReadOnly={onlyView}
               />
             </FormControl>
           </HStack>
@@ -270,44 +269,80 @@ const NewInstituition = () => {
             Informações complementares
           </Text>
           <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
-            <FormControl
-              isRequired
-              id="cnpj"
-              fontSize={isMobile ? "1rem" : "2rem"}
-            >
+            <FormControl id="identifier">
               <FormLabel>CNPJ</FormLabel>
-              <InputCNPJ name="cnpj" control={control} error={errors.cnpj} />
+              <InputCNPJ
+                name="identifier"
+                control={control}
+                error={errors.cnpj}
+                isReadOnly={onlyView}
+              />
             </FormControl>
 
-            <FormControl
-              isRequired
-              id="phone"
-              fontSize={isMobile ? "1rem" : "2rem"}
-            >
+            <FormControl isRequired id="phone">
               <FormLabel>Telefone</FormLabel>
               <InputPhone
                 name="telephone"
                 control={control}
                 error={errors.phone}
+                isReadOnly={onlyView}
               />
             </FormControl>
-            <FormControl id="url" fontSize={isMobile ? "1rem" : "2rem"}>
-              <FormLabel>Url da página</FormLabel>
+          </HStack>
+          <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
+            <FormControl id="url" mt="4">
+              <FormLabel>Link do site</FormLabel>
 
               <InputText
                 name="url"
                 control={control}
                 error={errors.complement}
-                placeholder="https://ufsm.fazumbem.br"
+                placeholder="www.seu_site.com.br"
+                required={false}
+                isReadOnly={onlyView}
+              />
+            </FormControl>
+            <FormControl id="facebook" mt="4">
+              <FormLabel>Link do Facebook</FormLabel>
+
+              <InputText
+                name="facebook"
+                control={control}
+                error={errors.complement}
+                placeholder="www.facebook.com/sua_pagina"
+                required={false}
+                isReadOnly={onlyView}
+              />
+            </FormControl>
+            <FormControl id="instagram" mt="4">
+              <FormLabel>Link do Instagram</FormLabel>
+
+              <InputText
+                name="instagram"
+                control={control}
+                error={errors.complement}
+                placeholder="www.instagram.com/sua_pagina"
+                required={false}
+                isReadOnly={onlyView}
               />
             </FormControl>
           </HStack>
 
-          <FormControl
-            mt="4"
-            id="description"
-            fontSize={isMobile ? "1rem" : "2rem"}
-          >
+          <FormControl mt="4" id="openHours" isRequired>
+            <FormLabel>Horário de funcionamento</FormLabel>
+
+            <InputProjectDescription
+              register={{
+                ...register("openHours", {
+                  required: "Campo obrigatório",
+                }),
+              }}
+              error={errors.openHours}
+              isReadOnly={onlyView}
+            />
+          </FormControl>
+
+          <FormControl mt="4" id="description" isRequired>
             <FormLabel>Descrição da instituição</FormLabel>
 
             <InputProjectDescription
@@ -317,27 +352,46 @@ const NewInstituition = () => {
                 }),
               }}
               error={errors.description}
+              isReadOnly={onlyView}
+            />
+          </FormControl>
+
+          <FormControl mt="4" id="bankAccount" isRequired>
+            <FormLabel>Informações para doação</FormLabel>
+
+            <InputProjectDescription
+              register={{
+                ...register("bankAccount", {
+                  required: "Campo obrigatório",
+                }),
+              }}
+              error={errors.bankAccount}
+              isReadOnly={onlyView}
             />
           </FormControl>
         </Box>
-        <Center pb={10}>
-          <Button
-            colorScheme="blue"
-            background="#ED6A5A"
-            color="white"
-            type="submit"
-            borderRadius="50px"
-            padding="15px 20px 15px"
-            boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
-            _hover={{
-              textDecoration: "none",
-              background: "#F18C7E",
-              transition: ".5s",
-            }}
-          >
-            Salvar alterações
-          </Button>
-        </Center>
+
+        {!onlyView && (
+          <Center pb={10}>
+            <Button
+              colorScheme="blue"
+              background="#ED6A5A"
+              color="white"
+              type="submit"
+              borderRadius="50px"
+              padding="15px 20px 15px"
+              boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+              _hover={{
+                textDecoration: "none",
+                background: "#F18C7E",
+                transition: ".5s",
+              }}
+            >
+              Salvar alterações
+            </Button>
+          </Center>
+        )}
+
         <Footer />
       </Box>
     </form>

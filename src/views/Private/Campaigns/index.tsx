@@ -50,7 +50,7 @@ const Campaigns = (props: Props) => {
   const history = useHistory();
 
   const userDetails = useAuthState();
-  const isSuperUser = userDetails?.user?.group === "Curador";
+  const isSuperUser = userDetails?.user?.group === "Curator";
 
   useEffect(() => {
     const getList = async () => {
