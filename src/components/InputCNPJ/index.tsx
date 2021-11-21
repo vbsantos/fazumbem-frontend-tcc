@@ -34,7 +34,6 @@ export default function InputCNPJ({
         )}
         control={control}
         rules={{
-          required: "Campo obrigatório",
           validate: {
             validCNPJ: (x) => (!!isValidCNPJ(x) ? true : "CNPJ inválido!"),
           },

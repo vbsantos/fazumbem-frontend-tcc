@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import { Textarea } from "@chakra-ui/textarea";
-import React from "react";
 import { TextAreaFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
 
@@ -13,6 +12,7 @@ export default function InputProjectDescription({
     <Box w="full">
       <Textarea
         placeholder="Digite aqui uma descrição detalhada do projeto..."
+        isFullWidth
         {...register}
         {...props}
       />

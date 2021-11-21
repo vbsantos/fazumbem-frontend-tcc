@@ -112,7 +112,7 @@ export default function AppRouter() {
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
-  const isSuperUser = userDetails?.user?.group === "Curador";
+  const isSuperUser = userDetails?.user?.group === "Curator";
 
   if (isAuth) {
     return (
