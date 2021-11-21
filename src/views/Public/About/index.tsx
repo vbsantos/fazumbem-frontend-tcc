@@ -2,23 +2,17 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import "../../../css/instituicoes.css";
 import { Box, Heading, VStack } from "@chakra-ui/layout";
-import {
-  Text,
-  Link,
-  Image,
-  Grid,
-  useMediaQuery
-} from "@chakra-ui/react";
+import { Text, Link, Image, Grid, useMediaQuery } from "@chakra-ui/react";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import AboutImage from "../../../assets/images/About/about.png";
 
 export default function Home() {
-  const [isMobile] = useMediaQuery("(max-width: 576px)")
-  const [isDesktop] = useMediaQuery("(min-width: 769px)")
-  const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const [isMobile] = useMediaQuery("(max-width: 576px)");
+  const [isDesktop] = useMediaQuery("(min-width: 769px)");
+  const [isGreater] = useMediaQuery("(min-width: 1200px)");
   return (
-    <Box backgroundColor="gray.200" >
+    <Box backgroundColor="gray.200">
       <Header />
       <Box
         padding={!isDesktop ? "50px 5px" : "50px"}
@@ -44,32 +38,27 @@ export default function Home() {
             padding={isGreater ? "0 20%" : "0 5px"}
           >
             Faz um bem! propõe-se, como uma plataforma virtual interativa, a
-            <strong> interligar doadores e receptores de recursos</strong>, centralizando
-            as necessidades de instituições e organizações sociais de Santa Maria. Traz,
-            portanto, <strong>informações sobre campanhas que estão acontecendo </strong>
+            <strong> interligar doadores e receptores de recursos</strong>,
+            centralizando as necessidades de instituições e organizações sociais
+            de Santa Maria. Traz, portanto,{" "}
+            <strong>informações sobre campanhas que estão acontecendo </strong>
             na cidade e como doadores e voluntários podem colaborar.
           </Text>
         </Box>
-        <Box
-          marginTop="50px;"
-        >
+        <Box marginTop="50px;">
           <Text
             fontSize={isMobile ? "18px" : "26px"}
             color="bluish.100"
             lineHeight="31.69px"
             padding={isGreater ? "0 25%" : "0 5px"}
           >
-            A ideia dessa plataforma surgiu em um contexto
-            de emergência de saúde pública mundial
-            com a pandemia de COVID-19 que intensificou a necessidade de
-            ações sociais por parte da sociedade civil
-            organizada e do Estado, especialmente através
-            das políticas públicas e sociais.
+            A ideia dessa plataforma surgiu em um contexto de emergência de
+            saúde pública mundial com a pandemia de COVID-19 que intensificou a
+            necessidade de ações sociais por parte da sociedade civil organizada
+            e do Estado, especialmente através das políticas públicas e sociais.
           </Text>
         </Box>
-        <Box
-          padding={isGreater ? "0 25%" : "0 5px"}
-        >
+        <Box padding={isGreater ? "0 25%" : "0 5px"}>
           <Grid
             marginTop="50px;"
             templateColumns={isMobile ? "" : "repeat(2, 50%)"}
@@ -118,6 +107,8 @@ export default function Home() {
                     color="white"
                     fontWeight="500"
                     textAlign="center"
+                    href={process.env.PUBLIC_URL + "termo.html"}
+                    as={Link}
                   >
                     Termos de uso
                   </Text>

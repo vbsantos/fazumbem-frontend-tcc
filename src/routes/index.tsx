@@ -22,6 +22,7 @@ import Home from "../views/Public/Home";
 import Institutes from "../views/Public/Institutes";
 import InstituteDetails from "../views/Public/InstituteDetails";
 import Login from "../views/Public/Login";
+import TermsOfUse from "../components/TermsOfUse";
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
@@ -159,6 +160,7 @@ export default function AppRouter() {
             component={route.component}
           />
         ))}
+        <Route exact path="/termos" component={TermsOfUse} />
         <Route component={() => <Redirect to="/" />} />
       </Switch>
     </Router>

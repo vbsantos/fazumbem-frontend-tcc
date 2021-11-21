@@ -134,7 +134,7 @@ export default function Footer(): ReactElement {
                   color="bluish.100"
                   fontSize={isDesktop ? "18px" : "16px"}
                   fontWeight="400"
-                  href="/"
+                  href={process.env.PUBLIC_URL + "termo.html"}
                   as={Link}
                 >
                   Termos de uso
@@ -327,7 +327,7 @@ export default function Footer(): ReactElement {
                   color="bluish.100"
                   fontSize={isDesktop ? "18px" : "16px"}
                   fontWeight="400"
-                  href="/"
+                  href={process.env.PUBLIC_URL + "termo.html"}
                   as={Link}
                 >
                   Termos de uso
