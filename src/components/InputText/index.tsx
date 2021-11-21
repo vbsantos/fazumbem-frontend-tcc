@@ -9,6 +9,7 @@ export default function InputText({
   error,
   name,
   control,
+  required = true,
   ...props
 }: InputControlledFieldProps & InputProps) {
   return (
@@ -19,9 +20,13 @@ export default function InputText({
           <Input {...field} isInvalid={!!error} {...props} />
         )}
         control={control}
-        rules={{
-          required: "Campo obrigatório",
-        }}
+        rules={
+          required
+            ? {
+                required: "Campo obrigatório",
+              }
+            : undefined
+        }
       />
 
       <InputError error={error} />

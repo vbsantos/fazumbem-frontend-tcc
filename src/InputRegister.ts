@@ -22,6 +22,7 @@ export type InputControlledFieldProps = InputProps & {
   control: Control<any>;
   error?: FieldError;
   name: string;
+  required?: boolean;
 };
 
 export type TextAreaFieldProps = TextareaProps & {
