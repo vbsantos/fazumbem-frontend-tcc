@@ -6,36 +6,24 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
   Table,
   TableCaption,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
-  useDisclosure,
-  ModalOverlay,
-  Text,
-  Stack,
-  Divider,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { httpClient } from "../../../services/httpClient";
 import Footer from "../../../components/Private/Footer";
+import { httpClient } from "../../../services/httpClient";
 
 interface Props {}
 
 const Institutions = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [opened, setOpened] = useState<any>();
   const history = useHistory();
   useEffect(() => {
     document.body.style.backgroundColor = "#EDF2F7";
@@ -128,8 +116,12 @@ const Institutions = (props: Props) => {
                     <MenuList>
                       <MenuItem
                         onClick={() => {
-                          setOpened(item);
-                          onOpen();
+                          history.push(
+                            "/instituição/:id?viewInfo".replace(
+                              ":id",
+                              item.idUser
+                            )
+                          );
                         }}
                       >
                         Mais informações
@@ -137,10 +129,7 @@ const Institutions = (props: Props) => {
                       <MenuItem
                         onClick={() =>
                           history.push(
-                            "/instituição/:id".replace(
-                              ":id",
-                              item.idInstitution
-                            )
+                            "/instituição/:id".replace(":id", item.idUser)
                           )
                         }
                       >
@@ -154,36 +143,6 @@ const Institutions = (props: Props) => {
             ))}
           </Tbody>
         </Table>
-
-        <Modal isOpen={isOpen && opened} onClose={onClose} size={"lg"}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>{opened?.name}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Stack spacing={2}>
-                <Text fontSize="md">Informações</Text>
-                <Text fontSize="sm">{opened?.cnpj}</Text>
-                <Text fontSize="sm">{opened?.email}</Text>
-                <Text fontSize="sm">{opened?.telephone}</Text>
-                <Divider />
-                <Text fontSize="md">Descrição</Text>
-                <Text fontSize="sm">{opened?.description}</Text>
-                <Divider />
-                <Box>
-                  <Text fontSize="md">Endereço</Text>
-                  <Text fontSize="sm">
-                    {opened?.address?.street} - {opened?.address?.number} -{" "}
-                    {opened?.address?.complement}
-                  </Text>
-                  <Text fontSize="sm">{opened?.address?.city}</Text>
-                  <Text fontSize="sm">{opened?.address?.state}</Text>
-                  <Text fontSize="xs">{opened?.address?.cep}</Text>
-                </Box>
-              </Stack>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
       </Box>
 
       <Box h={150}></Box>
