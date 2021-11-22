@@ -124,11 +124,6 @@ export default function AppRouter() {
           onClose={toggleSidebar}
         />
         <Box ml={!variants?.navigationButton ? 200 : undefined}>
-          <Header
-            showSidebarButton={variants?.navigationButton}
-            onShowSidebar={toggleSidebar}
-          />
-
           <Switch>
             {privateRoutes.map((route) => (
               <Route
