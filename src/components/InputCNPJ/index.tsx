@@ -35,7 +35,8 @@ export default function InputCNPJ({
         control={control}
         rules={{
           validate: {
-            validCNPJ: (x) => (!!isValidCNPJ(x) ? true : "CNPJ inválido!"),
+            validCNPJ: (x) =>
+              x ? (!!isValidCNPJ(x) ? true : "CNPJ inválido!") : undefined,
           },
         }}
         {...props}

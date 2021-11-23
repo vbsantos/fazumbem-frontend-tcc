@@ -74,8 +74,9 @@ const NewInstituition = () => {
       }
 
       toast({
-        title: "Cadastrado com sucesso!",
-        description: "Acesse o página Instituições no menu lateral",
+        title: institutionToEdit
+          ? "Atualizado com sucesso!"
+          : "Cadastrado com sucesso!",
         status: "success",
         duration: 3000,
         position: "top",
@@ -231,6 +232,7 @@ const NewInstituition = () => {
                 placeholder="Jardim Guaíra"
                 background="white"
                 isReadOnly={onlyView}
+                required={false}
               />
             </FormControl>
             <FormControl id="number">
@@ -242,6 +244,7 @@ const NewInstituition = () => {
                 placeholder="1373"
                 background="white"
                 isReadOnly={onlyView}
+                required={false}
               />
             </FormControl>
             <FormControl id="complemento">
@@ -253,6 +256,7 @@ const NewInstituition = () => {
                 placeholder="apto xxx"
                 background="white"
                 isReadOnly={onlyView}
+                required={false}
               />
             </FormControl>
           </HStack>
@@ -272,7 +276,7 @@ const NewInstituition = () => {
               <InputCNPJ
                 name="identifier"
                 control={control}
-                error={errors.cnpj}
+                error={errors.identifier}
                 isReadOnly={onlyView}
               />
             </FormControl>
