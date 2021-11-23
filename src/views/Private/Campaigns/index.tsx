@@ -56,7 +56,7 @@ const Campaigns = (props: Props) => {
     const getList = async () => {
       const req = await httpClient<any>({
         method: "GET",
-        url: "/campaign",
+        url: "/campaign/all",
       });
       setList(req.data);
     };

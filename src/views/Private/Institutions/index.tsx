@@ -32,7 +32,7 @@ const Institutions = (props: Props) => {
     const getList = async () => {
       const req = await httpClient<any>({
         method: "GET",
-        url: "/user",
+        url: "/user/institution",
       });
 
       setList(req.data);

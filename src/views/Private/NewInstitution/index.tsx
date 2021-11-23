@@ -42,7 +42,7 @@ const NewInstituition = () => {
 
       httpClient<any>({
         method: "GET",
-        url: "/user",
+        url: "/user/institution",
       })
         .then((req) => {
           const inst = req?.data?.find((item) => item.idUser === Number(id));
@@ -281,12 +281,12 @@ const NewInstituition = () => {
               />
             </FormControl>
 
-            <FormControl isRequired id="phone">
+            <FormControl isRequired id="telephone">
               <FormLabel>Telefone</FormLabel>
               <InputPhone
                 name="telephone"
                 control={control}
-                error={errors.phone}
+                error={errors.telephone}
                 isReadOnly={onlyView}
               />
             </FormControl>
