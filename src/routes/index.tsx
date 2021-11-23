@@ -6,7 +6,6 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useAuthState } from "../context";
 import Campaigns from "../views/Private/Campaigns";
