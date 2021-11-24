@@ -33,7 +33,7 @@ const SidebarContent = () => {
         <DefaultButton
           title="Minha instituição"
           type="sidebar"
-          route="/perfil"
+          route={"/instituição/" + userDetails?.user?.idUser}
         />
       )}
 

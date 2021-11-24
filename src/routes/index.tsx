@@ -12,7 +12,6 @@ import Campaigns from "../views/Private/Campaigns";
 import NewCampaign from "../views/Private/NewCampaign";
 import Institutions from "../views/Private/Institutions";
 import NewInstitution from "../views/Private/NewInstitution";
-import UserProfile from "../views/Private/UserProfile";
 import About from "../views/Public/About";
 import PublicCampaigns from "../views/Public/Campaigns";
 import CampaignDetails from "../views/Public/CampaignDetails";
@@ -75,10 +74,6 @@ export default function AppRouter() {
   ];
 
   const privateRoutes = [
-    {
-      path: "/perfil",
-      component: UserProfile,
-    },
     {
       path: "/campanhas",
       component: Campaigns,
