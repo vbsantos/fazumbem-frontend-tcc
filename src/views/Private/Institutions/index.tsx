@@ -153,7 +153,7 @@ const Institutions = (props: Props) => {
                         >
                           Editar
                         </MenuItem>
-                        <MenuItem>Excluir</MenuItem>
+                        {/* <MenuItem>Excluir</MenuItem> */}
                       </MenuList>
                     </Menu>
                   </Td>
