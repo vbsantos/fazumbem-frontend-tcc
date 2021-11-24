@@ -81,8 +81,8 @@ const NewCampaign = () => {
     body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
     body.append("image", data.files[0]);
 
-    try {
-      if (campaignToEdit) {
+    if (campaignToEdit) {
+      try {
         await httpClient({
           method: "PUT",
           url: "/campaign",
@@ -96,21 +96,31 @@ const NewCampaign = () => {
           position: "top",
           isClosable: true,
         });
-      } else {
-        axios.post(`https://api.imgbb.com/1/upload`, body).then((response) => {
-          const url = response.data?.data.display_url;
+      } catch (error) {
+        toast({
+          title: "Houve um erro!",
+          status: "error",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
+        });
+      }
+    } else {
+      axios.post(`https://api.imgbb.com/1/upload`, body).then((response) => {
+        const url = response.data?.data.display_url;
 
-          httpClient({
-            method: "POST",
-            url: "/campaign",
-            data: {
-              title: data.title,
-              description: data.description,
-              externalLink: data.externalLink,
-              images: [url],
-              user: { ...user.user },
-            },
-          }).then(() => {
+        httpClient({
+          method: "POST",
+          url: "/campaign",
+          data: {
+            title: data.title,
+            description: data.description,
+            externalLink: data.externalLink,
+            images: [url],
+            user: { ...user.user },
+          },
+        })
+          .then(() => {
             toast({
               title: "Campanha cadastrada com sucesso!",
 
@@ -119,18 +129,17 @@ const NewCampaign = () => {
               position: "top",
               isClosable: true,
             });
+          })
+          .catch(() => {
+            toast({
+              title: "Houve um erro!",
+              status: "error",
+              duration: 3000,
+              position: "top",
+              isClosable: true,
+            });
           });
-        });
-      }
-    } catch (e) {
-      toast({
-        title: "Houve um erro!",
-        status: "error",
-        duration: 3000,
-        position: "top",
-        isClosable: true,
       });
-      console.log(e);
     }
   };
 

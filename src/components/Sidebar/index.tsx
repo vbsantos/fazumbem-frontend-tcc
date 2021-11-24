@@ -34,7 +34,7 @@ const SidebarContent = () => {
           title="Minha instituição"
           type="sidebar"
           route={"/instituição/" + userDetails?.user?.idUser}
-          icon={<FaUser fontSize="12 px" />}
+          icon={<FaUser fontSize="12px" />}
         />
       )}
 
