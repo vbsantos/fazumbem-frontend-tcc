@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import styles from '../../../css/Campaigns.module.css';
+import styles from "../../../css/Campaigns.module.css";
 import { InfoIcon } from "@chakra-ui/icons";
 import { Box, Heading, HStack } from "@chakra-ui/layout";
 import {
@@ -9,21 +9,20 @@ import {
   Tooltip,
   SimpleGrid,
   Text,
-  useMediaQuery
+  useMediaQuery,
 } from "@chakra-ui/react";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { FaLandmark } from "react-icons/fa";
 import { httpClient } from "../../../services/httpClient";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-import "@fontsource/montserrat/700.css"
-
+import "@fontsource/montserrat/700.css";
 
 export default function Home() {
-  const [isMobile] = useMediaQuery("(max-width: 576px)")
-  const [isDesktop] = useMediaQuery("(min-width: 769px)")
-  const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const [isMobile] = useMediaQuery("(max-width: 576px)");
+  const [isDesktop] = useMediaQuery("(min-width: 769px)");
+  const [isGreater] = useMediaQuery("(min-width: 1200px)");
   const history = useHistory();
 
   const [list, setList] = useState<any[]>([]);
@@ -43,10 +42,7 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
-      <Box
-        padding={!isDesktop ? "50px 5px" : "50px"}
-        textAlign="center"
-      >
+      <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Heading>
           <Text
             display="inline"
@@ -55,7 +51,8 @@ export default function Home() {
             color="white"
             backgroundColor="#ED6A5A"
           >
-            Campanhas em<br/>
+            Campanhas em
+            <br />
             andamento
           </Text>
         </Heading>
@@ -69,12 +66,9 @@ export default function Home() {
             Conheça as campanhas que estão precisando de doações nesse momento!
           </Text>
         </Box>
-        <Box
-          marginTop="50px"
-          padding={isGreater ? "0 20%" : "0 5px"}
-        >
+        <Box marginTop="50px" padding={isGreater ? "0 20%" : "0 5px"}>
           <SimpleGrid
-            minChildWidth="260px"//{{ base: "40%", sm: "20%", lg: "150px" }}
+            minChildWidth="260px" //{{ base: "40%", sm: "20%", lg: "150px" }}
             spacing={10}
             paddingX={{ base: 4, md: 6, lg: 10 }}
             paddingY={4}
@@ -88,12 +82,10 @@ export default function Home() {
                 <div className={styles["card"]}>
                   <div className={styles["card-image"]}>
                     <Image
-                      src={`https://fazumbem.inf.ufsm.br/images/entidades/${campanha.picture_url}.png`}
+                      src={campanha.images.length > 0 && campanha.images[0]}
                     />
                   </div>
-                <div className={styles["card-title"]}>
-                    {campanha.title}
-                  </div>
+                  <div className={styles["card-title"]}>{campanha.title}</div>
                   <div className={styles["card-description"]}>
                     {campanha.description}
                   </div>
@@ -114,10 +106,12 @@ export default function Home() {
                           transform="translateY(-3px)"
                           bgColor="white"
                           icon={<InfoIcon />}
-                          onClick={() => history.push(`/campaign/${campanha.id}`)}
+                          onClick={() =>
+                            history.push(`/campaign/${campanha.idCampaign}`)
+                          }
                           _hover={{
                             bgColor: "#ED6A5A",
-                            color: "white"
+                            color: "white",
                           }}
                         />
                       </Tooltip>
@@ -136,10 +130,12 @@ export default function Home() {
                           transform="translateY(-3px)"
                           bgColor="white"
                           icon={<FaLandmark />}
-                          onClick={() => history.push(`/institute/${campanha.instituteId}`)}
+                          onClick={() =>
+                            history.push(`/institute/${campanha?.user?.idUser}`)
+                          }
                           _hover={{
                             bgColor: "#ED6A5A",
-                            color: "white"
+                            color: "white",
                           }}
                         />
                       </Tooltip>
@@ -148,23 +144,23 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            { !list.length ? (
-                <Text
-                  display="inline"
-                  fontSize={isMobile ? "15px" : "20px"}
-                  fontFamily="Comfortaa"
-                  color="white"
-                  backgroundColor="#ED6A5A"
-                >
-                  Não foram encontradas campanhas cadastradas até o momento
-                </Text>
-              ) : (
+            {!list.length ? (
+              <Text
+                display="inline"
+                fontSize={isMobile ? "15px" : "20px"}
+                fontFamily="Comfortaa"
+                color="white"
+                backgroundColor="#ED6A5A"
+              >
+                Não foram encontradas campanhas cadastradas até o momento
+              </Text>
+            ) : (
               ""
             )}
           </SimpleGrid>
         </Box>
       </Box>
-      <Footer />     
+      <Footer />
     </Box>
   );
 }
