@@ -77,10 +77,6 @@ const NewCampaign = () => {
   }, [id, reset]);
 
   const onSubmit = async (data: any) => {
-    let body = new FormData();
-    body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
-    body.append("image", data.files[0]);
-
     if (campaignToEdit) {
       try {
         await httpClient({
@@ -106,6 +102,10 @@ const NewCampaign = () => {
         });
       }
     } else {
+      let body = new FormData();
+      body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
+      body.append("image", data.files[0]);
+
       axios.post(`https://api.imgbb.com/1/upload`, body).then((response) => {
         const url = response.data?.data.display_url;
 
