@@ -1,45 +1,34 @@
 import {
-  Text,
-  Center,
   Box,
   Button,
+  Center,
+  CircularProgress,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
   Table,
   TableCaption,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
-  useDisclosure,
-  ModalOverlay,
-  Stack,
-  Image,
-  CircularProgress,
 } from "@chakra-ui/react";
-
+import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-
-import Footer from "../../../components/Private/Footer";
-
-import { useState } from "react";
-import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { httpClient } from "../../../services/httpClient";
+import Footer from "../../../components/Private/Footer";
 import { useAuthState } from "../../../context";
+import { httpClient } from "../../../services/httpClient";
 
 function textTruncate(text: String) {
   if (text.length > 80) {
     return text.substr(0, 80) + "...";
   }
+
+  return text;
 }
 
 interface Props {}
@@ -47,8 +36,6 @@ const Campaigns = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [opened, setOpened] = useState<any>();
   const history = useHistory();
 
   const userDetails = useAuthState();
@@ -58,7 +45,9 @@ const Campaigns = (props: Props) => {
     const getList = async () => {
       const req = await httpClient<any>({
         method: "GET",
-        url: "/campaign/all",
+        url: isSuperUser
+          ? "/campaign/all"
+          : `/campaign/by/${userDetails?.user?.username}`,
       });
       setList(req.data);
     };
@@ -66,6 +55,7 @@ const Campaigns = (props: Props) => {
     getList().finally(() => {
       setIsLoading(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -158,8 +148,12 @@ const Campaigns = (props: Props) => {
                           <MenuList>
                             <MenuItem
                               onClick={() => {
-                                setOpened(item);
-                                onOpen();
+                                history.push(
+                                  "/campanha/:id?viewInfo".replace(
+                                    ":id",
+                                    item.idCampaign
+                                  )
+                                );
                               }}
                             >
                               Mais informações
@@ -176,7 +170,7 @@ const Campaigns = (props: Props) => {
                             >
                               Editar
                             </MenuItem>
-                            <MenuItem>Excluir</MenuItem>
+                            <MenuItem>Desabilitar</MenuItem>
                           </MenuList>
                         </Menu>
                       </Td>
@@ -184,40 +178,6 @@ const Campaigns = (props: Props) => {
                   ))}
                 </Tbody>
               </Table>
-              <Modal isOpen={isOpen && opened} onClose={onClose} size={"lg"}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Ver detalhes da campanha</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    <Center>
-                      <Text
-                        fontSize="1.5rem"
-                        textAlign="center"
-                        fontWeight={500}
-                        fontFamily="Comfortaa"
-                        color="white"
-                        backgroundColor="#ED6A5A"
-                        display="inline"
-                        mb={5}
-                      >
-                        &nbsp;{opened?.title}&nbsp;
-                      </Text>
-                    </Center>
-                    <Stack spacing={2} pb={5}>
-                      <Image
-                        borderRadius="16px"
-                        src={`https://fazumbem.inf.ufsm.br/images/entidades/1.png`}
-                        mb={4}
-                      />
-                      <Text fontSize="1rem" fontWeight="bold">
-                        Descrição da campanha
-                      </Text>
-                      <Text fontSize="1rem">{opened?.description}</Text>
-                    </Stack>
-                  </ModalBody>
-                </ModalContent>
-              </Modal>
             </Box>
           </>
         )}
