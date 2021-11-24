@@ -170,7 +170,7 @@ const Campaigns = (props: Props) => {
                             >
                               Editar
                             </MenuItem>
-                            <MenuItem>Desabilitar</MenuItem>
+                            {/* <MenuItem>Excluir</MenuItem> */}
                           </MenuList>
                         </Menu>
                       </Td>
