@@ -14,7 +14,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { logout, useAuthDispatch, useAuthState } from "../../context";
 import Logo from "../Logo";
 import DefaultButton from "../DefaultButton";
-
+import { FaUser } from "react-icons/fa";
 interface Props {
   onClose: () => void;
   isOpen: boolean;
@@ -34,6 +34,7 @@ const SidebarContent = () => {
           title="Minha instituição"
           type="sidebar"
           route={"/instituição/" + userDetails?.user?.idUser}
+          icon={<FaUser fontSize="12 px" />}
         />
       )}
 
