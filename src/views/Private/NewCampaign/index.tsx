@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { FiFile } from "react-icons/fi";
 import { useLocation, useParams } from "react-router-dom";
 import FileUpload from "../../../components/FileUpload";
@@ -38,6 +38,12 @@ const NewCampaign = () => {
     register,
     reset,
   } = useForm({ defaultValues: campaignToEdit });
+
+  const files = useWatch({
+    name: "files",
+    defaultValue: false,
+    control,
+  });
 
   const validateFiles = (value: FileList) => {
     if (campaignToEdit === undefined && value.length < 1) {
@@ -79,11 +85,31 @@ const NewCampaign = () => {
   const onSubmit = async (data: any) => {
     if (campaignToEdit) {
       try {
-        await httpClient({
-          method: "PUT",
-          url: "/campaign",
-          data: { ...data },
-        });
+        if (files) {
+          let body = new FormData();
+          body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
+          body.append("image", data.files[0]);
+
+          const response = await axios.post(
+            `https://api.imgbb.com/1/upload`,
+            body
+          );
+          const url = response.data?.data.display_url;
+
+          const { images, ...restData } = data;
+
+          await httpClient({
+            method: "PUT",
+            url: "/campaign",
+            data: { ...restData, images: [url] },
+          });
+        } else {
+          await httpClient({
+            method: "PUT",
+            url: "/campaign",
+            data: { ...data },
+          });
+        }
 
         toast({
           title: "Atualizada com sucesso!",
@@ -206,11 +232,39 @@ const NewCampaign = () => {
               <FormLabel>Imagem da campanha</FormLabel>
 
               {campaignToEdit?.images.length > 0 ? (
-                <Image
-                  boxSize="400px"
-                  objectFit="cover"
-                  src={campaignToEdit?.images[0]}
-                />
+                <>
+                  {!files && (
+                    <Image
+                      boxSize="400px"
+                      objectFit="cover"
+                      src={campaignToEdit?.images[0]}
+                      marginX="auto"
+                    />
+                  )}
+
+                  <FileUpload
+                    accept={"image/*"}
+                    register={register("files", { validate: validateFiles })}
+                  >
+                    <Button
+                      colorScheme="blue"
+                      background="#ED6A5A"
+                      color="white"
+                      borderRadius="50px"
+                      padding="15px 20px 15px"
+                      boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+                      _hover={{
+                        textDecoration: "none",
+                        background: "#F18C7E",
+                        transition: ".5s",
+                      }}
+                      leftIcon={<Icon as={FiFile} />}
+                      isFullWidth
+                    >
+                      Alterar
+                    </Button>
+                  </FileUpload>
+                </>
               ) : (
                 <>
                   <FileUpload
