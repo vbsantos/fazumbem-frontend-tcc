@@ -129,7 +129,13 @@ export default function AppRouter() {
             ))}
             <Route
               component={() => (
-                <Redirect to={isSuperUser ? "/instituições" : "/perfil"} />
+                <Redirect
+                  to={
+                    isSuperUser
+                      ? "/instituições"
+                      : "/instituição/" + userDetails?.user?.idUser
+                  }
+                />
               )}
             />
           </Switch>
