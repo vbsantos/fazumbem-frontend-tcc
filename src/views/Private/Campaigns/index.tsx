@@ -23,7 +23,7 @@ import {
   ModalOverlay,
   Stack,
   Image,
-  /* Divider */
+  CircularProgress,
 } from "@chakra-ui/react";
 
 import { FaChevronDown } from "react-icons/fa";
@@ -45,6 +45,8 @@ function textTruncate(text: String) {
 interface Props {}
 const Campaigns = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [opened, setOpened] = useState<any>();
   const history = useHistory();
@@ -61,8 +63,11 @@ const Campaigns = (props: Props) => {
       setList(req.data);
     };
 
-    getList();
+    getList().finally(() => {
+      setIsLoading(false);
+    });
   }, []);
+
   return (
     <>
       <Box backgroundColor="gray.100" m={0} p={0}>
@@ -99,110 +104,123 @@ const Campaigns = (props: Props) => {
           </Text>
         </Box>
 
-        <>
-          <Box
-            m="10"
-            borderRadius="25px"
-            overflow="hidden"
-            backgroundColor="white"
-            textAlign="center"
-            color="bluish.100"
-            boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
-          >
-            <Table variant="striped">
-              <TableCaption>
-                {isSuperUser
-                  ? "Lista de todas campanhas do sistema"
-                  : "Lista de campanhas desta instituição"}
-              </TableCaption>
-              <Thead backgroundColor="#ED6A5A">
-                <Tr>
-                  <Th color="white" font="Comfortaa">
-                    Título
-                  </Th>
-                  <Th color="white" font="Comfortaa">
-                    Descrição
-                  </Th>
-                  <Th></Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {list.map((item, index) => (
-                  <Tr key={index}>
-                    <Td>{item.title}</Td>
-                    <Td>{textTruncate(item.description) || "--"}</Td>
-                    <Td isNumeric>
-                      <Menu>
-                        <MenuButton
-                          as={Button}
-                          colorScheme="brand"
-                          rightIcon={<FaChevronDown />}
-                          borderRadius="50px"
-                        >
-                          Ações
-                        </MenuButton>
-                        <MenuList>
-                          <MenuItem
-                            onClick={() => {
-                              setOpened(item);
-                              onOpen();
-                            }}
-                          >
-                            Mais informações
-                          </MenuItem>
-                          <MenuItem
-                            onClick={() =>
-                              history.push(
-                                "/campanha/:id".replace(":id", item.idCampaign)
-                              )
-                            }
-                          >
-                            Editar
-                          </MenuItem>
-                          <MenuItem>Excluir</MenuItem>
-                        </MenuList>
-                      </Menu>
-                    </Td>
+        {isLoading ? (
+          <Center h="300px">
+            <CircularProgress
+              isIndeterminate
+              color="brand.400"
+              marginX="auto"
+            />
+          </Center>
+        ) : (
+          <>
+            <Box
+              m="10"
+              borderRadius="25px"
+              overflow="hidden"
+              backgroundColor="white"
+              textAlign="center"
+              color="bluish.100"
+              boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
+            >
+              <Table variant="striped">
+                <TableCaption>
+                  {isSuperUser
+                    ? "Lista de todas campanhas do sistema"
+                    : "Lista de campanhas desta instituição"}
+                </TableCaption>
+                <Thead backgroundColor="#ED6A5A">
+                  <Tr>
+                    <Th color="white" font="Comfortaa">
+                      Título
+                    </Th>
+                    <Th color="white" font="Comfortaa">
+                      Descrição
+                    </Th>
+                    <Th></Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-            <Modal isOpen={isOpen && opened} onClose={onClose} size={"lg"}>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader>Ver detalhes da campanha</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Center>
-                    <Text
-                      fontSize="1.5rem"
-                      textAlign="center"
-                      fontWeight={500}
-                      fontFamily="Comfortaa"
-                      color="white"
-                      backgroundColor="#ED6A5A"
-                      display="inline"
-                      mb={5}
-                    >
-                      &nbsp;{opened?.title}&nbsp;
-                    </Text>
-                  </Center>
-                  <Stack spacing={2} pb={5}>
-                    <Image
-                      borderRadius="16px"
-                      src={`https://fazumbem.inf.ufsm.br/images/entidades/1.png`}
-                      mb={4}
-                    />
-                    <Text fontSize="1rem" fontWeight="bold">
-                      Descrição da campanha
-                    </Text>
-                    <Text fontSize="1rem">{opened?.description}</Text>
-                  </Stack>
-                </ModalBody>
-              </ModalContent>
-            </Modal>
-          </Box>
-        </>
+                </Thead>
+                <Tbody>
+                  {list.map((item, index) => (
+                    <Tr key={index}>
+                      <Td>{item.title}</Td>
+                      <Td>{textTruncate(item.description) || "--"}</Td>
+                      <Td isNumeric>
+                        <Menu>
+                          <MenuButton
+                            as={Button}
+                            colorScheme="brand"
+                            rightIcon={<FaChevronDown />}
+                            borderRadius="50px"
+                          >
+                            Ações
+                          </MenuButton>
+                          <MenuList>
+                            <MenuItem
+                              onClick={() => {
+                                setOpened(item);
+                                onOpen();
+                              }}
+                            >
+                              Mais informações
+                            </MenuItem>
+                            <MenuItem
+                              onClick={() =>
+                                history.push(
+                                  "/campanha/:id".replace(
+                                    ":id",
+                                    item.idCampaign
+                                  )
+                                )
+                              }
+                            >
+                              Editar
+                            </MenuItem>
+                            <MenuItem>Excluir</MenuItem>
+                          </MenuList>
+                        </Menu>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+              <Modal isOpen={isOpen && opened} onClose={onClose} size={"lg"}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Ver detalhes da campanha</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <Center>
+                      <Text
+                        fontSize="1.5rem"
+                        textAlign="center"
+                        fontWeight={500}
+                        fontFamily="Comfortaa"
+                        color="white"
+                        backgroundColor="#ED6A5A"
+                        display="inline"
+                        mb={5}
+                      >
+                        &nbsp;{opened?.title}&nbsp;
+                      </Text>
+                    </Center>
+                    <Stack spacing={2} pb={5}>
+                      <Image
+                        borderRadius="16px"
+                        src={`https://fazumbem.inf.ufsm.br/images/entidades/1.png`}
+                        mb={4}
+                      />
+                      <Text fontSize="1rem" fontWeight="bold">
+                        Descrição da campanha
+                      </Text>
+                      <Text fontSize="1rem">{opened?.description}</Text>
+                    </Stack>
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+            </Box>
+          </>
+        )}
 
         <Footer />
       </Box>
