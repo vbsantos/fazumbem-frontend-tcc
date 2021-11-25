@@ -77,26 +77,35 @@ export default function AppRouter() {
     {
       path: "/campanhas",
       component: Campaigns,
+      superUser: true,
+      user: true,
     },
     {
       path: "/nova-campanha",
       component: NewCampaign,
+      user: true,
     },
     {
       path: "/campanha/:id",
       component: NewCampaign,
+      superUser: true,
+      user: true,
     },
     {
       path: "/instituições",
       component: Institutions,
+      superUser: true,
     },
     {
       path: "/nova-instituição",
       component: NewInstitution,
+      superUser: true,
     },
     {
       path: "/instituição/:id",
       component: NewInstitution,
+      superUser: true,
+      user: true,
     },
   ];
 
@@ -109,6 +118,8 @@ export default function AppRouter() {
 
   const isSuperUser = userDetails?.user?.group === "Curator";
 
+  console.log("isSuperUser", isSuperUser);
+
   if (isAuth) {
     return (
       <Router>
@@ -119,14 +130,21 @@ export default function AppRouter() {
         />
         <Box ml={!variants?.navigationButton ? 200 : undefined}>
           <Switch>
-            {privateRoutes.map((route) => (
-              <Route
-                key={route.path}
-                exact
-                path={route.path}
-                component={route.component}
-              />
-            ))}
+            {privateRoutes
+              .filter((route) =>
+                isSuperUser
+                  ? route.superUser === isSuperUser
+                  : route.user === true
+              )
+              .map((route) => (
+                <Route
+                  key={route.path}
+                  exact
+                  path={route.path}
+                  component={route.component}
+                />
+              ))}
+
             <Route
               component={() => (
                 <Redirect
