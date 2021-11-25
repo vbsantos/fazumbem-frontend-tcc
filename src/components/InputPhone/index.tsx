@@ -42,6 +42,7 @@ export default function InputPhone({
               onChange={(e) => {
                 field.onChange(formatPhone(e.target.value));
               }}
+              background="white"
             />
           </InputGroup>
         )}

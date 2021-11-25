@@ -15,6 +15,7 @@ import {
   Th,
   Thead,
   Tr,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
@@ -24,7 +25,7 @@ import { useAuthState } from "../../../context";
 import { httpClient } from "../../../services/httpClient";
 
 function textTruncate(text: String) {
-  if (text.length > 80) {
+  if (text && text?.length > 80) {
     return text.substr(0, 80) + "...";
   }
 
@@ -37,21 +38,25 @@ const Campaigns = (props: Props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const history = useHistory();
+  const toast = useToast();
 
   const userDetails = useAuthState();
   const isSuperUser = userDetails?.user?.group === "Curator";
 
-  useEffect(() => {
-    const getList = async () => {
-      const req = await httpClient<any>({
-        method: "GET",
-        url: isSuperUser
-          ? "/campaign/all"
-          : `/campaign/by/${userDetails?.user?.username}`,
-      });
-      setList(req.data);
-    };
+  const getList = async () => {
+    setIsLoading(true);
 
+    const req = await httpClient<any>({
+      method: "GET",
+      url: isSuperUser
+        ? "/campaign/all"
+        : `/campaign/by/${userDetails?.user?.username}`,
+    });
+
+    setList(req.data);
+  };
+
+  useEffect(() => {
     getList().finally(() => {
       setIsLoading(false);
     });
@@ -170,7 +175,39 @@ const Campaigns = (props: Props) => {
                             >
                               Editar
                             </MenuItem>
-                            {/* <MenuItem>Excluir</MenuItem> */}
+                            <MenuItem
+                              onClick={() => {
+                                httpClient({
+                                  url: `/campaign/${item.idCampaign}`,
+                                  method: "DELETE",
+                                })
+                                  .then(() => {
+                                    getList().finally(() => {
+                                      setIsLoading(false);
+                                    });
+
+                                    toast({
+                                      title: "Deletado com sucesso!",
+
+                                      status: "success",
+                                      duration: 3000,
+                                      position: "top",
+                                      isClosable: true,
+                                    });
+                                  })
+                                  .catch(() => {
+                                    toast({
+                                      title: "Houve um erro!",
+                                      status: "error",
+                                      duration: 3000,
+                                      position: "top",
+                                      isClosable: true,
+                                    });
+                                  });
+                              }}
+                            >
+                              Deletar
+                            </MenuItem>
                           </MenuList>
                         </Menu>
                       </Td>

@@ -302,6 +302,7 @@ const NewInstituition = () => {
                 placeholder="www.seu_site.com.br"
                 required={false}
                 isReadOnly={onlyView}
+                background="white"
               />
             </FormControl>
             <FormControl id="facebook" mt="4">
@@ -314,6 +315,7 @@ const NewInstituition = () => {
                 placeholder="www.facebook.com/sua_pagina"
                 required={false}
                 isReadOnly={onlyView}
+                background="white"
               />
             </FormControl>
             <FormControl id="instagram" mt="4">
@@ -326,6 +328,7 @@ const NewInstituition = () => {
                 placeholder="www.instagram.com/sua_pagina"
                 required={false}
                 isReadOnly={onlyView}
+                background="white"
               />
             </FormControl>
           </HStack>
@@ -341,6 +344,7 @@ const NewInstituition = () => {
               }}
               error={errors.openHours}
               isReadOnly={onlyView}
+              background="white"
             />
           </FormControl>
 
@@ -355,6 +359,7 @@ const NewInstituition = () => {
               }}
               error={errors.description}
               isReadOnly={onlyView}
+              background="white"
             />
           </FormControl>
 
@@ -369,6 +374,7 @@ const NewInstituition = () => {
               }}
               error={errors.bankAccount}
               isReadOnly={onlyView}
+              background="white"
             />
           </FormControl>
         </Box>

@@ -16,6 +16,7 @@ import {
   Tr,
   CircularProgress,
   Center,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -28,28 +29,31 @@ const Institutions = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const toast = useToast();
   const history = useHistory();
 
   useEffect(() => {
     document.body.style.backgroundColor = "#EDF2F7";
   }, []);
 
+  const getList = async () => {
+    try {
+      setIsLoading(true);
+
+      const req = await httpClient<any>({
+        method: "GET",
+        url: "/user/institution",
+      });
+
+      setList(req.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getList = async () => {
-      try {
-        const req = await httpClient<any>({
-          method: "GET",
-          url: "/user/institution",
-        });
-
-        setList(req.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     getList();
   }, []);
 
@@ -153,7 +157,39 @@ const Institutions = (props: Props) => {
                         >
                           Editar
                         </MenuItem>
-                        {/* <MenuItem>Excluir</MenuItem> */}
+                        <MenuItem
+                          onClick={() => {
+                            httpClient({
+                              url: `/user/delete/${item.username}`,
+                              method: "DELETE",
+                            })
+                              .then(() => {
+                                getList().finally(() => {
+                                  setIsLoading(false);
+                                });
+
+                                toast({
+                                  title: "Deletado com sucesso!",
+
+                                  status: "success",
+                                  duration: 3000,
+                                  position: "top",
+                                  isClosable: true,
+                                });
+                              })
+                              .catch(() => {
+                                toast({
+                                  title: "Houve um erro!",
+                                  status: "error",
+                                  duration: 3000,
+                                  position: "top",
+                                  isClosable: true,
+                                });
+                              });
+                          }}
+                        >
+                          Deletar
+                        </MenuItem>
                       </MenuList>
                     </Menu>
                   </Td>

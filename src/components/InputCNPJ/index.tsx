@@ -29,6 +29,7 @@ export default function InputCNPJ({
               onChange={(e) => {
                 field.onChange(formatCNPJ(e.target.value));
               }}
+              background="white"
             />
           </InputGroup>
         )}
