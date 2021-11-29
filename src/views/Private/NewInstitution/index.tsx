@@ -8,9 +8,11 @@ import {
   Spinner,
   Text,
   useToast,
+  Icon,
+  Image,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useParams, useLocation } from "react-router-dom";
 import InputCNPJ from "../../../components/InputCNPJ";
 import InputPhone from "../../../components/InputPhone";
@@ -19,11 +21,16 @@ import InputText from "../../../components/InputText";
 import "../../../css/instituicoes.css";
 import { httpClient } from "../../../services/httpClient";
 import Footer from "../../../components/Private/Footer";
+import FileUpload from "../../../components/FileUpload";
+import InputError from "../../../components/InputError";
+import { FiFile } from "react-icons/fi";
+import axios from "axios";
 
 const NewInstituition = () => {
   let { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(Boolean(id));
   const [institutionToEdit, setInstitutionToEdit] = useState<any>();
+  const [imageSrc, setImageSrc] = useState(null);
   const toast = useToast();
 
   const onlyView = useLocation().search === "?viewInfo";
@@ -35,6 +42,34 @@ const NewInstituition = () => {
     register,
     reset,
   } = useForm({ defaultValues: institutionToEdit });
+
+  const files = useWatch({
+    name: "files",
+    defaultValue: false,
+    control,
+  });
+
+  useEffect(() => {
+    if (!files) return;
+
+    const file = files[0];
+
+    setImageSrc(URL.createObjectURL(file));
+  }, [files]);
+
+  const validateFiles = (value: FileList) => {
+    if (institutionToEdit === undefined && value.length < 1) {
+      return "Selecione um arquivo!";
+    }
+    for (const file of Array.from(value)) {
+      const fsMb = file.size / (1024 * 1024);
+      const MAX_FILE_SIZE = 5;
+      if (fsMb > MAX_FILE_SIZE) {
+        return "Tamanho máximo 5mb";
+      }
+    }
+    return true;
+  };
 
   useEffect(() => {
     if (id) {
@@ -58,39 +93,83 @@ const NewInstituition = () => {
   }, [id, reset]);
 
   const onSubmit = async (data: any) => {
-    try {
-      if (institutionToEdit) {
-        await httpClient({
-          method: "PUT",
-          url: "/user",
-          data: { ...data },
+    if (institutionToEdit) {
+      try {
+        if (files) {
+          let body = new FormData();
+          body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
+          body.append("image", data.files[0]);
+
+          const response = await axios.post(
+            `https://api.imgbb.com/1/upload`,
+            body
+          );
+          const url = response.data?.data.display_url;
+
+          const { images, ...restData } = data;
+
+          await httpClient({
+            method: "PUT",
+            url: "/user",
+            data: { ...restData, image: url },
+          });
+        } else {
+          await httpClient({
+            method: "PUT",
+            url: "/user",
+            data: { ...data },
+          });
+        }
+
+        toast({
+          title: "Atualizado com sucesso!",
+          status: "success",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
         });
-      } else {
-        await httpClient({
-          method: "POST",
-          url: "/user/register",
-          data: { ...data },
+      } catch (error) {
+        toast({
+          title: "Houve um erro!",
+          status: "error",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
         });
       }
+    } else {
+      let body = new FormData();
+      body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
+      body.append("image", data.files[0]);
 
-      toast({
-        title: institutionToEdit
-          ? "Atualizado com sucesso!"
-          : "Cadastrado com sucesso!",
-        status: "success",
-        duration: 3000,
-        position: "top",
-        isClosable: true,
+      axios.post(`https://api.imgbb.com/1/upload`, body).then((response) => {
+        const url = response.data?.data.display_url;
+
+        httpClient({
+          method: "POST",
+          url: "/user/register",
+          data: { ...data, image: url },
+        })
+          .then(() => {
+            toast({
+              title: "Instituição cadastrada com sucesso!",
+
+              status: "success",
+              duration: 3000,
+              position: "top",
+              isClosable: true,
+            });
+          })
+          .catch(() => {
+            toast({
+              title: "Houve um erro!",
+              status: "error",
+              duration: 3000,
+              position: "top",
+              isClosable: true,
+            });
+          });
       });
-    } catch (e) {
-      toast({
-        title: "Houve um erro!",
-        status: "error",
-        duration: 3000,
-        position: "top",
-        isClosable: true,
-      });
-      console.log(e);
     }
   };
 
@@ -127,7 +206,7 @@ const NewInstituition = () => {
             display="inline"
           >
             &nbsp;
-            {institutionToEdit ? institutionToEdit.name : "Nova Instituição"}
+            {institutionToEdit?.name || "Nova Instituição"}
             &nbsp;
           </Text>
         </Box>
@@ -142,18 +221,55 @@ const NewInstituition = () => {
           >
             Informações básicas
           </Text>
-          <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
-            <FormControl id="name" isRequired>
-              <FormLabel>Nome</FormLabel>
-              <InputText
-                name="name"
-                placeholder="Digite seu nome"
-                control={control}
-                error={errors.name}
-                background="white"
-                isReadOnly={onlyView}
-              />
+          <HStack
+            spacing={10}
+            margin={{ lg: "initial" }}
+            pt={2}
+            alignItems="flex-end"
+          >
+            <FormControl id="picture">
+              <FormLabel>Imagem da instituição</FormLabel>
+              <>
+                {Boolean(imageSrc || institutionToEdit?.image) && (
+                  <Image
+                    boxSize="400px"
+                    objectFit="cover"
+                    src={imageSrc || institutionToEdit?.image}
+                    marginX="auto"
+                    fallbackSrc="https://via.placeholder.com/300"
+                  />
+                )}
+
+                <FileUpload
+                  accept={"image/*"}
+                  register={register("files", { validate: validateFiles })}
+                  isDisabled={onlyView}
+                >
+                  <Button
+                    colorScheme="blue"
+                    background="#ED6A5A"
+                    color="white"
+                    borderRadius="50px"
+                    padding="15px 20px 15px"
+                    boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+                    _hover={{
+                      textDecoration: "none",
+                      background: "#F18C7E",
+                      transition: ".5s",
+                    }}
+                    leftIcon={<Icon as={FiFile} />}
+                    isFullWidth
+                    mt={2}
+                    isDisabled={onlyView}
+                  >
+                    Alterar
+                  </Button>
+                </FileUpload>
+
+                <InputError error={errors.files} />
+              </>
             </FormControl>
+
             <FormControl id="username" isRequired>
               <FormLabel>Email</FormLabel>
               <InputText
@@ -166,6 +282,19 @@ const NewInstituition = () => {
               />
             </FormControl>
           </HStack>
+
+          <FormControl id="name" isRequired mt="16px">
+            <FormLabel>Nome</FormLabel>
+            <InputText
+              name="name"
+              placeholder="Digite seu nome"
+              control={control}
+              error={errors.name}
+              background="white"
+              isReadOnly={onlyView}
+            />
+          </FormControl>
+
           <Divider borderBottom="1px solid #034074" pt={10} mb={10} />
           <Text
             color="bluish.100"

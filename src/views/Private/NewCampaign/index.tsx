@@ -27,6 +27,7 @@ const NewCampaign = () => {
   let { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(Boolean(id));
   const [campaignToEdit, setCampaignToEdit] = useState<any>();
+  const [imageSrc, setImageSrc] = useState(null);
   const toast = useToast();
   const user = useAuthState();
   const onlyView = useLocation().search === "?viewInfo";
@@ -44,6 +45,14 @@ const NewCampaign = () => {
     defaultValue: false,
     control,
   });
+
+  useEffect(() => {
+    if (!files) return;
+
+    const file = files[0];
+
+    setImageSrc(URL.createObjectURL(file));
+  }, [files]);
 
   const validateFiles = (value: FileList) => {
     if (campaignToEdit === undefined && value.length < 1) {
@@ -216,7 +225,12 @@ const NewCampaign = () => {
           >
             Informações básicas
           </Text>
-          <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
+          <HStack
+            spacing={10}
+            margin={{ lg: "initial" }}
+            pt={2}
+            alignItems="flex-end"
+          >
             <FormControl id="title" isRequired>
               <FormLabel>Título</FormLabel>
               <InputText
@@ -231,70 +245,45 @@ const NewCampaign = () => {
             <FormControl id="picture">
               <FormLabel>Imagem da campanha</FormLabel>
 
-              {campaignToEdit?.images.length > 0 ? (
-                <>
-                  {!files && (
-                    <Image
-                      boxSize="400px"
-                      objectFit="cover"
-                      src={campaignToEdit?.images[0]}
-                      marginX="auto"
-                    />
-                  )}
+              <>
+                {Boolean(imageSrc || campaignToEdit?.images[0]) && (
+                  <Image
+                    boxSize="400px"
+                    objectFit="cover"
+                    src={imageSrc || campaignToEdit?.images[0]}
+                    marginX="auto"
+                    fallbackSrc="https://via.placeholder.com/300"
+                  />
+                )}
 
-                  <FileUpload
-                    accept={"image/*"}
-                    register={register("files", { validate: validateFiles })}
+                <FileUpload
+                  accept={"image/*"}
+                  register={register("files", { validate: validateFiles })}
+                  isDisabled={onlyView}
+                >
+                  <Button
+                    colorScheme="blue"
+                    background="#ED6A5A"
+                    color="white"
+                    borderRadius="50px"
+                    padding="15px 20px 15px"
+                    boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
+                    _hover={{
+                      textDecoration: "none",
+                      background: "#F18C7E",
+                      transition: ".5s",
+                    }}
+                    leftIcon={<Icon as={FiFile} />}
+                    isFullWidth
+                    mt={2}
+                    isDisabled={onlyView}
                   >
-                    <Button
-                      colorScheme="blue"
-                      background="#ED6A5A"
-                      color="white"
-                      borderRadius="50px"
-                      padding="15px 20px 15px"
-                      boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
-                      _hover={{
-                        textDecoration: "none",
-                        background: "#F18C7E",
-                        transition: ".5s",
-                      }}
-                      leftIcon={<Icon as={FiFile} />}
-                      isFullWidth
-                    >
-                      Alterar
-                    </Button>
-                  </FileUpload>
-                </>
-              ) : (
-                <>
-                  <FileUpload
-                    accept={"image/*"}
-                    register={register("files", { validate: validateFiles })}
-                    isDisabled={campaignToEdit}
-                  >
-                    <Button
-                      colorScheme="blue"
-                      background="#ED6A5A"
-                      color="white"
-                      borderRadius="50px"
-                      padding="15px 20px 15px"
-                      boxShadow="0px 8px 10px rgba(0, 0, 0, 0.3)"
-                      _hover={{
-                        textDecoration: "none",
-                        background: "#F18C7E",
-                        transition: ".5s",
-                      }}
-                      leftIcon={<Icon as={FiFile} />}
-                      isFullWidth
-                      isDisabled={campaignToEdit}
-                    >
-                      Upload
-                    </Button>
-                  </FileUpload>
+                    Alterar
+                  </Button>
+                </FileUpload>
 
-                  <InputError error={errors.files} />
-                </>
-              )}
+                <InputError error={errors.files} />
+              </>
             </FormControl>
           </HStack>
           <FormControl mt="8" id="description" isRequired>

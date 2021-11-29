@@ -118,8 +118,6 @@ export default function AppRouter() {
 
   const isSuperUser = userDetails?.user?.group === "Curator";
 
-  console.log("isSuperUser", isSuperUser);
-
   if (isAuth) {
     return (
       <Router>
