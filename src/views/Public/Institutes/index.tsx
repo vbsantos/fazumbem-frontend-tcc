@@ -12,13 +12,14 @@ import {
   Text,
   useMediaQuery
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
+// import { useDisclosure } from "@chakra-ui/react";
 import "../../../css/instituicoes.css";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-import InstituteModal from "../../../components/Modals/InstituteModal";
+// import InstituteModal from "../../../components/Modals/InstituteModal";
 import "@fontsource/montserrat/600.css";
 import { useEffect, useState } from 'react';
+import { useHistory } from "react-router";
 import { httpClient } from "../../../services/httpClient";
 import defaultLogo from "../../../assets/images/defaultlogo.png";
 
@@ -36,8 +37,10 @@ export default function Home() {
   const [isDesktop] = useMediaQuery("(min-width: 769px)");
   const [isGreater] = useMediaQuery("(min-width: 1200px)");
 
-  const { isOpen, onOpen, onClose } = useDisclosure();  
-  const [opened, setOpened] = useState<any>();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const [opened, setOpened] = useState<any>();
+
+  const history = useHistory();
 
   const [list, setList] = useState<any[]>([]);
   useEffect(() => {
@@ -122,10 +125,7 @@ export default function Home() {
                           bgColor: "#ED6A5A",
                           color: "white",
                         }}
-                        onClick={() => {
-                          setOpened(institute);
-                          onOpen();
-                        }}
+                        onClick={() => history.push(`/institute/${institute.idUser}`)}
                       />
                     </Tooltip>
                   </Box>
@@ -166,14 +166,15 @@ export default function Home() {
           </VStack>
         </Box>
       </Box>
-      <InstituteModal 
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        opened={opened}
-      />
-      
+
+
       <Footer />
     </Box>
   );
 }
+// <InstituteModal
+//   isOpen={isOpen}
+//   onOpen={onOpen}
+//   onClose={onClose}
+//   opened={opened}
+// />

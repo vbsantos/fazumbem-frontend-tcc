@@ -15,11 +15,14 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
-import { FaRegEnvelope, FaInstagram, FaFacebookSquare, FaWhatsapp } from "react-icons/fa";
+import { useEffect, useState } from 'react';
+import { httpClient } from "../../../services/httpClient";
+import { FaRegEnvelope, FaInstagram, FaFacebookSquare, /*FaWhatsapp,*/ FaGlobe } from "react-icons/fa";
 import Slider from "react-slick";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import "@fontsource/montserrat/700.css"
+// import defaultLogo from "../../../assets/images/defaultlogo.png";
 
 export default function Home() {
   let { id } : any = {};
@@ -151,147 +154,29 @@ export default function Home() {
       instituteId: 14
     },
   ];
-  const institutes = [
-    {
-      id: 0,
-      name: "Instituição 1",
-      picture_url: 1,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 1,
-      name: "Instituição 2",
-      picture_url: 2,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 2,
-      name: "Instituição 3",
-      picture_url: 3,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 3,
-      name: "Instituição 4",
-      picture_url: 4,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 4,
-      name: "Instituição 5",
-      picture_url: 5,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 5,
-      name: "Instituição 6",
-      picture_url: 6,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 6,
-      name: "Instituição 7",
-      picture_url: 7,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 7,
-      name: "Instituição 8",
-      picture_url: 8,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 8,
-      name: "Instituição 9",
-      picture_url: 9,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 9,
-      name: "Instituição 10",
-      picture_url: 10,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 10,
-      name: "Instituição 11",
-      picture_url: 11,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 11,
-      name: "Instituição 12",
-      picture_url: 12,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 12,
-      name: "Instituição 13",
-      picture_url: 13,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 13,
-      name: "Instituição 14",
-      picture_url: 14,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-    {
-      id: 14,
-      name: "Instituição 15",
-      picture_url: 15,
-      telephone: "(55) 9 9191-9191",
-      email: "instituicao@mail.com",
-      description: "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, "
-      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore."
-    },
-  ];
+  //const institutes = [
+
   // // eslint-disable-next-line
   // const campanha = campanhas.find(element => element.id == id);
   // eslint-disable-next-line
-  const instituicao = institutes.find(element => element.id == id);
+  //const instituicao = institutes.find(element => element.id == id);
+  console.log(id);
+
+  const [institute, setInstitute] = useState<any>([]);
+  useEffect(() => {
+    const getInstitute = async () => {
+      const req = await httpClient<any>({
+        method: "GET",
+        url: `/user/id/${id}`,
+      });
+
+      setInstitute(req.data);
+    };
+
+    getInstitute();
+  }, [id]);
+
+  console.log(institute);
   let slides = (isMobile) ? 1 : 3;
   const settings = {
     dots: true,
@@ -300,6 +185,7 @@ export default function Home() {
     slidesToShow: slides,
     slidesToScroll: 1
   };
+  window.scrollTo(0,0);
   return (
     <Box backgroundColor="gray.200">
       <Header />
@@ -313,17 +199,19 @@ export default function Home() {
           <Grid
             templateColumns={isMobile ? "" : "repeat(3, 1fr)"}
             templateRows={isMobile ? "repeat(2, 1fr)" : ""}
-            gap={12}
+            columnGap={12}
+            rowGap={6}
           >
-            <GridItem>
+            <GridItem colSpan={1} rowSpan={1}>
                   <Box className={detailsStyle["institute-image"]}>
                     <Image
-                      src={`https://fazumbem.inf.ufsm.br/images/logos/${instituicao.picture_url}.png`}
+                      src={`https://fazumbem.inf.ufsm.br/images/logos/1.png`}
+                        // src={institute.image}
                     />
                   </Box>
             </GridItem>
-            <GridItem colSpan={isMobile ? 1 : 2} textAlign={isMobile ? "center" : "left"}>
-              <Heading>
+            <GridItem colSpan={isMobile ? 1 : 2} rowSpan={1} textAlign={isMobile ? "center" : "left"}>
+              <Heading margin={"6% 0"}>
                 <Text
                   display="inline"
                   fontSize={isMobile ? "35px" : "55px"}
@@ -331,17 +219,19 @@ export default function Home() {
                   color="white"
                   backgroundColor="#ED6A5A"
                 >
-                  {instituicao.name}
+                  {institute.name}
                 </Text>
               </Heading>
-              <Box marginTop="50px">
+            </GridItem>
+            <GridItem colSpan={3} rowSpan={1}>
+              <Box /*marginTop="50px"*/>
                 <Text
                   fontSize={isMobile ? "18px" : "24px"}
                   color="bluish.100"
                   lineHeight="31.69px"
                   // padding={isGreater ? "0 20%" : "0 5px"}
                 >
-                  {instituicao.description}
+                  {institute.description}
                 </Text>
               </Box>
             </GridItem>
@@ -366,6 +256,7 @@ export default function Home() {
         </Box>
         */}
         <Box
+          hidden={!institute.campaigns}
           marginTop="100px"
           padding={isGreater ? "0 20%" : "0 5px"}
           textAlign={isMobile ? "center" : "left"}
@@ -428,13 +319,13 @@ export default function Home() {
               fontSize={isMobile ? "22px" : "24px"}
               color="bluish.100"
             >
-              Telefone: {instituicao.telephone}
+              Telefone: {institute.telephone}
             </Text>
             <Text
               fontSize={isMobile ? "22px" : "24px"}
               color="bluish.100"
             >
-              Email: {instituicao.email}
+              Email: {institute.username}
             </Text>
             <Box>
               <HStack spacing="24px">
@@ -451,13 +342,13 @@ export default function Home() {
                     <Box
                       color="bluish.100"
                       as={Link}
-                      href={`mailto:${instituicao.email}`}
+                      href={`mailto:${institute.username}`}
                     >
                       <FaRegEnvelope  size={50}/>
                     </Box>
                   </Tooltip>
                 </Box>
-                <Box>
+                <Box hidden={!institute.instagram}>
                   <Tooltip
                     hasArrow
                     label="Instagram da instituição"
@@ -470,13 +361,13 @@ export default function Home() {
                     <Box
                       color="bluish.100"
                       as={Link}
-                      href="#"
+                      href={institute.instagram}
                     >
                       <FaInstagram size={50} />
                     </Box>
                   </Tooltip>
                 </Box>
-                <Box>
+                <Box hidden={!institute.facebook}>
                   <Tooltip
                     hasArrow
                     label="Facebook da instituição"
@@ -489,12 +380,13 @@ export default function Home() {
                     <Box
                       color="bluish.100"
                       as={Link}
-                      href="#"
+                      href={institute.facebook}
                     >
                       <FaFacebookSquare size={48} />
                     </Box>
                   </Tooltip>
                 </Box>
+                {/*
                 <Box>
                   <Tooltip
                     hasArrow
@@ -508,9 +400,29 @@ export default function Home() {
                     <Box
                       color="bluish.100"
                       as={Link}
-                      href={`http://api.whatsapp.com/send/?phone=55${instituicao.telephone}`}
+                      href={`http://api.whatsapp.com/send/?phone=55${institute.telephone}`}
                     >
                       <FaWhatsapp size={48} />
+                    </Box>
+                  </Tooltip>
+                </Box>
+                */}
+                <Box hidden={!institute.url}>
+                  <Tooltip
+                    hasArrow
+                    label="Site da instituição"
+                    bg="bluish.200"
+                    color="white"
+                    placement="top"
+                    borderRadius="8px"
+                    transition="0.2s"
+                  >
+                    <Box
+                      color="bluish.100"
+                      as={Link}
+                      href={institute.url}
+                    >
+                      <FaGlobe size={48} />
                     </Box>
                   </Tooltip>
                 </Box>

@@ -12,12 +12,12 @@ import {
   useMediaQuery
 } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
+// import { useDisclosure } from "@chakra-ui/react";
 import { InfoIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Carousel from "../../../components/Home/Carousel";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-import InstituteModal from "../../../components/Modals/InstituteModal";
+// import InstituteModal from "../../../components/Modals/InstituteModal";
 import TopLayoutDesktop from "../../../components/Home/Top/LayoutDesktop";
 import TopLayoutMobile from "../../../components/Home/Top/LayoutMobile";
 import TopLayoutTablet from "../../../components/Home/Top/LayoutTablet";
@@ -25,6 +25,7 @@ import React from "react";
 import defaultLogo from "../../../assets/images/defaultlogo.png";
 
 import { useEffect, useState } from 'react';
+import { useHistory } from "react-router";
 import { httpClient } from "../../../services/httpClient";
 
 // function truncateName(name: String) {
@@ -34,14 +35,15 @@ import { httpClient } from "../../../services/httpClient";
 // }
 
 export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();  
-  const [opened, setOpened] = useState<any>();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const [opened, setOpened] = useState<any>();
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   let isTablet = false;
   if (!isMobile && !isDesktop) isTablet = true;
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
+  const history = useHistory();
 
 
   const [camp_list, setCampList] = useState<any[]>([]);
@@ -72,6 +74,8 @@ export default function Home() {
 
     getInstList();
   }, []);
+  console.log(inst_list);
+
   return (
     <>
     <Box backgroundColor="gray.200" >
@@ -86,7 +90,7 @@ export default function Home() {
         <TopLayoutTablet />
       ) : ("")}
 
-      
+
         <Box
           backgroundColor="bluish.100"
           width="100%"
@@ -244,10 +248,11 @@ export default function Home() {
                                 borderRadius: "10px",
                                 transform: "translateY(-3px)",
                               }}
-                              onClick={() => {
-                                setOpened(institute);
-                                onOpen();
-                              }}
+                              onClick={() => history.push(`/institute/${institute.idUser}`)}
+                              // {() => {
+                              //   setOpened(institute);
+                              //   onOpen();
+                              // }}
                             />
                           </i>
                         </span>
@@ -300,16 +305,17 @@ export default function Home() {
         >
         </IconButton>
       </Box>
-      
-      <InstituteModal 
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        opened={opened}
-      />
       <Footer />
+
+
       </>
     </Box>
     </>
   );
 }
+// <InstituteModal
+//   isOpen={isOpen}
+//   onOpen={onOpen}
+//   onClose={onClose}
+//   opened={opened}
+// />
