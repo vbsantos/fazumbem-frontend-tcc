@@ -25,13 +25,19 @@ import FileUpload from "../../../components/FileUpload";
 import InputError from "../../../components/InputError";
 import { FiFile } from "react-icons/fi";
 import axios from "axios";
+import { useHistory } from "react-router";
+import { useAuthState } from "../../../context";
 
 const NewInstituition = () => {
   let { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(Boolean(id));
   const [institutionToEdit, setInstitutionToEdit] = useState<any>();
   const [imageSrc, setImageSrc] = useState(null);
+  const [isRequesting, setIsRequesting] = useState(false);
   const toast = useToast();
+  const history = useHistory();
+  const userDetails = useAuthState();
+  const isSuperUser = userDetails?.user?.group === "Curator";
 
   const onlyView = useLocation().search === "?viewInfo";
 
@@ -95,9 +101,11 @@ const NewInstituition = () => {
   const onSubmit = async (data: any) => {
     if (institutionToEdit) {
       try {
+        setIsRequesting(true);
+
         if (files) {
           let body = new FormData();
-          body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
+          body.set("key", "85073d9659d6a29c95abf796134fbc2c");
           body.append("image", data.files[0]);
 
           const response = await axios.post(
@@ -128,6 +136,8 @@ const NewInstituition = () => {
           position: "top",
           isClosable: true,
         });
+
+        if (isSuperUser) history.goBack();
       } catch (error) {
         toast({
           title: "Houve um erro!",
@@ -136,11 +146,15 @@ const NewInstituition = () => {
           position: "top",
           isClosable: true,
         });
+      } finally {
+        setIsRequesting(false);
       }
     } else {
       let body = new FormData();
       body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
       body.append("image", data.files[0]);
+
+      setIsRequesting(true);
 
       axios.post(`https://api.imgbb.com/1/upload`, body).then((response) => {
         const url = response.data?.data.display_url;
@@ -159,6 +173,8 @@ const NewInstituition = () => {
               position: "top",
               isClosable: true,
             });
+
+            history.goBack();
           })
           .catch(() => {
             toast({
@@ -168,6 +184,9 @@ const NewInstituition = () => {
               position: "top",
               isClosable: true,
             });
+          })
+          .finally(() => {
+            setIsRequesting(false);
           });
       });
     }
@@ -221,12 +240,7 @@ const NewInstituition = () => {
           >
             Informações básicas
           </Text>
-          <HStack
-            spacing={10}
-            margin={{ lg: "initial" }}
-            pt={2}
-            alignItems="flex-end"
-          >
+          <HStack spacing={10} pt={2} alignItems="flex-end">
             <FormControl id="picture">
               <FormLabel>Imagem da instituição</FormLabel>
               <>
@@ -305,7 +319,7 @@ const NewInstituition = () => {
           >
             Endereço
           </Text>
-          <HStack spacing={10} margin={{ lg: "initial" }} pt={2} pb={5}>
+          <HStack spacing={10} pt={2} pb={5}>
             <FormControl isRequired id="cep">
               <FormLabel>CEP</FormLabel>
               <InputText
@@ -351,7 +365,7 @@ const NewInstituition = () => {
               />
             </FormControl>
           </HStack>
-          <HStack spacing={10} margin={{ lg: "initial" }} pt={2} pb={5}>
+          <HStack spacing={10} pt={2} pb={5}>
             <FormControl id="logradouro">
               <FormLabel>Logradouro</FormLabel>
               <InputText
@@ -399,7 +413,7 @@ const NewInstituition = () => {
           >
             Informações complementares
           </Text>
-          <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
+          <HStack spacing={10} pt={2}>
             <FormControl id="identifier">
               <FormLabel>CNPJ</FormLabel>
               <InputCNPJ
@@ -420,44 +434,47 @@ const NewInstituition = () => {
               />
             </FormControl>
           </HStack>
-          <HStack spacing={10} margin={{ lg: "initial" }} pt={2}>
-            <FormControl id="url" mt="4">
+          <HStack spacing={10} pt={2} mt={4}>
+            <FormControl id="url">
               <FormLabel>Link do site</FormLabel>
 
               <InputText
                 name="url"
                 control={control}
                 error={errors.complement}
-                placeholder="www.seu_site.com.br"
+                placeholder="https://www.seu_site.com.br"
                 required={false}
                 isReadOnly={onlyView}
                 background="white"
+                type="url"
               />
             </FormControl>
-            <FormControl id="facebook" mt="4">
+            <FormControl id="facebook">
               <FormLabel>Link do Facebook</FormLabel>
 
               <InputText
                 name="facebook"
                 control={control}
                 error={errors.complement}
-                placeholder="www.facebook.com/sua_pagina"
+                placeholder="https://www.facebook.com/sua_pagina"
                 required={false}
                 isReadOnly={onlyView}
                 background="white"
+                type="url"
               />
             </FormControl>
-            <FormControl id="instagram" mt="4">
+            <FormControl id="instagram">
               <FormLabel>Link do Instagram</FormLabel>
 
               <InputText
                 name="instagram"
                 control={control}
                 error={errors.complement}
-                placeholder="www.instagram.com/sua_pagina"
+                placeholder="https://www.instagram.com/sua_pagina"
                 required={false}
                 isReadOnly={onlyView}
                 background="white"
+                type="url"
               />
             </FormControl>
           </HStack>
@@ -523,6 +540,7 @@ const NewInstituition = () => {
                 background: "#F18C7E",
                 transition: ".5s",
               }}
+              isLoading={isRequesting}
             >
               Salvar alterações
             </Button>

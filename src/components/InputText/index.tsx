@@ -1,6 +1,5 @@
 import { Input } from "@chakra-ui/input";
 import { Box, InputProps } from "@chakra-ui/react";
-import React from "react";
 import { Controller } from "react-hook-form";
 import { InputControlledFieldProps } from "../../InputRegister";
 import InputError from "../InputError";
@@ -11,7 +10,7 @@ export default function InputText({
   control,
   required = true,
   ...props
-}: InputControlledFieldProps & InputProps) {
+}: InputControlledFieldProps & InputProps & { urlMode?: boolean }) {
   return (
     <Box w="full">
       <Controller
