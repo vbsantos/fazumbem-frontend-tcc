@@ -323,7 +323,7 @@ const NewCampaign = () => {
               control={control}
               error={errors.externalLink}
               background="white"
-              isRequired={false}
+              required={false}
               isReadOnly={onlyView}
               type="url"
             />
