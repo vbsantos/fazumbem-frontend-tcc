@@ -22,15 +22,18 @@ import InputText from "../../../components/InputText";
 import Footer from "../../../components/Private/Footer";
 import { useAuthState } from "../../../context";
 import { httpClient } from "../../../services/httpClient";
+import { useHistory } from "react-router";
 
 const NewCampaign = () => {
   let { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(Boolean(id));
   const [campaignToEdit, setCampaignToEdit] = useState<any>();
   const [imageSrc, setImageSrc] = useState(null);
+  const [isRequesting, setIsRequesting] = useState(false);
   const toast = useToast();
   const user = useAuthState();
   const onlyView = useLocation().search === "?viewInfo";
+  const history = useHistory();
 
   const {
     control,
@@ -94,9 +97,11 @@ const NewCampaign = () => {
   const onSubmit = async (data: any) => {
     if (campaignToEdit) {
       try {
+        setIsRequesting(true);
+
         if (files) {
           let body = new FormData();
-          body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
+          body.set("key", "85073d9659d6a29c95abf796134fbc2c");
           body.append("image", data.files[0]);
 
           const response = await axios.post(
@@ -127,6 +132,8 @@ const NewCampaign = () => {
           position: "top",
           isClosable: true,
         });
+
+        history.goBack();
       } catch (error) {
         toast({
           title: "Houve um erro!",
@@ -135,11 +142,15 @@ const NewCampaign = () => {
           position: "top",
           isClosable: true,
         });
+      } finally {
+        setIsRequesting(false);
       }
     } else {
       let body = new FormData();
       body.set("key", "e8a140d7ae8c3ede637cd5be670fe181");
       body.append("image", data.files[0]);
+
+      setIsRequesting(true);
 
       axios.post(`https://api.imgbb.com/1/upload`, body).then((response) => {
         const url = response.data?.data.display_url;
@@ -164,6 +175,8 @@ const NewCampaign = () => {
               position: "top",
               isClosable: true,
             });
+
+            history.goBack();
           })
           .catch(() => {
             toast({
@@ -173,6 +186,9 @@ const NewCampaign = () => {
               position: "top",
               isClosable: true,
             });
+          })
+          .finally(() => {
+            setIsRequesting(false);
           });
       });
     }
@@ -309,6 +325,7 @@ const NewCampaign = () => {
               background="white"
               isRequired={false}
               isReadOnly={onlyView}
+              type="url"
             />
           </FormControl>
         </Box>
@@ -327,6 +344,7 @@ const NewCampaign = () => {
                 background: "#F18C7E",
                 transition: ".5s",
               }}
+              isLoading={isRequesting}
             >
               Salvar alterações
             </Button>
