@@ -22,7 +22,6 @@ import Slider from "react-slick";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import "@fontsource/montserrat/700.css"
-// import defaultLogo from "../../../assets/images/defaultlogo.png";
 
 export default function Home() {
   let { id } : any = {};
@@ -154,13 +153,6 @@ export default function Home() {
       instituteId: 14
     },
   ];
-  //const institutes = [
-
-  // // eslint-disable-next-line
-  // const campanha = campanhas.find(element => element.id == id);
-  // eslint-disable-next-line
-  //const instituicao = institutes.find(element => element.id == id);
-  console.log(id);
 
   const [institute, setInstitute] = useState<any>([]);
   useEffect(() => {
@@ -176,7 +168,6 @@ export default function Home() {
     getInstitute();
   }, [id]);
 
-  console.log(institute);
   let slides = (isMobile) ? 1 : 3;
   const settings = {
     dots: true,
@@ -205,8 +196,8 @@ export default function Home() {
             <GridItem colSpan={1} rowSpan={1}>
                   <Box className={detailsStyle["institute-image"]}>
                     <Image
-                      src={`https://fazumbem.inf.ufsm.br/images/logos/1.png`}
-                        // src={institute.image}
+                      // src={`https://fazumbem.inf.ufsm.br/images/logos/1.png`}
+                      src={institute.image}
                     />
                   </Box>
             </GridItem>
@@ -226,10 +217,12 @@ export default function Home() {
             <GridItem colSpan={3} rowSpan={1}>
               <Box /*marginTop="50px"*/>
                 <Text
+                  id="insituteDescription"
                   fontSize={isMobile ? "18px" : "24px"}
                   color="bluish.100"
                   lineHeight="31.69px"
                   // padding={isGreater ? "0 20%" : "0 5px"}
+                  // html={(institute.description) ? institute.description.replace(/\\n/g, '<br>') : ""}
                 >
                   {institute.description}
                 </Text>
@@ -434,4 +427,6 @@ export default function Home() {
       <Footer />
     </Box>
   );
+
+
 }
