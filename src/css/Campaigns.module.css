@@ -37,6 +37,9 @@
   font-weight: 700;
   margin: 5% 10%;
   line-height: 29.26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-description {
