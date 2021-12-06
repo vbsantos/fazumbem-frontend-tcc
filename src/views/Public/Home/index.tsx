@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import "../../../css/instituicoes.css";
+import instituteStyle from "../../../css/HomeInstitutes.module.css";
 import { Box, Heading } from "@chakra-ui/layout";
 import { Collapse } from "@chakra-ui/transition";
 import {
@@ -12,31 +12,21 @@ import {
   useMediaQuery
 } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
-// import { useDisclosure } from "@chakra-ui/react";
 import { InfoIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Carousel from "../../../components/Home/Carousel";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-// import InstituteModal from "../../../components/Modals/InstituteModal";
 import TopLayoutDesktop from "../../../components/Home/Top/LayoutDesktop";
 import TopLayoutMobile from "../../../components/Home/Top/LayoutMobile";
 import TopLayoutTablet from "../../../components/Home/Top/LayoutTablet";
 import React from "react";
-import defaultLogo from "../../../assets/images/defaultlogo.png";
 
 import { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import { httpClient } from "../../../services/httpClient";
 
-// function truncateName(name: String) {
-//   if (name.length > 12) {
-//     return name.substr(0, 12);
-//   }
-// }
 
 export default function Home() {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [opened, setOpened] = useState<any>();
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   let isTablet = false;
@@ -195,7 +185,7 @@ export default function Home() {
             &nbsp;partipantes&nbsp;
           </Text>
         </Heading>
-        <Collapse startingHeight={isMobile ? 850 : 560} in={show} transition={{enter: {duration: 2.5}, exit: {duration: 2.5}}}>
+        <Collapse startingHeight={isMobile ? 850 : 700} in={show} transition={{enter: {duration: 2.5}, exit: {duration: 2.5}}}>
           <SimpleGrid
             columns={4}
             minChildWidth={isMobile ? "30%" : "160px"}//{{ base: "40%", sm: "30%", lg: "160px" }}
@@ -209,12 +199,12 @@ export default function Home() {
           >
 
             {inst_list.map((institute: any = []) => (
-              <div key={institute.id}>
-                <div className="institute-card">
-                  <div className="institute-card-image">
-                    <Image src={defaultLogo} />
-                  </div>
-                  <div>
+              <Box key={institute.id}>
+                <Box className={instituteStyle["card"]}>
+                  <Box className={instituteStyle["card-image"]}>
+                    <Image src={institute.image} />
+                  </Box>
+                  <Box className={instituteStyle["card-title"]}>
                     <Text
                       color="white"
                       margin="5px 0"
@@ -222,8 +212,33 @@ export default function Home() {
                     >
                     {institute.name}
                     </Text>
-                  </div>
-                  <Tooltip
+                  </Box>
+                  <Box className={instituteStyle["icons"]}>
+                    <Tooltip
+                      hasArrow
+                      label="Ver informações"
+                      bg="bluish.100"
+                      color="white"
+                      placement="top"
+                      borderRadius="8px"
+                      transition="0.4s"
+                    >
+                      <IconButton
+                        aria-label="info"
+                        borderRadius="10px"
+                        bgColor="white"
+                        color="bluish.100"
+                        icon={<InfoIcon />}
+                        _hover={{
+                          bgColor: "#ED6A5A",
+                          color: "white",
+                        }}
+                        onClick={() => history.push(`/institute/${institute.idUser}`)}
+                      />
+                    </Tooltip>
+                  </Box>
+                  {/*
+                    <Tooltip
                     hasArrow
                     label="Ver informações"
                     bg="bluish.300"
@@ -265,8 +280,8 @@ export default function Home() {
                   // </div>
                   */}
 
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
           </SimpleGrid>
         </Collapse>
@@ -306,16 +321,8 @@ export default function Home() {
         </IconButton>
       </Box>
       <Footer />
-
-
       </>
     </Box>
     </>
   );
 }
-// <InstituteModal
-//   isOpen={isOpen}
-//   onOpen={onOpen}
-//   onClose={onClose}
-//   opened={opened}
-// />

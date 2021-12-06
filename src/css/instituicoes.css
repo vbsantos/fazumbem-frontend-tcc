@@ -1,5 +1,5 @@
 
-.all-card {
+/* .all-card {
   width: 100%;
   height: 10rem;
   border-radius: 16px;
@@ -93,51 +93,51 @@
 }
 .all-card:hover .all-details {
   bottom: 0;
-}
+} */
 
 
-.institute-card {
+/* .institute-card { */
   /* width: 100%; */
   /* height: 160px; */
   /* border-radius: 50%; */
   /* overflow: hidden; */
-  position: relative;
-}
+  /* position: relative;
+} */
 
-.institute-card-image {
+/* .institute-card-image {
   margin: 0 auto;
 }
 
-.institute-card .institute-card-image {
+.institute-card .institute-card-image { */
   /* position: absolute; */
   /* top: 0; */
   /* left: 0; */
-  width: 160px;
+  /* width: 160px;
   height: 160px;
   border-radius: 50%;
   z-index: 3;
   background-color: #000;
   transition: 0.5s;
-}
+} */
 
-.institute-card .institute-card-image img {
+/* .institute-card .institute-card-image img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-}
+} */
 
-.institute-card:hover img {
+/* .institute-card:hover img {
   opacity: 0.4;
   transition: 0.5s;
-}
+} */
 
-.institute-card:hover .institute-card-image {
+/* .institute-card:hover .institute-card-image {
   /* transform: translateY(-70px); */
-  transition: all 0.9s;
-}
+  /* transition: all 0.9s; */
+/* } */
 
-.institute-icons {
+/* .institute-icons {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -187,9 +187,9 @@
 
 .institute-card:hover li:nth-child(1) a {
   transition-delay: 0.1s;
-}
+} */
 
-.institute-details {
+/* .institute-details {
   position: absolute;
   bottom: 400px;
   left: 0;
@@ -210,4 +210,4 @@
 
 .institute-card:hover .institute-details {
   bottom: 0;
-}
+} */
