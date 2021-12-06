@@ -23,26 +23,38 @@ import { useHistory } from "react-router";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import blueLogo from "../../../assets/images/logo.svg";
+import { useState } from "react";
 
 export default function Home() {
-  const {handleSubmit} = useForm<FormData>();
+  const { handleSubmit } = useForm<FormData>();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isMobile] = useMediaQuery("(max-width: 576px)")
-  const [isDesktop] = useMediaQuery("(min-width: 769px)")
-  const [isGreater] = useMediaQuery("(min-width: 1200px)")
+  const [isMobile] = useMediaQuery("(max-width: 576px)");
+  const [isDesktop] = useMediaQuery("(min-width: 769px)");
+  const [isGreater] = useMediaQuery("(min-width: 1200px)");
+
+  const [disabled, setDisbled] = useState(true);
+
   const history = useHistory();
 
   const onSubmit = async (data: FormData) => {
+    const message = (document.getElementById("message") as HTMLInputElement).value;
+    const subject = (document.getElementById("subject") as HTMLInputElement).value;
+    window.open(`mailto: coord-fazumbem@inf.ufsm.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`, '_blank');
     onOpen();
   };
 
+  const formWatcher = () => {
+    if ((document.getElementById("message") as HTMLInputElement).value && (document.getElementById("subject") as HTMLInputElement).value) {
+      setDisbled(false);
+    } else {
+      setDisbled(true);
+    }
+  }
+  
   return (
-    <Box backgroundColor="gray.200" >
+    <Box backgroundColor="gray.200">
       <Header />
-      <Box
-        padding={!isDesktop ? "50px 5px" : "50px"}
-        textAlign="center"
-      >
+      <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Heading>
           <Text
             display="inline"
@@ -61,15 +73,11 @@ export default function Home() {
             lineHeight="31.69px"
             padding={isGreater ? "0 24%" : "0 5px"}
           >
-            Possui dúvidas, sugestões ou mensagens para compartilhar?
-            Abaixo você pode entrar em contato com a plataforma Faz um Bem!
+            Possui dúvidas, sugestões ou mensagens para compartilhar? Abaixo
+            você pode entrar em contato com a plataforma Faz um Bem!
           </Text>
         </Box>
-        <Box
-          marginTop="50px;"
-          padding={isGreater ? "0 25%" : "0 5px"}
-
-        >
+        <Box marginTop="50px;" padding={isGreater ? "0 25%" : "0 5px"}>
           <Box
             backgroundColor="white"
             borderRadius="50px"
@@ -77,8 +85,8 @@ export default function Home() {
             padding="25px 50px"
             boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
           >
-            <form  onSubmit={handleSubmit(onSubmit)}>
-              <Text fontWeight="700" fontSize={isMobile ? "20px" : "22px"}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {/* <Text fontWeight="700" fontSize={isMobile ? "20px" : "22px"}>
                 Email
               </Text>
               <Input
@@ -101,7 +109,8 @@ export default function Home() {
                 border="none"
                 margin="15px 0 50px"
                 type="text"
-              />
+                id="sender"
+              /> */}
               <Text fontWeight="700" fontSize={isMobile ? "20px" : "22px"}>
                 Assunto
               </Text>
@@ -113,6 +122,8 @@ export default function Home() {
                 border="none"
                 margin="15px 0 50px"
                 type="text"
+                id="subject"
+                onChange={formWatcher}
               />
               <Text fontWeight="700" fontSize={isMobile ? "20px" : "22px"}>
                 Mensagem
@@ -126,6 +137,8 @@ export default function Home() {
                 border="none"
                 margin="15px 0 50px"
                 resize="none"
+                id="message"
+                onChange={formWatcher}
               />
               <Box
                 borderRadius="50px"
@@ -139,6 +152,10 @@ export default function Home() {
                   background: "#F18C7E",
                   transition: ".5s",
                 }}
+                _disabled={{
+                  background: "#f2988c"
+                }}
+                disabled={disabled}
               >
                 <Text
                   fontSize={isMobile ? "22px" : "24px"}
@@ -167,14 +184,14 @@ export default function Home() {
           </ModalHeader>
           <ModalCloseButton color="#ED6A5A" />
           <ModalBody fontSize="20px" padding="10px 90px" color="bluish.100">
-            <Text><strong>Agradecemos sua mensagem!</strong></Text>
-            <Text marginTop="30px">Retornaremos seu contato o mais rápido possível.</Text>
+            <Text>
+              <strong>Agradecemos sua mensagem!</strong>
+            </Text>
+            <Text marginTop="30px">
+              Retornaremos seu contato o mais rápido possível.
+            </Text>
           </ModalBody>
-          <ModalFooter
-            textAlign="center"
-            display="block"
-            padding="30px 0"
-          >
+          <ModalFooter textAlign="center" display="block" padding="30px 0">
             <Heading
               color="white"
               fontWeight="none"
