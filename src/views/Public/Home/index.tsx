@@ -64,7 +64,7 @@ export default function Home() {
 
     getInstList();
   }, []);
-  console.log(inst_list);
+  console.log(camp_list);
 
   return (
     <>
@@ -237,49 +237,6 @@ export default function Home() {
                       />
                     </Tooltip>
                   </Box>
-                  {/*
-                    <Tooltip
-                    hasArrow
-                    label="Ver informações"
-                    bg="bluish.300"
-                    color="white"
-                    placement="right"
-                    borderRadius="8px"
-                    transition="0.4s"
-                    ml={1}
-                  >
-                    <ul className="institute-icons">
-                      <li>
-                        <span>
-                          <i>
-                            <IconButton
-                              aria-label="info"
-                              borderRadius="10px"
-                              transform="translateY(-3px)"
-                              bgColor="white"
-                              icon={<InfoIcon />}
-                              _hover={{
-                                bgColor: "bluish.400",
-                                borderRadius: "10px",
-                                transform: "translateY(-3px)",
-                              }}
-                              onClick={() => history.push(`/institute/${institute.idUser}`)}
-                              // {() => {
-                              //   setOpened(institute);
-                              //   onOpen();
-                              // }}
-                            />
-                          </i>
-                        </span>
-                      </li>
-                    </ul>
-                  </Tooltip>
-                  {/*
-                    <div className="institute-details" title={institute.name}>
-                  //   <h5>{truncateName(institute.name)}</h5>
-                  // </div>
-                  */}
-
                 </Box>
               </Box>
             ))}

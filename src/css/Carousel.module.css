@@ -1,0 +1,110 @@
+.carousel {
+  margin: 50px;
+}
+
+.card-wrapper {
+  /* max-width: 40%; */
+  position: relative;
+  padding: 10px;
+}
+
+.card {
+  width: 100%;
+  height: 25rem;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: #000;
+  transition: 0.5s;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-image-more {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: #000;
+  transition: 0.5s;
+}
+
+.card-image-more img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* filter: brightness(40%); */
+}
+
+.icons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  opacity: 0;
+}
+
+.details {
+  position: absolute;
+  bottom: 400px;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  height: 105px;
+  z-index: 1;
+  padding: 10px;
+  transition: 0.6s;
+  font-weight: 700;
+  padding: 35px 0;
+  font-size: 24px;
+}
+
+.more-details {
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  background: rgba(255, 255, 255, 0.85);
+  /* color: #034074; */
+  width: 100%;
+  height: 105px;
+  /* z-index: 1; */
+  padding: 35px;
+  /* transition: 0.6s; */
+  /* font-weight: 500; */
+  /* cursor: pointer; */
+}
+
+.card:hover img {
+  opacity: 0.4;
+  transition: 0.5s;
+}
+
+.card:hover .card-image:not(.more) {
+  transform: translateY(-100px);
+  transition: all 0.9s;
+}
+
+.card:hover .icons {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.card:hover .details {
+  bottom: 0;
+}
