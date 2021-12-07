@@ -1,47 +1,42 @@
 /* CARDS DAS INSTITUIÇÕES */
-.card-wrapper {
-  width: 175px;
-  margin: 0 auto;
-}
-
 .card {
-  width: 100%;
-  height: 285px;
-  overflow: hidden;
+  /* width: 100%; */
+  /* height: 160px; */
+  /* border-radius: 50%; */
+  /* overflow: hidden; */
   position: relative;
+  max-height: 275px;
 }
 
 .card-image {
   margin: 0 auto;
   width: 160px;
   height: 160px;
-  background-color: black;
   border-radius: 50%;
+  z-index: 3;
+  background-color: #000;
+  transition: 0.5s;
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .card-title {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  margin: 10%;
-  line-height: 21.94px;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
 }
 
 .icons {
   text-align: center;
   position: absolute;
   top: 70px;
-  left: 66px;
+  left: 60px;
   opacity: 0;
 }
 
@@ -49,6 +44,10 @@
   opacity: 0.4;
   transition: 0.5s;
 }
+
+/* .card:hover .card-image {
+  transition: all 0.9s;
+} */
 
 .card:hover .icons {
   opacity: 1;

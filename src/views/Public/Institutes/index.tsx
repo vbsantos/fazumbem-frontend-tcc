@@ -12,32 +12,23 @@ import {
   Text,
   useMediaQuery
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
+// import { useDisclosure } from "@chakra-ui/react";
 import "../../../css/instituicoes.css";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
-import InstituteModal from "../../../components/Modals/InstituteModal";
+// import InstituteModal from "../../../components/Modals/InstituteModal";
 import "@fontsource/montserrat/600.css";
 import { useEffect, useState } from 'react';
+import { useHistory } from "react-router";
 import { httpClient } from "../../../services/httpClient";
-import defaultLogo from "../../../assets/images/defaultlogo.png";
 
-function truncateName(name: String) {
-  if (name.length > 12) {
-    return name.substr(0, 10) + "...";
-  }
-}
-/*function showCampaignDetails(){
-  console.log("show details");
-}*/
 
 export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
   const [isDesktop] = useMediaQuery("(min-width: 769px)");
   const [isGreater] = useMediaQuery("(min-width: 1200px)");
 
-  const { isOpen, onOpen, onClose } = useDisclosure();  
-  const [opened, setOpened] = useState<any>();
+  const history = useHistory();
 
   const [list, setList] = useState<any[]>([]);
   useEffect(() => {
@@ -52,6 +43,7 @@ export default function Home() {
 
     getList();
   }, []);
+
   return (
     <Box backgroundColor="gray.200">
       <Header />
@@ -94,12 +86,12 @@ export default function Home() {
                 <Box className={instituteStyle["card"]}>
                   <Box className={instituteStyle["card-image"]}>
                     <Image
-                      src={defaultLogo}
+                      src={institute.image}
                     />
                   </Box>
                   <Box className={instituteStyle["card-title"]}>
                     <Text color="bluish.100" title={institute.name}>
-                      {truncateName(institute.name)}
+                      {institute.name}
                     </Text>
                   </Box>
                   <Box className={instituteStyle["icons"]}>
@@ -122,10 +114,7 @@ export default function Home() {
                           bgColor: "#ED6A5A",
                           color: "white",
                         }}
-                        onClick={() => {
-                          setOpened(institute);
-                          onOpen();
-                        }}
+                        onClick={() => history.push(`/institute/${institute.idUser}`)}
                       />
                     </Tooltip>
                   </Box>
@@ -166,13 +155,8 @@ export default function Home() {
           </VStack>
         </Box>
       </Box>
-      <InstituteModal 
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        opened={opened}
-      />
-      
+
+
       <Footer />
     </Box>
   );

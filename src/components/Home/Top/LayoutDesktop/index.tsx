@@ -1,5 +1,5 @@
 
-import "../../../../css/instituicoes.css";
+// import "../../../../css/instituicoes.css";
 import { Box/*, Heading*/ } from "@chakra-ui/layout";
 import { ReactElement } from "react";
 import {

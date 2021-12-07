@@ -37,6 +37,9 @@
   font-weight: 700;
   margin: 5% 10%;
   line-height: 29.26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-description {
@@ -46,7 +49,7 @@
   margin: 5% 10%;
   font-size: 16px;
   height: 20%;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
 }

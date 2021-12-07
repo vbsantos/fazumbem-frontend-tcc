@@ -1,21 +1,23 @@
+import carouselStyle from "../../../css/Carousel.module.css";
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Image } from "@chakra-ui/image";
-import "../../../css/carousel.css";
 import { FaLandmark } from "react-icons/fa";
-import { IconButton, Tooltip, useMediaQuery } from "@chakra-ui/react";
+import { HStack, IconButton, Tooltip, useMediaQuery } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
-import { Heading } from "@chakra-ui/layout";
+import { Box, Heading } from "@chakra-ui/layout";
 
 function showCampaignDetails(camp: Props) {
   console.log(camp.campanhas[0]);
 }
 
 interface Props {
-  campanhas: {}[];
+  campanhas: {
+    images:string[]
+  }[];
 }
 export default function Carousel(listaCampanhas: Props) {
 
@@ -23,6 +25,7 @@ export default function Carousel(listaCampanhas: Props) {
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   let slides;
   if (isMobile) slides = 1;
+  else if (listaCampanhas.campanhas.length < 3) slides = listaCampanhas.campanhas.length;
   else if (isDesktop) slides = 3;
   else slides = 2;
   let settings = {
@@ -33,111 +36,110 @@ export default function Carousel(listaCampanhas: Props) {
     slidesToScroll: 1,
     cssEase: "linear",
   };
+  let imageMore = listaCampanhas.campanhas[0];
+  console.log(imageMore);
   return (
     <>
-      <Slider {...settings} className="carousel">
+      <Slider {...settings} className={carouselStyle["carousel"]}>
         {listaCampanhas.campanhas.map((campanha: any = {}) => (
-          <div className="card-wrapper" key={campanha.id}>
-            <div
-              className="card"
+          <Box className={carouselStyle["card-wrapper"]} key={campanha.id}
+            maxWidth={(slides == 1) ? "40%" : ((slides == 2) ? "80%" : "100%")}>
+            <Box
+              className={carouselStyle["card"]}
               onClick={(e) => showCampaignDetails(listaCampanhas)}
             >
-              <div className="card-image">
+              <Box className={carouselStyle["card-image"]}>
                 <Image
-                  src={`https://fazumbem.inf.ufsm.br/images/entidades/${campanha.picture_url}.png`}
+                  src={campanha.images[0]}
                 />
-              </div>
-            <ul className="icons">
-              <Tooltip
-                hasArrow
-                label="Ver detalhes da Campanha"
-                bg="bluish.300"
-                color="white"
-                placement="bottom"
-                borderRadius="8px"
-                transition="0.4s"
-                ml={2}
-              >
-                <li>
-                  <a href="/">
-                    <i>
-                      <IconButton
-                        aria-label="info"
-                        borderRadius="10px"
-                        transform="translateY(-3px)"
-                        bgColor="white"
-                        icon={<InfoIcon />}
-                        _hover={{
-                          bgColor: "bluish.400",
-                          borderRadius: "10px",
-                          transform: "translateY(-3px)",
-                        }}
-                      />
-                    </i>
-                  </a>
-                </li>
-              </Tooltip>
-              <Tooltip
-                hasArrow
-                label="Ver informações da Instituição"
-                bg="bluish.300"
-                color="white"
-                placement="bottom"
-                borderRadius="8px"
-                transition="0.4s"
-                ml={2}
-              >
-                <li>
-                  <a href="/">
-                    <i>
-                      <IconButton
-                        aria-label="info"
-                        borderRadius="10px"
-                        transform="translateY(-3px)"
-                        bgColor="white"
-                        icon={<FaLandmark />}
-                        _hover={{
-                          bgColor: "bluish.400",
-                          borderRadius: "10px",
-                          transform: "translateY(-3px)",
-                        }}
-                      />
-                    </i>
-                  </a>
-                </li>
-              </Tooltip>
-            </ul>
-            <div className="details">
-              <h2>{campanha.title}</h2>
-            </div>
-            </div>
-          </div>
+              </Box>
+              <Box className={carouselStyle["icons"]}>
+                <HStack spacing={8}>
+                  <Tooltip
+                    hasArrow
+                    label="Ver informações"
+                    bg="bluish.100"
+                    color="white"
+                    placement="top"
+                    borderRadius="8px"
+                    transition="0.4s"
+                    ml={2}
+                  >
+                    <IconButton
+                      aria-label="info"
+                      borderRadius="10px"
+                      bgColor="white"
+                      color="bluish.100"
+                      icon={<InfoIcon />}
+                      _hover={{
+                        bgColor: "#ED6A5A",
+                        color: "white"
+                      }}
+                      as={RouterLink}
+                      to={`/campaign/${campanha.idCampaign}`}
+                    />
+                  </Tooltip>
+                  <Tooltip
+                    hasArrow
+                    label="Ver Instituição"
+                    bg="bluish.100"
+                    color="white"
+                    placement="top"
+                    borderRadius="8px"
+                    transition="0.4s"
+                    ml={2}
+                  >
+                    <IconButton
+                      aria-label="info"
+                      borderRadius="10px"
+                      bgColor="white"
+                      color="bluish.100"
+                      icon={<FaLandmark />}
+                      _hover={{
+                        bgColor: "#ED6A5A",
+                        color: "white"
+                      }}
+                      as={RouterLink}
+                      to={`/institute/${campanha.user.idUser}`}
+                      // onClick={() => history.push(`/institute/${campanha.user.idUser}`)}
+                    />
+                  </Tooltip>
+                </HStack>
+              </Box>
+            <Box className={carouselStyle["details"]}>
+              {campanha.title}
+            </Box>
+            </Box>
+          </Box>
         ))}
 
-        <div className="card-wrapper" key="more">
-          <div
-            className="card"
+        <Box className={carouselStyle["card-wrapper"]} id="moreCampaigns" key="more"
+          maxWidth={(slides == 1) ? "40%" : ((slides == 2) ? "80%" : "100%")}>
+          <Box
+            className={carouselStyle["card"]}
             onClick={(e) => showCampaignDetails(listaCampanhas)}
           >
-            <div className="card-image-more">
+            <Box className={carouselStyle["card-image-more"]}>
               <Image
-                filter="blur(4px);"
-                src={`https://fazumbem.inf.ufsm.br/images/entidades/${15}.png`}
+                filter="blur(4px) brightness(40%);"
+                src={(listaCampanhas.campanhas[0]) ? listaCampanhas.campanhas[0].images[0] : ""}
               />
-              <div className="more-details">
+              <Box className={carouselStyle["more-details"]}>
                 <Heading
-                  fontWeight="none"
-                  size="md"
+                  color="bluish.100"
+                  fontSize="24px"
+                  fontWeight="700"
+                  // size="md"
                   cursor="pointer"
                   as={RouterLink}
                   to="/campaigns"
                 >
-                  <h2>Ver todas as campanhas</h2>
+                  Ver todas as campanhas
                 </Heading>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
        </Slider>
     </>
   );
