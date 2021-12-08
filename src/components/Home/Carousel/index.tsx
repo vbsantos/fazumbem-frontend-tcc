@@ -43,7 +43,7 @@ export default function Carousel(listaCampanhas: Props) {
       <Slider {...settings} className={carouselStyle["carousel"]}>
         {listaCampanhas.campanhas.map((campanha: any = {}) => (
           <Box className={carouselStyle["card-wrapper"]} key={campanha.id}
-            maxWidth={(slides == 1) ? "40%" : ((slides == 2) ? "80%" : "100%")}>
+            maxWidth={(slides === 1) ? "40%" : ((slides === 2) ? "80%" : "100%")}>
             <Box
               className={carouselStyle["card"]}
               onClick={(e) => showCampaignDetails(listaCampanhas)}
@@ -114,7 +114,7 @@ export default function Carousel(listaCampanhas: Props) {
         ))}
 
         <Box className={carouselStyle["card-wrapper"]} id="moreCampaigns" key="more"
-          maxWidth={(slides == 1) ? "40%" : ((slides == 2) ? "80%" : "100%")}>
+          maxWidth={(slides === 1) ? "40%" : ((slides === 2) ? "80%" : "100%")}>
           <Box
             className={carouselStyle["card"]}
             onClick={(e) => showCampaignDetails(listaCampanhas)}
