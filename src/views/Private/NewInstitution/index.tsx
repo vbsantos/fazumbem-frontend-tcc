@@ -250,7 +250,7 @@ const NewInstituition = () => {
                     objectFit="cover"
                     src={imageSrc || institutionToEdit?.image}
                     marginX="auto"
-                    fallbackSrc="https://via.placeholder.com/300"
+                    fallbackSrc="https://c.tenor.com/tEBoZu1ISJ8AAAAC/spinning-loading.gif"
                   />
                 )}
 
@@ -288,7 +288,7 @@ const NewInstituition = () => {
               <FormLabel>Email</FormLabel>
               <InputText
                 name="username"
-                placeholder="Digite seu email"
+                placeholder="Email da instituição"
                 control={control}
                 error={errors.username}
                 background="white"
@@ -301,7 +301,7 @@ const NewInstituition = () => {
             <FormLabel>Nome</FormLabel>
             <InputText
               name="name"
-              placeholder="Digite seu nome"
+              placeholder="Nome da instituição"
               control={control}
               error={errors.name}
               background="white"
@@ -483,6 +483,7 @@ const NewInstituition = () => {
             <FormLabel>Horário de funcionamento</FormLabel>
 
             <InputProjectDescription
+              noPlaceholder
               register={{
                 ...register("openHours", {
                   required: "Campo obrigatório",
@@ -498,6 +499,7 @@ const NewInstituition = () => {
             <FormLabel>Descrição da instituição</FormLabel>
 
             <InputProjectDescription
+              noPlaceholder
               register={{
                 ...register("description", {
                   required: "Campo obrigatório",
@@ -513,6 +515,7 @@ const NewInstituition = () => {
             <FormLabel>Informações para doação</FormLabel>
 
             <InputProjectDescription
+              noPlaceholder
               register={{
                 ...register("bankAccount", {
                   required: "Campo obrigatório",

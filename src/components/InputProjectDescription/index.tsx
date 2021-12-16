@@ -6,12 +6,17 @@ import InputError from "../InputError";
 export default function InputProjectDescription({
   error,
   register,
+  noPlaceholder,
   ...props
-}: TextAreaFieldProps) {
+}: TextAreaFieldProps & { noPlaceholder?: boolean }) {
   return (
     <Box w="full">
       <Textarea
-        placeholder="Digite aqui uma descrição detalhada do projeto..."
+        placeholder={
+          noPlaceholder
+            ? undefined
+            : "Digite aqui uma descrição detalhada da campanha..."
+        }
         {...register}
         {...props}
       />

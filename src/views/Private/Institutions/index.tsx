@@ -17,9 +17,11 @@ import {
   CircularProgress,
   Center,
   useToast,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import ConfirmModal from "../../../components/ConfirmModal";
 import Footer from "../../../components/Private/Footer";
 import { httpClient } from "../../../services/httpClient";
 
@@ -28,7 +30,9 @@ interface Props {}
 const Institutions = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [userToDelete, setUserToDelete] = useState<string | null>();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const history = useHistory();
 
@@ -93,8 +97,7 @@ const Institutions = (props: Props) => {
           fontFamily="Comfortaa"
           m={5}
         >
-          Verifique as instituições que estão cadastradas no sistema e o número
-          de usuários cadastrados para cada uma.
+          Verifique as instituições que estão cadastradas no sistema
         </Text>
       </Box>
 
@@ -170,33 +173,8 @@ const Institutions = (props: Props) => {
                         </MenuItem>
                         <MenuItem
                           onClick={() => {
-                            httpClient({
-                              url: `/user/delete/${item.username}`,
-                              method: "DELETE",
-                            })
-                              .then(() => {
-                                getList().finally(() => {
-                                  setIsLoading(false);
-                                });
-
-                                toast({
-                                  title: "Deletado com sucesso!",
-
-                                  status: "success",
-                                  duration: 3000,
-                                  position: "top",
-                                  isClosable: true,
-                                });
-                              })
-                              .catch(() => {
-                                toast({
-                                  title: "Houve um erro!",
-                                  status: "error",
-                                  duration: 3000,
-                                  position: "top",
-                                  isClosable: true,
-                                });
-                              });
+                            setUserToDelete(item.username);
+                            onOpen();
                           }}
                         >
                           Deletar
@@ -210,6 +188,46 @@ const Institutions = (props: Props) => {
           </Table>
         </Box>
       )}
+
+      <ConfirmModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={() => {
+          httpClient({
+            url: `/user/delete/${userToDelete}`,
+            method: "DELETE",
+          })
+            .then(() => {
+              getList().finally(() => {
+                setIsLoading(false);
+              });
+
+              toast({
+                title: "Deletado com sucesso!",
+
+                status: "success",
+                duration: 3000,
+                position: "top",
+                isClosable: true,
+              });
+
+              onClose();
+              setUserToDelete(null);
+            })
+            .catch(() => {
+              toast({
+                title: "Houve um erro!",
+                status: "error",
+                duration: 3000,
+                position: "top",
+                isClosable: true,
+              });
+
+              onClose();
+              setUserToDelete(null);
+            });
+        }}
+      />
 
       <Box h={150}></Box>
       <Footer />

@@ -26,11 +26,7 @@ import {
   /* Divider */
 } from "@chakra-ui/react";
 
-import {
-  FaBullhorn,
-  FaBuilding,
-  FaChevronDown
-} from "react-icons/fa";
+import { FaBullhorn, FaBuilding, FaChevronDown } from "react-icons/fa";
 
 import { useState } from "react";
 import { useEffect } from "react";
@@ -77,7 +73,7 @@ const Campaigns = (props: Props) => {
             color="white"
             backgroundColor="#ED6A5A"
             display="inline"
-          > 
+          >
             &nbsp;Campanhas&nbsp;
           </Text>
         </Box>
@@ -87,35 +83,38 @@ const Campaigns = (props: Props) => {
             fontSize="26px"
             textAlign="center"
             fontWeight={500}
-            fontFamily="Comfortaa" 
+            fontFamily="Comfortaa"
             m={5}
           >
-            Conheça as campanhas que estão precisando de doações nesse momento 
-            ou verifique as campanhas cadastradas pela sua instituição. Selecione 
-            abaixo quais campanhas você deseja verificar.
+            Conheça as campanhas que estão precisando de doações nesse momento
+            ou verifique as campanhas cadastradas pela sua instituição.
+            Selecione abaixo quais campanhas você deseja verificar.
           </Text>
         </Box>
         <Box m={20} mt={20} pb={10} color="bluish.100">
           <HStack>
-            <Box 
-              width= "100%"
-              height= "370px"
-              borderRadius= "25px"
-              overflow= "hidden"
-              backgroundColor= "white"
-              textAlign= "center"
-              color= "bluish.100"
-              boxShadow= "2px 4px 9px rgba(0, 0, 0, 0.25)"
-              fontSize="1.8rem" 
-              transition= "0.5s"
-              border= "1px solid transparent"
+            <Box
+              width="100%"
+              height="370px"
+              borderRadius="25px"
+              overflow="hidden"
+              backgroundColor="white"
+              textAlign="center"
+              color="bluish.100"
+              boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
+              fontSize="1.8rem"
+              transition="0.5s"
+              border="1px solid transparent"
               cursor="pointer"
-              _hover={{ 
+              _hover={{
                 borderColor: "#ED6A5A",
                 transform: "translateY(-10px)",
-                transition: "0.5s"
-              }}               
-              onClick={(event) => {setShowAll(true); setShowSelf(false)}}
+                transition: "0.5s",
+              }}
+              onClick={(event) => {
+                setShowAll(true);
+                setShowSelf(false);
+              }}
             >
               <Center m={5} fontSize="5rem">
                 <FaBuilding />
@@ -127,31 +126,34 @@ const Campaigns = (props: Props) => {
                 fontSize="26px"
                 textAlign="center"
                 fontWeight={500}
-                fontFamily="Comfortaa" 
+                fontFamily="Comfortaa"
                 m={5}
               >
                 Visualize as campanhas cadastradas por outras insituições
               </Text>
             </Box>
-            <Box 
-              width= "100%"
-              height= "370px"
-              borderRadius= "25px"
-              overflow= "hidden"
-              backgroundColor= "white"
-              textAlign= "center"
-              color= "bluish.100"
-              boxShadow= "2px 4px 9px rgba(0, 0, 0, 0.25)"
+            <Box
+              width="100%"
+              height="370px"
+              borderRadius="25px"
+              overflow="hidden"
+              backgroundColor="white"
+              textAlign="center"
+              color="bluish.100"
+              boxShadow="2px 4px 9px rgba(0, 0, 0, 0.25)"
               fontSize="1.8rem"
-              transition= "0.5s"
-              border= "1px solid transparent"
+              transition="0.5s"
+              border="1px solid transparent"
               cursor="pointer"
-              _hover={{ 
+              _hover={{
                 borderColor: "#ED6A5A",
                 transform: "translateY(-10px)",
-                transition: "0.5s"
-              }}               
-              onClick={(event) => {setShowAll(true); setShowSelf(false)}}
+                transition: "0.5s",
+              }}
+              onClick={(event) => {
+                setShowAll(true);
+                setShowSelf(false);
+              }}
             >
               <Center m={5} fontSize="5rem">
                 <FaBullhorn />
@@ -163,11 +165,11 @@ const Campaigns = (props: Props) => {
                 fontSize="26px"
                 textAlign="center"
                 fontWeight={500}
-                fontFamily="Comfortaa" 
+                fontFamily="Comfortaa"
                 m={5}
               >
-                Visualize e edite as campanhas que foram cadastradas pela 
-                sua instituição
+                Visualize e edite as campanhas que foram cadastradas pela sua
+                instituição
               </Text>
             </Box>
           </HStack>
@@ -312,8 +314,8 @@ const Campaigns = (props: Props) => {
         ) : (
           ""
         )}
-      <Footer />
-    </Box>
+        <Footer />
+      </Box>
     </>
   );
 };

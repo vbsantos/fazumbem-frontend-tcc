@@ -50,11 +50,15 @@ const NewCampaign = () => {
   });
 
   useEffect(() => {
-    if (!files) return;
+    try {
+      if (!files) return;
 
-    const file = files[0];
+      const file = files[0];
 
-    setImageSrc(URL.createObjectURL(file));
+      setImageSrc(URL.createObjectURL(file));
+    } catch (error) {
+      console.error(error);
+    }
   }, [files]);
 
   const validateFiles = (value: FileList) => {
@@ -268,7 +272,7 @@ const NewCampaign = () => {
                     objectFit="cover"
                     src={imageSrc || campaignToEdit?.images[0]}
                     marginX="auto"
-                    fallbackSrc="https://via.placeholder.com/300"
+                    fallbackSrc="https://c.tenor.com/tEBoZu1ISJ8AAAAC/spinning-loading.gif"
                   />
                 )}
 

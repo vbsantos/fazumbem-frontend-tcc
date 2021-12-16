@@ -279,8 +279,9 @@ export default function Home() {
 
   const instituicao = institutes.find(
     // eslint-disable-next-line eqeqeq
-    (element) => element.id == campanha.instituteId
+    (element) => element?.id == campanha?.instituteId
   );
+
   const settings = {
     dots: true,
     infinite: true,
@@ -331,11 +332,11 @@ export default function Home() {
                   </Box>
                   <Box className={detailsStyle["card-image"]}>
                     <Image
-                      src={`https://fazumbem.inf.ufsm.br/images/logos/${instituicao.picture_url}.png`}
+                      src={`https://fazumbem.inf.ufsm.br/images/logos/${instituicao?.picture_url}.png`}
                     />
                   </Box>
                   <Box className={detailsStyle["card-title"]}>
-                    {instituicao.name}
+                    {instituicao?.name}
                   </Box>
                 </Box>
               </Box>
@@ -412,10 +413,10 @@ export default function Home() {
           <VStack align={isMobile ? "center" : "left"} spacing={10}>
             <Heading color="bluish.100">Contato</Heading>
             <Text fontSize={isMobile ? "22px" : "24px"} color="bluish.100">
-              Telefone: {instituicao.telephone}
+              Telefone: {instituicao?.telephone}
             </Text>
             <Text fontSize={isMobile ? "22px" : "24px"} color="bluish.100">
-              Email: {instituicao.email}
+              Email: {instituicao?.email}
             </Text>
             <Box>
               <HStack spacing="24px">
@@ -432,7 +433,7 @@ export default function Home() {
                     <Box
                       color="bluish.100"
                       as={Link}
-                      href={`mailto:${instituicao.email}`}
+                      href={`mailto:${instituicao?.email}`}
                     >
                       <FaRegEnvelope size={50} />
                     </Box>
@@ -481,7 +482,7 @@ export default function Home() {
                     <Box
                       color="bluish.100"
                       as={Link}
-                      href={`http://api.whatsapp.com/send/?phone=55${instituicao.telephone}`}
+                      href={`http://api.whatsapp.com/send/?phone=55${instituicao?.telephone}`}
                     >
                       <FaWhatsapp size={48} />
                     </Box>

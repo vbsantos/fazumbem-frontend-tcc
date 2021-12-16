@@ -15,11 +15,13 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
+import ConfirmModal from "../../../components/ConfirmModal";
 import Footer from "../../../components/Private/Footer";
 import { useAuthState } from "../../../context";
 import { httpClient } from "../../../services/httpClient";
@@ -36,9 +38,11 @@ interface Props {}
 const Campaigns = (props: Props) => {
   const [list, setList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [idToDelete, setIdToDelete] = useState<string | null>();
 
   const history = useHistory();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const userDetails = useAuthState();
   const isSuperUser = userDetails?.user?.group === "Curator";
@@ -95,18 +99,6 @@ const Campaigns = (props: Props) => {
             paddingX="1rem"
           >
             {isSuperUser ? "Campanhas" : "Minhas Campanhas"}
-          </Text>
-        </Box>
-        <Box>
-          <Text
-            color="bluish.100"
-            fontSize="26px"
-            textAlign="center"
-            fontWeight={500}
-            fontFamily="Comfortaa"
-            m={5}
-          >
-            Conheça as campanhas que estão precisando de doações nesse momento.
           </Text>
         </Box>
 
@@ -188,33 +180,8 @@ const Campaigns = (props: Props) => {
                             </MenuItem>
                             <MenuItem
                               onClick={() => {
-                                httpClient({
-                                  url: `/campaign/${item.idCampaign}`,
-                                  method: "DELETE",
-                                })
-                                  .then(() => {
-                                    getList().finally(() => {
-                                      setIsLoading(false);
-                                    });
-
-                                    toast({
-                                      title: "Deletado com sucesso!",
-
-                                      status: "success",
-                                      duration: 3000,
-                                      position: "top",
-                                      isClosable: true,
-                                    });
-                                  })
-                                  .catch(() => {
-                                    toast({
-                                      title: "Houve um erro!",
-                                      status: "error",
-                                      duration: 3000,
-                                      position: "top",
-                                      isClosable: true,
-                                    });
-                                  });
+                                setIdToDelete(item.idCampaign);
+                                onOpen();
                               }}
                             >
                               Deletar
@@ -229,6 +196,46 @@ const Campaigns = (props: Props) => {
             </Box>
           </>
         )}
+
+        <ConfirmModal
+          isOpen={isOpen}
+          onClose={onClose}
+          onConfirm={() => {
+            httpClient({
+              url: `/campaign/${idToDelete}`,
+              method: "DELETE",
+            })
+              .then(() => {
+                getList().finally(() => {
+                  setIsLoading(false);
+                });
+
+                toast({
+                  title: "Deletado com sucesso!",
+
+                  status: "success",
+                  duration: 3000,
+                  position: "top",
+                  isClosable: true,
+                });
+
+                setIdToDelete(null);
+                onClose();
+              })
+              .catch(() => {
+                toast({
+                  title: "Houve um erro!",
+                  status: "error",
+                  duration: 3000,
+                  position: "top",
+                  isClosable: true,
+                });
+
+                setIdToDelete(null);
+                onClose();
+              });
+          }}
+        />
 
         <Footer />
       </Box>
