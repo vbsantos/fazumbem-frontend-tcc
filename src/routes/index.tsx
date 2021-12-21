@@ -126,7 +126,7 @@ export default function AppRouter() {
           isOpen={isSidebarOpen}
           onClose={toggleSidebar}
         />
-        <Box ml={!variants?.navigationButton ? 200 : undefined}>
+        <Box h="100vh" ml={!variants?.navigationButton ? 200 : undefined}>
           <Switch>
             {privateRoutes
               .filter((route) =>

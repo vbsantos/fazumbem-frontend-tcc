@@ -23,6 +23,7 @@ import Footer from "../../../components/Private/Footer";
 import { useAuthState } from "../../../context";
 import { httpClient } from "../../../services/httpClient";
 import { useHistory } from "react-router";
+import ReturnButton from "../../../components/ReturnButton";
 
 const NewCampaign = () => {
   let { id } = useParams<{ id: string }>();
@@ -213,13 +214,21 @@ const NewCampaign = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box backgroundColor="gray.100" m={0} p={0}>
+      <Box
+        backgroundColor="gray.100"
+        m={0}
+        p={0}
+      >
         <Box
           backgroundColor="#ED6A5A"
           width="100%"
           color="brand.300"
           p={2}
         ></Box>
+        <ReturnButton
+          title="Voltar para lista de campanhas"
+          route="/campanhas"
+        />
         <Box pt={10} textAlign="center">
           <Text
             fontSize="2.5rem"
