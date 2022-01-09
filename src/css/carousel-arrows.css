@@ -1,0 +1,64 @@
+/* SETAS DO CARROSSEL */
+.slick-prev, .slick-next {
+  width: 50px !important;
+  height: 50px !important;
+  padding: 4px 0 !important;
+  background-color: white !important;
+  border-radius: 50px !important;
+  margin-top: 2px  !important;
+}
+
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+  background-color: white !important;
+  border-radius: 50px !important;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: #ED6A5A !important;
+  font-size: 50px !important;
+  opacity: 1 !important;
+}
+
+.slick-prev:hover:before, .slick-next:hover:before {
+  color: #F18C7E !important;
+  transition: .5s !important;
+}
+
+.slick-next {
+  right: 1.5% !important;
+}
+
+.slick-prev {
+  left: 1.5% !important;
+}
+
+
+.slick-list {
+  width: 85% !important;
+  margin: 0 auto !important;
+}
+
+@media (max-width: 576px) {
+  .slick-list {
+    width: 100% !important;
+  }
+
+  .slick-next {
+    right: -18% !important;
+  }
+
+  .slick-prev {
+    left: -18% !important;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+  .slick-next {
+    right: -3% !important;
+  }
+
+  .slick-prev {
+    left: -3% !important;
+  }
+}
