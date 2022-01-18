@@ -24,6 +24,7 @@ import Slider from "react-slick";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import "@fontsource/montserrat/700.css";
+import ReturnButton from "../../../components/ReturnButton";
 
 export default function Home() {
   let { id }: any = {};
@@ -59,6 +60,10 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
+      <ReturnButton
+        title="Voltar para lista de campanhas"
+        route="/campaigns"
+      />
       <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Box padding={isGreater ? "0 20%" : "0 5px"}>
           <Grid

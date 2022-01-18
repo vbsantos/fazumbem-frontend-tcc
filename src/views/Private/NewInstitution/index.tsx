@@ -27,6 +27,7 @@ import { FiFile } from "react-icons/fi";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { useAuthState } from "../../../context";
+import ReturnButton from "../../../components/ReturnButton";
 
 const NewInstituition = () => {
   let { id } = useParams<{ id: string }>();
@@ -214,6 +215,15 @@ const NewInstituition = () => {
           color="brand.300"
           p={2}
         ></Box>
+        {isSuperUser ? (
+          <ReturnButton
+            title="Voltar para lista de instituições"
+            route="/instituições"
+          />
+          ) : (
+            ""
+          )}
+        
         <Box pt={10} textAlign="center">
           <Text
             fontSize="2.5rem"
