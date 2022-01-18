@@ -199,7 +199,7 @@ export default function Home() {
           >
 
             {inst_list.map((institute: any = []) => (
-              <Box key={institute.id}>
+              <Box key={institute.idUser}>
                 <Box className={instituteStyle["card"]}>
                   <Box className={instituteStyle["card-image"]}>
                     <Image src={institute.image} />
@@ -233,7 +233,7 @@ export default function Home() {
                           bgColor: "#ED6A5A",
                           color: "white",
                         }}
-                        onClick={() => history.push(`/institute/${institute.idUser}`)}
+                        onClick={() => history.push(`/institute/${institute.idCampaign}`)}
                       />
                     </Tooltip>
                   </Box>

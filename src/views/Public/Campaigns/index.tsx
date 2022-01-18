@@ -82,7 +82,7 @@ export default function Home() {
             justify="center"
           >
             {list.map((campanha: any = []) => (
-              <div className={styles["card-wrapper"]} key={campanha.id}>
+              <div className={styles["card-wrapper"]} key={campanha.idCampaign}>
                 <div className={styles["card"]}>
                   <div className={styles["card-image"]}>
                     <Image
