@@ -15,15 +15,16 @@ import { useEffect, useState } from 'react';
 import { httpClient } from "../../../services/httpClient";
 import {
   FaRegEnvelope,
-  FaInstagram,
-  FaFacebookSquare,
+  /* FaInstagram,
+  FaFacebookSquare, */
   /*FaWhatsapp,*/
-  FaGlobe
+  /* FaGlobe */
 } from "react-icons/fa";
 import Slider from "react-slick";
 import Header from "../../../components/PublicHeader";
 import Footer from "../../../components/Footer";
 import "@fontsource/montserrat/700.css";
+import ReturnButton from "../../../components/ReturnButton";
 
 export default function Home() {
   let { id }: any = {};
@@ -60,6 +61,10 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
+      <ReturnButton
+        title="Voltar para lista de campanhas"
+        route="/campaigns"
+      />
       <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Box padding={isGreater ? "0 20%" : "0 5px"}>
           <Grid
@@ -197,7 +202,7 @@ export default function Home() {
                     </Box>
                   </Tooltip>
                 </Box>
-                <Box hidden={!institute.instagram}>
+                {/* <Box hidden={!institute.instagram}>
                   <Tooltip
                     hasArrow
                     label="Instagram da instituição"
@@ -211,8 +216,8 @@ export default function Home() {
                       <FaInstagram size={50} />
                     </Box>
                   </Tooltip>
-                </Box>
-                <Box hidden={!institute.facebook}>
+                </Box> */}
+                {/* <Box hidden={!institute.facebook}>
                   <Tooltip
                     hasArrow
                     label="Facebook da instituição"
@@ -226,7 +231,7 @@ export default function Home() {
                       <FaFacebookSquare size={48} />
                     </Box>
                   </Tooltip>
-                </Box>
+                </Box> */}
                 {/*
                 <Box>
                   <Tooltip
@@ -248,7 +253,7 @@ export default function Home() {
                   </Tooltip>
                 </Box>
                 */}
-                <Box hidden={!institute.url}>
+                {/* <Box hidden={!institute.url}>
                   <Tooltip
                     hasArrow
                     label="Site da instituição"
@@ -266,7 +271,7 @@ export default function Home() {
                       <FaGlobe size={48} />
                     </Box>
                   </Tooltip>
-                </Box>
+                </Box> */}
               </HStack>
             </Box>
           </VStack>

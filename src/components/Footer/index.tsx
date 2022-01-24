@@ -46,7 +46,7 @@ export default function Footer(): ReactElement {
                     borderRadius="8px"
                     transition="0.2s"
                   >
-                    <Box as={Link} href="/">
+                    <Box as={"a"} href="mailto: fazumbem@inf.ufsm.br">
                       <FaRegEnvelope size={50} />
                     </Box>
                   </Tooltip>
@@ -173,8 +173,8 @@ export default function Footer(): ReactElement {
                     transition="0.2s"
                   >
                     <Box //m={2}
-                      as={Link}
-                      href="/"
+                      as={"a"}
+                      href="mailto: fazumbem@inf.ufsm.br"
                     >
                       <FaRegEnvelope size={50} />
                     </Box>

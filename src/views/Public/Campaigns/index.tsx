@@ -26,6 +26,8 @@ export default function Home() {
   const history = useHistory();
 
   const [list, setList] = useState<any[]>([]);
+  const [empty, setEmptyness] = useState(false);
+
   useEffect(() => {
     const getList = async () => {
       const req = await httpClient<any>({
@@ -34,10 +36,12 @@ export default function Home() {
       });
 
       setList(req.data);
+      if (!req.data.length) setEmptyness(true);
+      else setEmptyness(false);
     };
 
     getList();
-  }, []);
+  }, [list.length, setEmptyness]);
 
   return (
     <Box backgroundColor="gray.200">
@@ -78,7 +82,7 @@ export default function Home() {
             justify="center"
           >
             {list.map((campanha: any = []) => (
-              <div className={styles["card-wrapper"]} key={campanha.id}>
+              <div className={styles["card-wrapper"]} key={campanha.idCampaign}>
                 <div className={styles["card"]}>
                   <div className={styles["card-image"]}>
                     <Image
@@ -144,7 +148,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            {!list.length ? (
+            {empty ? (
               <Text
                 display="inline"
                 fontSize={isMobile ? "15px" : "20px"}
