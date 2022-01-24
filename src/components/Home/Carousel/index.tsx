@@ -99,8 +99,7 @@ export default function Carousel(listaCampanhas: Props) {
                         color: "white"
                       }}
                       as={RouterLink}
-                      to={`/institute/${campanha?.user?.idCampaign}`}
-                      // onClick={() => history.push(`/institute/${campanha.user.idUser}`)}
+                      to={`/institute/${campanha?.user?.idUser}`}
                     />
                   </Tooltip>
                 </HStack>
