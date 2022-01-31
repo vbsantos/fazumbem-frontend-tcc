@@ -13,7 +13,7 @@ import {
   IconButton,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import { httpClient } from "../../../services/httpClient";
@@ -33,9 +33,18 @@ export default function Home() {
   let { id }: any = {};
   id = useParams();
   id = id.id;
+  const location = useLocation();
+  const {state} = useLocation();
   const [isMobile] = useMediaQuery("(max-width: 576px)");
   const [isDesktop] = useMediaQuery("(min-width: 769px)");
   const [isGreater] = useMediaQuery("(min-width: 1200px)");
+  const [returnPath, setReturnPath] = useState("");
+  const [returnTitle, setReturnTitle] = useState("");
+  
+  function openRoute(path: string) {
+    history.push(path, { state: { from: "institute" }  });
+  }
+
   const history = useHistory();
   const campanhas = [
     {
@@ -182,12 +191,22 @@ export default function Home() {
         method: "GET",
         url: `/user/id/${id}`,
       });
-
       setInstitute(req.data);
     };
-
     getInstitute();
-  }, [id]);
+    Object.entries(state).forEach(([key, value]) => {
+      if (value.from === "homepage") {
+        setReturnTitle("Voltar para tela inicial");
+        setReturnPath("/")
+      } else if (value.from === "campaigns") {
+        setReturnTitle("Voltar para lista de campanhas");
+        setReturnPath("/campaigns")
+      } else {
+        setReturnTitle("Voltar para lista de instituições");
+        setReturnPath("/institutes")
+      }
+    })
+  }, [id, location.state, state]);
 
   let slides = isMobile ? 1 : 3;
   const settings = {
@@ -201,10 +220,7 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
-      <ReturnButton
-        title="Voltar para lista de instituições"
-        route="/institutes"
-      />
+      <ReturnButton title={returnTitle} route={returnPath} />
       <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Box padding={isGreater ? "0 20%" : "0 5px"}>
           <Grid
@@ -304,7 +320,7 @@ export default function Home() {
                           bgColor="white"
                           icon={<InfoIcon />}
                           onClick={() =>
-                            history.push(`/campaign/${campanha.id}`)
+                            openRoute(`/campaign/${campanha.id}`)
                           }
                           _hover={{
                             bgColor: "#ED6A5A",
@@ -387,27 +403,6 @@ export default function Home() {
                     </Box>
                   </Tooltip>
                 </Box>
-                {/*
-                <Box>
-                  <Tooltip
-                    hasArrow
-                    label="WhatsApp da instituição"
-                    bg="bluish.200"
-                    color="white"
-                    placement="top"
-                    borderRadius="8px"
-                    transition="0.2s"
-                  >
-                    <Box
-                      color="bluish.100"
-                      as={Link}
-                      href={`http://api.whatsapp.com/send/?phone=55${institute.telephone}`}
-                    >
-                      <FaWhatsapp size={48} />
-                    </Box>
-                  </Tooltip>
-                </Box>
-                */}
                 <Box hidden={!institute.url}>
                   <Tooltip
                     hasArrow

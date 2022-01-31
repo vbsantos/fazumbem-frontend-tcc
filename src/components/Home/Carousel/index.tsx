@@ -8,11 +8,11 @@ import { Image } from "@chakra-ui/image";
 import { FaLandmark } from "react-icons/fa";
 import { HStack, IconButton, Tooltip, useMediaQuery } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { Box, Heading } from "@chakra-ui/layout";
 
 function showCampaignDetails(camp: Props) {
-  console.log(camp.campanhas[0]);
+  //console.log(camp.campanhas[0]);
 }
 
 interface Props {
@@ -21,7 +21,10 @@ interface Props {
   }[];
 }
 export default function Carousel(listaCampanhas: Props) {
-
+  const history = useHistory();
+  function openRoute(path: string) {
+    history.push(path, { state: { from: "homepage" }  });
+  }
   const [isMobile] = useMediaQuery("(max-width: 576px)")
   const [isDesktop] = useMediaQuery("(min-width: 769px)")
   let slides;
@@ -37,8 +40,8 @@ export default function Carousel(listaCampanhas: Props) {
     slidesToScroll: 1,
     cssEase: "linear",
   };
-  let imageMore = listaCampanhas.campanhas[0];
-  console.log(imageMore);
+  //let imageMore = listaCampanhas.campanhas[0];
+  //console.log(imageMore);
   return (
     <>
       <Slider {...settings} className={carouselStyle["carousel"]}>
@@ -76,8 +79,7 @@ export default function Carousel(listaCampanhas: Props) {
                         bgColor: "#ED6A5A",
                         color: "white"
                       }}
-                      as={RouterLink}
-                      to={`/campaign/${campanha.idCampaign}`}
+                      onClick={(e) => openRoute(`/campaign/${campanha.idCampaign}`)}
                     />
                   </Tooltip>
                   <Tooltip
@@ -100,9 +102,7 @@ export default function Carousel(listaCampanhas: Props) {
                         bgColor: "#ED6A5A",
                         color: "white"
                       }}
-                      as={RouterLink}
-                      to={`/institute/${campanha?.user?.idCampaign}`}
-                      // onClick={() => history.push(`/institute/${campanha.user.idUser}`)}
+                      onClick={(e) => openRoute(`/institute/${campanha?.user?.idUser}`)}
                     />
                   </Tooltip>
                 </HStack>

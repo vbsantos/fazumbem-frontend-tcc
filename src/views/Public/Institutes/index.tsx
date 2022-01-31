@@ -29,6 +29,9 @@ export default function Home() {
   const [isGreater] = useMediaQuery("(min-width: 1200px)");
 
   const history = useHistory();
+  function openRoute(path: string) {
+    history.push(path, { state: { from: "institutes" }  });
+  }
 
   const [list, setList] = useState<any[]>([]);
   useEffect(() => {
@@ -114,7 +117,7 @@ export default function Home() {
                           bgColor: "#ED6A5A",
                           color: "white",
                         }}
-                        onClick={() => history.push(`/institute/${institute.idUser}`)}
+                        onClick={(e) => openRoute(`/institute/${institute.idUser}`)}
                       />
                     </Tooltip>
                   </Box>

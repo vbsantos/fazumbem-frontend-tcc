@@ -1,11 +1,10 @@
 import { Box } from "@chakra-ui/layout";
 import { Link, Text } from "@chakra-ui/react";
-import React from "react";
+//import React from "react";
 import { ReactElement } from "react";
 export default function Footer(): ReactElement {
 
   return (
-    <>
     <Box
       backgroundColor="bluish.100"
       color="white"
@@ -35,6 +34,5 @@ export default function Footer(): ReactElement {
         .
       </Text>
     </Box>
-    </>
   );
 }

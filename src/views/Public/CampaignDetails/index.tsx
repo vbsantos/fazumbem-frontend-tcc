@@ -10,8 +10,8 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { httpClient } from "../../../services/httpClient";
 import {
   FaRegEnvelope,
@@ -33,23 +33,34 @@ export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 576px)");
   const [isDesktop] = useMediaQuery("(min-width: 769px)");
   const [isGreater] = useMediaQuery("(min-width: 1200px)");
-
+  const { state } = useLocation();
   const [campaign, setCampaign] = useState<any>([]);
   const [institute, setInstitute] = useState<any>([]);
+  const [returnPath, setReturnPath] = useState("");
+  const [returnTitle, setReturnTitle] = useState("");
   useEffect(() => {
     const getCampaign = async () => {
       const req = await httpClient<any>({
         method: "GET",
         url: `/campaign/id/${id}`,
       });
-
       setCampaign(req.data);
       setInstitute(req.data.user);
     };
-
     getCampaign();
-  }, [id]);
-
+    Object.entries(state).forEach(([key, value]) => {
+      if (value.from === "homepage") {
+        setReturnTitle("Voltar para tela inicial");
+        setReturnPath("/");
+      } else if (value.from === "campaigns") {
+        setReturnTitle("Voltar para lista de campanhas");
+        setReturnPath("/campaigns");
+      } else {
+        setReturnTitle("Voltar para lista de instituições");
+        setReturnPath("/institutes");
+      }
+    });
+  }, [id, state]);
   const settings = {
     dots: true,
     infinite: true,
@@ -60,10 +71,7 @@ export default function Home() {
   return (
     <Box backgroundColor="gray.200">
       <Header />
-      <ReturnButton
-        title="Voltar para lista de campanhas"
-        route="/campaigns"
-      />
+      <ReturnButton title={returnTitle} route={returnPath} />
       <Box padding={!isDesktop ? "50px 5px" : "50px"} textAlign="center">
         <Box padding={isGreater ? "0 20%" : "0 5px"}>
           <Grid
@@ -103,11 +111,12 @@ export default function Home() {
                     Campanha promovida por:
                   </Box>
                   <Box className={detailsStyle["card-image"]}>
-                    <Image
-                      src={institute?.image}
-                    />
+                    <Image src={institute?.image} />
                   </Box>
-                  <Box className={detailsStyle["card-title"]} title={institute?.name}>
+                  <Box
+                    className={detailsStyle["card-title"]}
+                    title={institute?.name}
+                  >
                     {institute?.name}
                   </Box>
                 </Box>
@@ -156,11 +165,8 @@ export default function Home() {
           <Box margin="70px 0" textAlign="center">
             <Slider {...settings}>
               {campaign?.images?.map((image: any = []) => (
-                <Box className={detailsStyle["image-slide"]}>
-                  <Image
-                    objectFit="cover"
-                    src={image}
-                  />
+                <Box className={detailsStyle["image-slide"]} key={image}>
+                  <Image objectFit="cover" src={image} />
                 </Box>
               ))}
             </Slider>
