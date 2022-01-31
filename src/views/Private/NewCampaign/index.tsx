@@ -218,6 +218,9 @@ const NewCampaign = () => {
         backgroundColor="gray.100"
         m={0}
         p={0}
+        minH="100vh"
+        position={"relative"}
+        overflow="auto"
       >
         <Box
           backgroundColor="#ED6A5A"
@@ -225,10 +228,14 @@ const NewCampaign = () => {
           color="brand.300"
           p={2}
         ></Box>
-        <ReturnButton
-          title="Voltar para lista de campanhas"
-          route="/campanhas"
-        />
+        {campaignToEdit ? (
+          <ReturnButton
+            title="Voltar para lista de campanhas"
+            route="/campanhas"
+          />
+        ) : (
+          ""
+        )}
         <Box pt={10} textAlign="center">
           <Text
             fontSize="2.5rem"
@@ -244,7 +251,7 @@ const NewCampaign = () => {
           </Text>
         </Box>
 
-        <Box m={20} mt={10} pb={10} color="bluish.100">
+        <Box m={20} mt={10} pb={3} color="bluish.100">
           <Text
             color="bluish.100"
             fontSize="1.8rem"
@@ -363,7 +370,9 @@ const NewCampaign = () => {
             </Button>
           </Center>
         )}
-        <Footer />
+        <Box bottom={0} width={"100%"} position={"absolute"}>
+          <Footer />
+        </Box>
       </Box>
     </form>
   );

@@ -25,6 +25,9 @@ export default function Home() {
   const [isGreater] = useMediaQuery("(min-width: 1200px)");
   const history = useHistory();
 
+  function openRoute(path: string) {
+    history.push(path, { state: { from: 'campaigns'} });
+  }
   const [list, setList] = useState<any[]>([]);
   const [empty, setEmptyness] = useState(false);
 
@@ -110,9 +113,7 @@ export default function Home() {
                           transform="translateY(-3px)"
                           bgColor="white"
                           icon={<InfoIcon />}
-                          onClick={() =>
-                            history.push(`/campaign/${campanha.idCampaign}`)
-                          }
+                          onClick={(e) => openRoute(`/campaign/${campanha.idCampaign}`)}
                           _hover={{
                             bgColor: "#ED6A5A",
                             color: "white",
@@ -134,9 +135,7 @@ export default function Home() {
                           transform="translateY(-3px)"
                           bgColor="white"
                           icon={<FaLandmark />}
-                          onClick={() =>
-                            history.push(`/institute/${campanha?.user?.idUser}`)
-                          }
+                          onClick={(e) => openRoute(`/institute/${campanha?.user?.idUser}`)}
                           _hover={{
                             bgColor: "#ED6A5A",
                             color: "white",

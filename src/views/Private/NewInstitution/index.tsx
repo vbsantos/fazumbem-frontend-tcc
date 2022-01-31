@@ -216,14 +216,18 @@ const NewInstituition = () => {
           p={2}
         ></Box>
         {isSuperUser ? (
-          <ReturnButton
-            title="Voltar para lista de instituições"
-            route="/instituições"
-          />
+          institutionToEdit ? (
+            <ReturnButton
+              title="Voltar para lista de instituições"
+              route="/instituições"
+            />
           ) : (
             ""
-          )}
-        
+          )
+        ) : (
+          ""
+        )}
+
         <Box pt={10} textAlign="center">
           <Text
             fontSize="2.5rem"

@@ -73,7 +73,14 @@ const Institutions = (props: Props) => {
   }, []);
 
   return (
-    <Box backgroundColor="gray.100" m={0} p={0}>
+    <Box
+      backgroundColor="gray.100"
+      m={0}
+      p={0}
+      minH="100vh"
+      position={"relative"}
+      overflow="auto"
+    >
       <Box backgroundColor="#ED6A5A" width="100%" color="brand.300" p={2}></Box>
       <Box pt={10} textAlign="center">
         <Text
@@ -230,7 +237,9 @@ const Institutions = (props: Props) => {
       />
 
       <Box h={150}></Box>
-      <Footer />
+      <Box position={"absolute"} bottom={0} width={"100%"}>
+        <Footer />
+      </Box>
     </Box>
   );
 };

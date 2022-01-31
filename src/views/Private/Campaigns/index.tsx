@@ -80,7 +80,14 @@ const Campaigns = (props: Props) => {
 
   return (
     <>
-      <Box backgroundColor="gray.100" m={0} p={0}>
+      <Box
+        backgroundColor="gray.100"
+        m={0}
+        p={0}
+        minH="100vh"
+        position={"relative"}
+        overflow="auto"
+      >
         <Box
           backgroundColor="#ED6A5A"
           width="100%"
@@ -236,8 +243,10 @@ const Campaigns = (props: Props) => {
               });
           }}
         />
-
-        <Footer />
+        <Box h={150}></Box>
+        <Box position={"absolute"} bottom={0} width={"100%"}>
+          <Footer />
+        </Box>
       </Box>
     </>
   );
