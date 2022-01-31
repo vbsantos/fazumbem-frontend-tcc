@@ -66,7 +66,7 @@ export default function Login() {
       try {
         await httpClient({
           method: "POST",
-          url: `/resetpassword/${payload.email}`,
+          url: `/user/resetpassword/${payload.email}`,
           data: payload,
         });
         onOpen();
