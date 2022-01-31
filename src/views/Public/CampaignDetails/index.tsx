@@ -68,6 +68,7 @@ export default function Home() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  window.scrollTo(0,0);
   return (
     <Box backgroundColor="gray.200">
       <Header />

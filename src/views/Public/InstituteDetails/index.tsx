@@ -46,145 +46,8 @@ export default function Home() {
   }
 
   const history = useHistory();
-  const campanhas = [
-    {
-      id: 0,
-      title: "Campanha 1",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, sit consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 1,
-      instituteId: 0,
-    },
-    {
-      id: 1,
-      title: "Campanha 2",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 2,
-      instituteId: 1,
-    },
-    {
-      id: 2,
-      title: "Campanha 3",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 3,
-      instituteId: 2,
-    },
-    {
-      id: 3,
-      title: "Campanha 4",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 4,
-      instituteId: 3,
-    },
-    {
-      id: 4,
-      title: "Campanha 5",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 5,
-      instituteId: 4,
-    },
-    {
-      id: 5,
-      title: "Campanha 6",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 6,
-      instituteId: 5,
-    },
-    {
-      id: 6,
-      title: "Campanha 7",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 7,
-      instituteId: 6,
-    },
-    {
-      id: 7,
-      title: "Campanha 8",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 8,
-      instituteId: 7,
-    },
-    {
-      id: 8,
-      title: "Campanha 9",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 9,
-      instituteId: 8,
-    },
-    {
-      id: 9,
-      title: "Campanha 10",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 10,
-      instituteId: 9,
-    },
-    {
-      id: 10,
-      title: "Campanha 11",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 11,
-      instituteId: 10,
-    },
-    {
-      id: 11,
-      title: "Campanha 12",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 12,
-      instituteId: 11,
-    },
-    {
-      id: 12,
-      title: "Campanha 13",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 13,
-      instituteId: 12,
-    },
-    {
-      id: 13,
-      title: "Campanha 14",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 14,
-      instituteId: 13,
-    },
-    {
-      id: 14,
-      title: "Campanha 15",
-      description:
-        "Precisamos da sua ajuda com doações para lorem ipsum dolor sit amet, consectetuer adipiscing elit, " +
-        "sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
-      picture_url: 15,
-      instituteId: 14,
-    },
-  ];
-
   const [institute, setInstitute] = useState<any>([]);
+  const [campaigns, setCampaigns] = useState<any>([]);
   useEffect(() => {
     const getInstitute = async () => {
       const req = await httpClient<any>({
@@ -192,6 +55,7 @@ export default function Home() {
         url: `/user/id/${id}`,
       });
       setInstitute(req.data);
+      setCampaigns(req.data.campaigns);
     };
     getInstitute();
     Object.entries(state).forEach(([key, value]) => {
@@ -208,7 +72,11 @@ export default function Home() {
     })
   }, [id, location.state, state]);
 
-  let slides = isMobile ? 1 : 3;
+  let slides;
+  if (isMobile) slides = 1;
+  else if (campaigns.length < 3) slides = campaigns.length;
+  else if (isDesktop) slides = 3;
+  else slides = 2;
   const settings = {
     dots: true,
     infinite: true,
@@ -230,12 +98,11 @@ export default function Home() {
             rowGap={6}
           >
             <GridItem colSpan={1} rowSpan={1}>
-              <Box className={detailsStyle["institute-image"]}>
-                <Image
-                  // src={`https://fazumbem.inf.ufsm.br/images/logos/1.png`}
-                  src={institute.image}
-                />
-              </Box>
+                  <Box className={detailsStyle["institute-image"]}>
+                    <Image
+                      src={institute.image}
+                    />
+                  </Box>
             </GridItem>
             <GridItem
               colSpan={isMobile ? 1 : 2}
@@ -283,18 +150,15 @@ export default function Home() {
           <Heading color="bluish.100">Campanhas desta instituição</Heading>
           <Box margin="70px 0" textAlign="center">
             <Slider {...settings}>
-              {campanhas.map((campanha: any = []) => (
-                <Box
-                  className={campaignStyles["card-wrapper"]}
-                  key={campanha.id}
-                >
+              {campaigns.map((campanha: any = []) => (
+                <Box className={campaignStyles["card-wrapper"]} key={campanha.id} transform="scale(0.8)">
                   <Box className={campaignStyles["card"]}>
                     <Box className={campaignStyles["card-image"]}>
                       <Image
-                        src={`https://fazumbem.inf.ufsm.br/images/entidades/${campanha.picture_url}.png`}
+                        src={campanha.images[0]}
                       />
                     </Box>
-                    <Box className={campaignStyles["card-title"]}>
+                    <Box className={campaignStyles["card-title"]} title={campanha.title}>
                       {campanha.title}
                     </Box>
                     <Box className={campaignStyles["card-description"]}>
@@ -320,7 +184,7 @@ export default function Home() {
                           bgColor="white"
                           icon={<InfoIcon />}
                           onClick={() =>
-                            openRoute(`/campaign/${campanha.id}`)
+                            openRoute(`/campaign/${campanha.idCampaign}`)
                           }
                           _hover={{
                             bgColor: "#ED6A5A",

@@ -40,8 +40,6 @@ export default function Carousel(listaCampanhas: Props) {
     slidesToScroll: 1,
     cssEase: "linear",
   };
-  //let imageMore = listaCampanhas.campanhas[0];
-  //console.log(imageMore);
   return (
     <>
       <Slider {...settings} className={carouselStyle["carousel"]}>
