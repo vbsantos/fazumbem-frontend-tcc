@@ -9,15 +9,15 @@ pipeline {
             steps {
                 sh 'node --version'
             }
-            stage('Test') {
-                steps {
-                    echo 'Testing..'
-                }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
             }
-            stage('Deploy') {
-                steps {
-                    echo 'Deploying....'
-                }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
