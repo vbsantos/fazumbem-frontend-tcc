@@ -8,7 +8,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'node --version'
-                sh 'ls -la'
             }
             stage('Test') {
                 steps {
