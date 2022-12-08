@@ -1,17 +1,27 @@
-# get the base node image
-FROM node:17 as builder
+# pull official base image
+FROM node:16 AS builder
+# set working directory
+WORKDIR /app
+# install app dependencies
+#copies package.json and package-lock.json to Docker environment
+COPY package.json ./
+COPY package-lock.json ./
+# Installs all node packages
+RUN npm install 
+# Copies everything over to Docker environment
+COPY . ./
+RUN npm run build
 
-# set the working dir for container
-WORKDIR /frontend
-
-# copy the json file first
-COPY ./package.json /frontend
-
-# install npm dependencies
-RUN npm ci
-
-# copy other project files
-COPY . .
-
-CMD [ "npm", "run", "start" ]
-
+#Stage 2
+#######################################
+#pull the official nginx:1.19.0 base image
+FROM nginx:stable
+#copies React to the container directory
+# Set working directory to nginx resources directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static resources
+RUN rm -rf ./*
+# Copies static resources from builder stage
+COPY --from=builder /app/build .
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
