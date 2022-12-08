@@ -9,13 +9,11 @@ RUN npm install
 COPY . ./
 RUN npm run build
 
-FROM nginx:stable
+FROM node:16-alpine
 EXPOSE 3000
 # Set working directory to nginx resources directory
-WORKDIR /usr/share/nginx/html
-# Remove default nginx static resources
-RUN rm -rf ./*
+WORKDIR /frontend
 # Copies static resources from builder stage
 COPY --from=builder /app/build .
 # Containers run nginx with global directives and daemon off
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npx", "serve", "-s", "build"]
