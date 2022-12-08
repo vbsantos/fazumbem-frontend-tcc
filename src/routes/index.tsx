@@ -21,6 +21,7 @@ import Institutes from "../views/Public/Institutes";
 import InstituteDetails from "../views/Public/InstituteDetails";
 import Login from "../views/Public/Login";
 import TermsOfUse from "../components/TermsOfUse";
+import Register from "../views/Public/Register";
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
@@ -36,11 +37,11 @@ export default function AppRouter() {
       component: Home,
       isPrivate: false,
     },
-    // {
-    //   path: "/register",
-    //   component: Register,
-    //   isPrivate: false,
-    // },
+    {
+      path: "/register",
+      component: Register,
+      isPrivate: false,
+    },
     {
       path: "/campaigns",
       component: PublicCampaigns,

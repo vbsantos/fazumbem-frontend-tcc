@@ -57,7 +57,7 @@ const responseErrorInterceptor = (error: any) => {
 };
 
 const instance = axios.create({
-  baseURL: `https://faz-um-bem.herokuapp.com`,
+  baseURL: `http://localhost:8080`,
 });
 
 instance.interceptors.request.use(requestInterceptor);

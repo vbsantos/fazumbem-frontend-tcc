@@ -1,22 +1,16 @@
-# pull official base image
 FROM node:16 AS builder
 # set working directory
 WORKDIR /app
 # install app dependencies
-#copies package.json and package-lock.json to Docker environment
 COPY package.json ./
 COPY package-lock.json ./
-# Installs all node packages
-RUN npm install 
+RUN npm --no-color install
 # Copies everything over to Docker environment
 COPY . ./
-RUN npm run build
+RUN npm --no-color run build
 
-#Stage 2
-#######################################
-#pull the official nginx:1.19.0 base image
 FROM nginx:stable
-#copies React to the container directory
+EXPOSE 3000
 # Set working directory to nginx resources directory
 WORKDIR /usr/share/nginx/html
 # Remove default nginx static resources
