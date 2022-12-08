@@ -1,5 +1,5 @@
 # get the base node image
-FROM node:16 as builder
+FROM node:17 as builder
 
 # set the working dir for container
 WORKDIR /frontend
@@ -8,7 +8,7 @@ WORKDIR /frontend
 COPY ./package.json /frontend
 
 # install npm dependencies
-RUN npm install
+RUN npm ci
 
 # copy other project files
 COPY . .
