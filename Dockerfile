@@ -4,10 +4,10 @@ WORKDIR /app
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm --no-color install
+RUN npm install
 # Copies everything over to Docker environment
 COPY . ./
-RUN npm --no-color run build
+RUN npm run build
 
 FROM nginx:stable
 EXPOSE 3000
@@ -18,4 +18,4 @@ RUN rm -rf ./*
 # Copies static resources from builder stage
 COPY --from=builder /app/build .
 # Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
