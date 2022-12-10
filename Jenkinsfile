@@ -1,20 +1,9 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh '''
-                    node --version
-                    npm install
-                    npm run build
-                '''
-            }
-        }
-        stage('Test') {
-            steps {
-                sh '''
-                    echo "Testing.."
-                '''
+                sh 'docker build --rm -t vbsantos-tcc/frontend:latest .'
             }
         }
     }
