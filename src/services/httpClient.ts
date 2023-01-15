@@ -1,5 +1,7 @@
 import axios, { AxiosResponse, AxiosPromise, AxiosRequestConfig } from "axios";
 
+const API_URL = process.env.API_URL || "http://localhost:8080"
+
 const defaultHeaders = () => {
   let token = localStorage.getItem("currentUser")
     ? JSON.parse(localStorage.getItem("currentUser") as string).token
@@ -57,7 +59,7 @@ const responseErrorInterceptor = (error: any) => {
 };
 
 const instance = axios.create({
-  baseURL: `http://localhost:8000`,
+  baseURL: API_URL,
 });
 
 instance.interceptors.request.use(requestInterceptor);

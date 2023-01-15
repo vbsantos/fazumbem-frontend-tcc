@@ -1,16 +1,14 @@
 # Build stage
-FROM node:16 AS builder
+FROM node:16 as build
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install
-COPY . ./
+COPY package*.json ./
+RUN npm ci
+COPY . .
 RUN npm run build
 
-# Package stage
-FROM nginx:stable
+# Deploy stage
+FROM node:16
+RUN npm install -g serve
+COPY --from=build /app/build /app
 EXPOSE 3000
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-COPY --from=builder /app/build .
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "/app", "-l", "3000"]
