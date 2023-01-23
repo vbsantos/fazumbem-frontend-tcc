@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosPromise, AxiosRequestConfig } from "axios";
 
-const API_URL = process.env.API_URL || "http://localhost:8000"
+const REACT_API_URL = process.env.REACT_API_URL || "http://localhost:8000"
 
 const defaultHeaders = () => {
   let token = localStorage.getItem("currentUser")
@@ -59,7 +59,7 @@ const responseErrorInterceptor = (error: any) => {
 };
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: REACT_API_URL,
 });
 
 instance.interceptors.request.use(requestInterceptor);
