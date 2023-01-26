@@ -27,7 +27,7 @@ export default function Footer(): ReactElement {
     <>
       <Box
         backgroundColor="#F5F5F5"
-        width="98%"
+        width="99%"
         color="brand.300"
         padding={isDesktop ? "20px 10%" : "20px 25px"}
         id="footer"
